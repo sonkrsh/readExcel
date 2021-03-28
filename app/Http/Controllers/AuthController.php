@@ -84,18 +84,11 @@ class AuthController extends Controller
     }
 
     public function test(){
-        $master_email = "master@gmail.com";
-        $master_password = "master";
-        $credentials = request(['email', 'password']);
-        if($master_email =="master@gmail.com" && $master_password=="master"){
-            $token = auth()->attempt($credentials);
-            return response()->json(['message'=>'master'], 200)->withCookie(
-                'token', 
-                auth()->getToken()->get(), 
-                config('jwt.ttl'), 
-                '/'
-            );
-        }
+        return User::create([
+            'name'=>"master",
+            'email'=>"master@gmail.com",
+            'password'=>Hash::make("master"),
+        ]);
     }
     /**
      * Get the authenticated User.
