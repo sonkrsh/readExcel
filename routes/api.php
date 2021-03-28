@@ -26,7 +26,7 @@ Route::group([
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('adminUserVerify', [AuthController::class,'verify']);
 
-
+    Route::get('test',[AuthController::class,'test']);
     
     Route::post('refresh',[AuthController::class,'refresh']);
     Route::post('register',[AuthController::class,'register']);

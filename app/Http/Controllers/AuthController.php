@@ -84,7 +84,18 @@ class AuthController extends Controller
     }
 
     public function test(){
-        return response()->json('wlcomw');
+        $master_email = "master@gmail.com";
+        $master_password = "master";
+        $credentials = request(['email', 'password']);
+        if($master_email =="master@gmail.com" && $master_password=="master"){
+            $token = auth()->attempt($credentials);
+            return response()->json(['message'=>'master'], 200)->withCookie(
+                'token', 
+                auth()->getToken()->get(), 
+                config('jwt.ttl'), 
+                '/'
+            );
+        }
     }
     /**
      * Get the authenticated User.
