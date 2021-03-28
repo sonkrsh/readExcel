@@ -1,0 +1,10 @@
+
+.ant-layout-sider-children ul{
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+    .ant-layout-sider{
+        position: absolute;
+        height: 100vh;
+    }
+  }
