@@ -6,3 +6,9 @@ export const MODEL_FORM_SUBMIT = "resourcesjsAdminContainersMODEL_FORM_SUBMIT";
 export const MODEL_DATA = "resourcesjsAdminContainersMODEL_DATA";
 export const MODEL_DATA_SUCCESS =
     "resourcesjsAdminContainersMODEL_DATA_SUCCESS";
+
+
+export const FUEL_FORM_SUBMIT = "resourcesjsAdminContainersFUEL_FORM_SUBMIT";
+export const FUEL_DATA = "resourcesjsAdminContainersFUEL_DATA";
+export const FUEL_DATA_SUCCESS =
+    "resourcesjsAdminContainersFUEL_DATA_SUCCESS";

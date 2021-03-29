@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FuelCarController;
 use App\Http\Controllers\MakeCarController;
 use App\Http\Controllers\ModelCarController;
 
@@ -16,6 +17,9 @@ Route::group([
 
     Route::post('storeModel', [ModelCarController::class,'store']);
     Route::get('getModel', [ModelCarController::class,'index']);
+
+    Route::post('storeFuel', [FuelCarController::class,'store']);
+    Route::get('getFuel', [FuelCarController::class,'index']);
 });
 
 Route::group([

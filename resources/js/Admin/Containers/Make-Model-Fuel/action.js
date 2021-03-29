@@ -5,6 +5,9 @@ import {
     MODEL_FORM_SUBMIT,
     MODEL_DATA,
     MODEL_DATA_SUCCESS,
+    FUEL_FORM_SUBMIT,
+    FUEL_DATA,
+    FUEL_DATA_SUCCESS
 } from "./constants";
 
 export function makeFormSubmit(payload) {
@@ -45,6 +48,27 @@ export function modelData(payload) {
 export function modelDataSuccess(payload) {
     return {
         type: MODEL_DATA_SUCCESS,
+        payload,
+    };
+}
+
+export function fuelFormSubmit(payload) {
+    return {
+        type: FUEL_FORM_SUBMIT,
+        payload,
+    };
+}
+
+export function fuelData(payload) {
+    return {
+        type: FUEL_DATA,
+        payload,
+    };
+}
+
+export function fuelDataSuccess(payload) {
+    return {
+        type: FUEL_DATA_SUCCESS,
         payload,
     };
 }

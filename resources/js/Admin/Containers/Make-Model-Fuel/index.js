@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { Tabs } from "antd";
 import AddMake from "../../Components/addMake";
 import AddModel from "../../Components/addModel";
+import AddFuel from '../../Components/addFuel'
 import { useSelector, useDispatch } from "react-redux";
-import { makeFormSubmit, makeData, modelFormSubmit, modelData } from "./action";
+import { makeFormSubmit, makeData, modelFormSubmit, modelData,fuelFormSubmit,fuelData } from "./action";
 
 function index() {
     const dispatch = useDispatch();
@@ -22,16 +23,17 @@ function index() {
         dispatch(modelFormSubmit(values));
     };
 
+    const handleFuelName = (values) => {
+        dispatch(fuelFormSubmit(values));
+    };
+
     return (
         <div>
             <Tabs
-                defaultActiveKey="1"
+                defaultActiveKey="2"
                 tabPosition={"top"}
                 style={{ height: "100vh" }}
             >
-                <TabPane tab={"Dashboard"} key={1}>
-                    DashBoard
-                </TabPane>
                 <TabPane tab={"Add Make"} key={2}>
                     <AddMake
                         onsubmit={(event) => handleMakeName(event)}
@@ -47,7 +49,7 @@ function index() {
                     />
                 </TabPane>
                 <TabPane tab={"Add Fuel"} key={4}>
-                    Add Fuel
+                    <AddFuel onsubmit={(event) => handleFuelName(event)} onload={()=>dispatch(fuelData())}  fuelData={reducerProps.fuelData}/>
                 </TabPane>
             </Tabs>
         </div>

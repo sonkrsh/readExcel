@@ -84,11 +84,16 @@ class AuthController extends Controller
     }
 
     public function test(){
-        return User::create([
+        $data = new User();
+        $data->name = "master";
+        $data->email = "master@gmail.com";
+        $data->password = Hash::make("master");
+        return response()->json('Success', 200);
+        /* return User::create([
             'name'=>"master",
             'email'=>"master@gmail.com",
             'password'=>Hash::make("master"),
-        ]);
+        ]); */
     }
     /**
      * Get the authenticated User.

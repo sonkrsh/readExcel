@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Layout, Menu, Icon } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import "./style.css";
-import { Link, Route,Switch } from "react-router-dom";
-
+import { Link, Route, Switch } from "react-router-dom";
 
 function index(props) {
-    const { sidebarRoutes,dashboardRoutes } = props;
+    const { sidebarRoutes, dashboardRoutes } = props;
     const { Header, Sider, Content } = Layout;
+    const { SubMenu } = Menu;
+
     const [windowSize, setwindowSize] = useState(null);
     const [collapsed, setcollapsed] = useState(false);
 
@@ -78,13 +79,29 @@ function index(props) {
                             mode="inline"
                             //defaultSelectedKeys={["0"]}
                         >
-                            {sidebarRoutes.map((value, key) => (
-                                <Menu.Item key={key}>
-                                    {value.icon}
-                                    <span>{value.title}</span>
-                                    <Link to={value.url} />
-                                </Menu.Item>
-                            ))}
+                            {sidebarRoutes.map((value, key) => {
+                                if (value.submenu) {
+                                    return (
+                                        <SubMenu
+                                            key={key}
+                                            icon={value.icon}
+                                            title={value.title}
+                                        >
+                                            <Menu.Item key={key}>
+                                                <span>{value.data.title}</span>
+                                                <Link to={value.data.url} />
+                                            </Menu.Item>
+                                        </SubMenu>
+                                    );
+                                }
+                                return (
+                                    <Menu.Item key={key}>
+                                        {value.icon}
+                                        <span>{value.title}</span>
+                                        <Link to={value.url} />
+                                    </Menu.Item>
+                                );
+                            })}
                         </Menu>
                     </Sider>
                     <Layout>
@@ -100,14 +117,14 @@ function index(props) {
                             }}
                         >
                             <Switch>
-                                {
-                                    dashboardRoutes.map((value,key)=>(
-                                        <Route key={key} path={value.path} component={value.component} />
-                                    ))
-                                }
-                               
+                                {dashboardRoutes.map((value, key) => (
+                                    <Route
+                                        key={key}
+                                        path={value.path}
+                                        component={value.component}
+                                    />
+                                ))}
                             </Switch>
-                            
                         </Content>
                     </Layout>
                 </Layout>

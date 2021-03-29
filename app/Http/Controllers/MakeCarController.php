@@ -15,7 +15,7 @@ class MakeCarController extends Controller
     public function index()
     {
         try {
-            $makeData = MakeCar::All();
+            $makeData = MakeCar::orderBy('id', 'DESC')->get();
             return $makeData;
         } catch (\Throwable $th) {
             //throw $th;

@@ -18,6 +18,7 @@ class ModelCarController extends Controller
         try {
             $data = DB::table('make_cars')
             ->join('model_cars','make_cars.id','model_cars.make_id')
+            ->orderBy('model_cars.id', 'desc')
             ->select(DB::raw('make_cars.*, model_cars.*,make_cars.name as makename'))
             ->get();
              return response()->json($data, 200);
