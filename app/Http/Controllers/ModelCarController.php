@@ -16,18 +16,13 @@ class ModelCarController extends Controller
     public function index()
     {
         try {
-            $data = DB::table('make_cars')
+            return response()->json(['error'=>'Something is Wrong '.$request->make], 200);
+          /*   $data = DB::table('make_cars')
             ->join('model_cars','make_cars.id','model_cars.make_id')
             ->orderBy('model_cars.id', 'desc')
             ->select(DB::raw('make_cars.*, model_cars.*,make_cars.name as makename'))
             ->get();
-            if($data){
-                return response()->json($data, 200);
-            }
-            else{
-                return response()->json('aglibar', 200);
-            }
-            
+             return response()->json($data, 200); */
         } catch (\Exception  $thh) {
             if ($errorCode === 1062) { // Duplicate Entry error code
                 return response()->json(['error'=>'Duplicate Entry '.$request->make], 200);

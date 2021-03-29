@@ -13,21 +13,13 @@ function index() {
                 style={{ height: "100vh" }}
             >
                 <TabPane tab={"Add Battery Company"} key={2}>
-                   {/*  <AddMake
-                        onsubmit={(event) => handleMakeName(event)}
-                        makeData={reducerProps.makeData}
-                    /> */}
+               
                 </TabPane>
                 <TabPane tab={"Add Model"} key={3}>
-                    {/* <AddModel
-                        onsubmit={(event) => handleModelName(event)}
-                        onload={() => dispatch(modelData())}
-                        makeData={reducerProps.makeData}
-                        modelData={reducerProps.modelData}
-                    /> */}
+                  
                 </TabPane>
                 <TabPane tab={"Add Fuel"} key={4}>
-                   {/*  <AddFuel onsubmit={(event) => handleFuelName(event)} onload={()=>dispatch(fuelData())}  fuelData={reducerProps.fuelData}/> */}
+                 
                 </TabPane>
             </Tabs>
         </div>
