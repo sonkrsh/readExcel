@@ -12,7 +12,7 @@ function index() {
                 tabPosition={"top"}
                 style={{ height: "100vh" }}
             >
-                <TabPane tab={"Add Make"} key={2}>
+                <TabPane tab={"Add Battery Company"} key={2}>
                    {/*  <AddMake
                         onsubmit={(event) => handleMakeName(event)}
                         makeData={reducerProps.makeData}
