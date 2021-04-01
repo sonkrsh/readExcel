@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FuelCarController;
 use App\Http\Controllers\MakeCarController;
 use App\Http\Controllers\ModelCarController;
+use App\Http\Controllers\BatteryModelController;
+use App\Http\Controllers\BatteryCompanyController;
 
 Route::group([
     'middleware' => 'jwt.auth',
@@ -20,6 +22,13 @@ Route::group([
 
     Route::post('storeFuel', [FuelCarController::class,'store']);
     Route::get('getFuel', [FuelCarController::class,'index']);
+
+    Route::post('storeBatteryCompany', [BatteryCompanyController::class,'store']);
+    Route::get('getBatteryCompany', [BatteryCompanyController::class,'index']);
+
+    Route::post('storeBatteryModel', [BatteryModelController::class,'store']);
+    Route::get('BatteryCompanyModel', [BatteryModelController::class,'index']);
+    Route::post('image', [BatteryModelController::class,'create']);
 });
 
 Route::group([

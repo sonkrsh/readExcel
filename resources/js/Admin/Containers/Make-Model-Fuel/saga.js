@@ -99,7 +99,6 @@ function* fuelFormSubmit({payload}) {
 
         const response = yield call(request, options);
         const { data } = response;
-        console.log(data)
         if (data.message) {
             message.success(data.message, 2);
             yield put({ type: FUEL_DATA });

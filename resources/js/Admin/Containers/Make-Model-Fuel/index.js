@@ -32,7 +32,6 @@ function index() {
             <Tabs
                 defaultActiveKey="2"
                 tabPosition={"top"}
-                style={{ height: "100vh" }}
             >
                 <TabPane tab={"Add Make"} key={2}>
                     <AddMake
