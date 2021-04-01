@@ -84,6 +84,10 @@ function* modelData() {
         if (data) {
             yield put(modelDataSuccess(data));
         }
+        else{
+            message.error('System Error');
+            console.log('wrong')
+        }
     } catch (error) {
         message.error(error);
     }
