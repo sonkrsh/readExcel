@@ -22,7 +22,8 @@ class ModelCarController extends Controller
             ->select(DB::raw('make_cars.*, model_cars.*,make_cars.name as makename'))
             ->get();
              return response()->json($data, 200);
-        } catch (\Exception  $errorCode) {
+        } catch (\Exception  $th) {
+            $errorCode  = $th->errorInfo[1];
             if ($errorCode === 1062) { // Duplicate Entry error code
                 return response()->json(['error'=>'Duplicate Entry '], 200);
             }
