@@ -15,6 +15,7 @@ class ModelCarController extends Controller
      */
     public function index()
     {
+        $data = [];
         try {
             $data = DB::table('make_cars')
             ->join('model_cars','make_cars.id','model_cars.make_id')
@@ -25,10 +26,10 @@ class ModelCarController extends Controller
         } catch (\Exception  $th) {
             $errorCode  = $th->errorInfo[1];
             if ($errorCode === 1062) { // Duplicate Entry error code
-                return response()->json(['error'=>'Duplicate Entry '], 200);
+                return response()->json(['error'=>'Duplicate Entry '], 400);
             }
             else{
-                return response()->json(['error'=>'Something is Wrong '], 200);
+                return response()->json(['error'=>'Something is Wrong '], 400);
             }
         }
       
