@@ -3,7 +3,7 @@ import { notification, message } from "antd";
 import { isEmpty, get } from "lodash";
 import { getJSON } from "jquery";
 import { useSelector, useDispatch } from "react-redux";
-import store from "../Store/store";
+import store from "../../Store/store";
 
 const instance = axios.create({
     // .. where we make our configurations

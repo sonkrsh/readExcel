@@ -3,7 +3,6 @@ import { Table } from "antd";
 
 
 function getBatteryCompanyModel({batteryCompanyModelData}) {
-    console.log(batteryCompanyModelData);
     const columns = [
         {
             title: "Id.",
@@ -34,18 +33,37 @@ function getBatteryCompanyModel({batteryCompanyModelData}) {
             /*  responsive: ['lg'], */
         },
         {
-            title: "Action",
-            dataIndex: "action",
-            key: "action",
-            render: (value, key, time) => <p>{time}</p>,
-            /* responsive: ['lg'], */
+            title: "Description",
+            dataIndex: "desc",
+            key: "desc",
+            render: (value, key, time) => {
+                var fun=null
+                try {
+                  fun   = JSON.parse(value)
+                  return(
+                    fun.map((value,key)=>{
+                        return(
+                            <p key={key}>{value.desc}</p>
+                        )
+                    })
+                  )
+               
+                } catch (error) {
+                    
+                } 
+            }
+                /* console.log('value',value) */
+               /*  <img style={{height:"3rem"}} src={"/storage/"+value} /> */
+            
+            /*  responsive: ['lg'], */
         },
+       
     ];
 
     return (
         <div>
             <Table
-                pagination={{ pageSize: 5 }}
+                pagination={{ pageSize: 10 }}
                 rowKey={(record) => record.id}
                 columns={columns}
                 dataSource={batteryCompanyModelData}

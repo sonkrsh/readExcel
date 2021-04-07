@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FuelCarController;
 use App\Http\Controllers\MakeCarController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ModelCarController;
 use App\Http\Controllers\BatteryModelController;
 use App\Http\Controllers\BatteryCompanyController;
+use App\Http\Controllers\BatteryProductController;
 
 Route::group([
     'middleware' => 'jwt.auth',
@@ -29,6 +31,12 @@ Route::group([
     Route::post('storeBatteryModel', [BatteryModelController::class,'store']);
     Route::get('BatteryCompanyModel', [BatteryModelController::class,'index']);
     Route::post('image', [BatteryModelController::class,'create']);
+
+    Route::post('storeLocation', [LocationController::class,'store']);
+    Route::get('getLocation', [LocationController::class,'index']);
+
+    Route::get('getBatteryProduct', [BatteryProductController::class,'index']);
+    Route::post('storeBatteryProduct', [BatteryProductController::class,'store']);
 });
 
 Route::group([

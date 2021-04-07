@@ -65,6 +65,7 @@ function index(props) {
             <Layout>
                 <Layout>
                     <Sider
+                        className="sidebar"
                         collapsedWidth={windowSize}
                         trigger={null}
                         collapsible
@@ -87,15 +88,19 @@ function index(props) {
                                             icon={value.icon}
                                             title={value.title}
                                         >
-                                            <Menu.Item key={key}>
-                                                <span>{value.data.title}</span>
-                                                <Link to={value.data.url} />
-                                            </Menu.Item>
+                                            {value.data.map((value, key) => (
+                                                <Menu.Item onClick={toggle} key={key}>
+                                                    <span>
+                                                        {value.title}
+                                                    </span>
+                                                    <Link to={value.url} />
+                                                </Menu.Item>
+                                            ))}
                                         </SubMenu>
                                     );
                                 }
                                 return (
-                                    <Menu.Item key={key}>
+                                    <Menu.Item onClick={toggle} key={key}>
                                         {value.icon}
                                         <span>{value.title}</span>
                                         <Link to={value.url} />

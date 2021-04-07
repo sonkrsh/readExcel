@@ -19,11 +19,7 @@ function index({ onsubmit, makeData, onload, modelData }) {
     };
     return (
         <div>
-            <Form
-                form={form}
-                layout="vertical"
-                onFinish={onFinish}
-            >
+            <Form form={form} layout="vertical" onFinish={onFinish}>
                 <Form.Item
                     label="Select Make"
                     name="make"
@@ -34,7 +30,15 @@ function index({ onsubmit, makeData, onload, modelData }) {
                         },
                     ]}
                 >
-                    <Select showSearch placeholder="Select a Make First">
+                    <Select
+                        filterOption={(input, option) =>
+                            option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
+                        showSearch
+                        placeholder="Select a Make First"
+                    >
                         {makeData
                             ? makeData.map((value, key) => (
                                   <Option key={key} value={value.id}>

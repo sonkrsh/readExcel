@@ -2,6 +2,9 @@
 .ant-layout-sider-children ul{
     width: 100%;
 }
+.sidebar{
+    z-index: 1;
+}
 @media screen and (max-width: 768px) {
     .ant-layout-sider{
         position: absolute;

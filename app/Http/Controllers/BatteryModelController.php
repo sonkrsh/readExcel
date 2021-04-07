@@ -50,10 +50,12 @@ class BatteryModelController extends Controller
     public function store(Request $request)
     {
         try {
+            /* $myArr = []; */
             if ($request->hasFile('file')){
                 $data = new BatteryModel();
                 $data->battery_id =   $request->input("batteryCompany");
                 $data->batteryModel_name = $request->input("batteryModel");
+                $data->desc = $request->input("fields");
                 $data->image = $request->file('file')->store('images');
                 $data->save();
                 return response()->json(['message'=>'success'], 200);

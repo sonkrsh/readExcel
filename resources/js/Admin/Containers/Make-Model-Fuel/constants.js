@@ -12,3 +12,9 @@ export const FUEL_FORM_SUBMIT = "resourcesjsAdminContainersFUEL_FORM_SUBMIT";
 export const FUEL_DATA = "resourcesjsAdminContainersFUEL_DATA";
 export const FUEL_DATA_SUCCESS =
     "resourcesjsAdminContainersFUEL_DATA_SUCCESS";
+
+
+export const LOCATION_FORM_SUBMIT = "resourcesjsAdminContainers/LOCATION_FORM_SUBMIT";
+export const LOCATION_DATA = "resourcesjsAdminContainers/LOCATION_DATA";
+export const LOCATION_DATA_SUCCESS =
+    "resourcesjsAdminContainers/LOCATION_DATA_SUCCESS";

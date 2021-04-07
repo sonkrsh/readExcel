@@ -7,7 +7,10 @@ import {
     MODEL_DATA_SUCCESS,
     FUEL_FORM_SUBMIT,
     FUEL_DATA,
-    FUEL_DATA_SUCCESS
+    FUEL_DATA_SUCCESS,
+    LOCATION_FORM_SUBMIT,
+    LOCATION_DATA,
+    LOCATION_DATA_SUCCESS
 } from "./constants";
 
 export function makeFormSubmit(payload) {
@@ -69,6 +72,26 @@ export function fuelData(payload) {
 export function fuelDataSuccess(payload) {
     return {
         type: FUEL_DATA_SUCCESS,
+        payload,
+    };
+}
+
+export function locationFormSubmit(payload) {
+    return {
+        type: LOCATION_FORM_SUBMIT,
+        payload,
+    };
+}
+
+export function locationData(payload) {
+    return {
+        type: LOCATION_DATA,
+        payload,
+    };
+}
+export function locationDataSuccess(payload) {
+    return {
+        type: LOCATION_DATA_SUCCESS,
         payload,
     };
 }

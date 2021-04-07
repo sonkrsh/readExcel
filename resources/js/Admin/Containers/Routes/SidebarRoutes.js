@@ -12,10 +12,14 @@ const SidebarRoutes =
          icon:<BoldOutlined />,
          submenu:true ,
          data:
-         {
+         [{
             title: 'Add',
-            url: '/Dashboard/Battery',
-         }
+            url: '/Dashboard/Battery'
+         },{
+            title: 'Allocate Battery',
+            url: '/Dashboard/allocate-battery'
+         }]
+         
       },
       
       

@@ -4,12 +4,14 @@ import {
     MODEL_FORM_SUBMIT,
     MODEL_DATA,
     FUEL_FORM_SUBMIT,
-    FUEL_DATA
+    FUEL_DATA,
+    LOCATION_FORM_SUBMIT,
+    LOCATION_DATA
 } from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
 import { message } from "antd";
-import { makeDataSuccess, modelDataSuccess,fuelDataSuccess } from "./action";
+import { makeDataSuccess, modelDataSuccess,fuelDataSuccess,locationDataSuccess } from "./action";
 
 function* makeFormSubmit({ payload }) {
     try {
@@ -128,6 +130,46 @@ function* fuelData() {
     }
 }
 
+function* locationFormSubmit({payload}) {
+    try {
+        const options = {
+            url: "/storeLocation",
+            method: "post",
+            data: payload,
+        };
+
+        const response = yield call(request, options);
+        const { data } = response;
+        if (data.message) {
+            message.success(data.message, 2);
+            yield put({ type: LOCATION_DATA });
+        }
+        if (data.error) {
+            message.error(data.error, 2);
+        }
+    } catch (error) {
+        message.error(error);
+    }
+}
+
+
+function* locationData() {
+    try {
+        const options = {
+            url: "/getLocation",
+            method: "get",
+        };
+
+        const response = yield call(request, options);
+        const { data } = response;
+        if (data) {
+            yield put(locationDataSuccess(data));
+        }
+    } catch (error) {
+        message.error(error);
+    }
+}
+
 export default function* MakeModelFuelDefaultSaga() {
     yield takeLatest(MAKE_FORM_SUBMIT, makeFormSubmit);
     yield takeLatest(MAKE_DATA, makeData);
@@ -135,4 +177,7 @@ export default function* MakeModelFuelDefaultSaga() {
     yield takeLatest(MODEL_DATA, modelData);
     yield takeLatest(FUEL_FORM_SUBMIT, fuelFormSubmit);
     yield takeLatest(FUEL_DATA, fuelData);
+    yield takeLatest(LOCATION_FORM_SUBMIT, locationFormSubmit);
+    yield takeLatest(LOCATION_DATA, locationData);
+    
 }

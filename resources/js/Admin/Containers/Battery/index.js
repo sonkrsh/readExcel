@@ -1,32 +1,45 @@
 import React, { useEffect } from "react";
 import { Tabs } from "antd";
-import AddBattery from '../../Components/addBattery'
+import AddBattery from "../../Components/addBattery";
 import { useSelector, useDispatch } from "react-redux";
-import {batteryFormSubmit,batteryCompanyData,batteryModelFormSubmit,companyModelData} from './action'
+import {
+    batteryFormSubmit,
+    batteryCompanyData,
+    batteryModelFormSubmit,
+    companyModelData,
+} from "./action";
+import GetBatteryCompanyModel from "../../Components/addBattery/getBatteryCompanyModel";
 
 function index() {
-  const dispatch = useDispatch();
-  const { TabPane } = Tabs;
-  const reducerProps = useSelector((state) => state.Battery);
+    const dispatch = useDispatch();
+    const { TabPane } = Tabs;
+    const reducerProps = useSelector((state) => state.Battery);
+
+    useEffect(() => {
+       dispatch(companyModelData())
+    }, [])
+    
     return (
         <div>
-           <Tabs
-                defaultActiveKey="2"
-                tabPosition={"top"}
-            >
-                <TabPane tab={"Add Battery Company"} key={2}>
-                    <AddBattery onload={()=>{
-                        dispatch(batteryCompanyData());
-                        dispatch(companyModelData())
-                        }} companyData={reducerProps.batteryCompany} onsubmit={(event)=>dispatch(batteryFormSubmit(event))} batteryModel={(event)=>dispatch(batteryModelFormSubmit(event))} 
-                        batteryCompanyModelData={reducerProps.batteryCompanyModel}
-                        />
+            <Tabs defaultActiveKey="2" tabPosition={"top"}>
+                <TabPane tab={"Dashboard"} key={2}>
+                    <GetBatteryCompanyModel
+                        batteryCompanyModelData={
+                            reducerProps.batteryCompanyModel
+                        }
+                    />
                 </TabPane>
-                <TabPane tab={"Add Model"} key={3}>
-                  
-                </TabPane>
-                <TabPane tab={"Add Fuel"} key={4}>
-                 
+                <TabPane tab={"Add Battery"} key={3}>
+                    <AddBattery
+                        onload={() => {
+                            dispatch(batteryCompanyData());
+                        }}
+                        companyData={reducerProps.batteryCompany}
+                        onsubmit={(event) => dispatch(batteryFormSubmit(event))}
+                        batteryModel={(event) =>
+                            dispatch(batteryModelFormSubmit(event))
+                        }
+                    />
                 </TabPane>
             </Tabs>
         </div>

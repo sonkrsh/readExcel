@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Select, Row, Col, Upload } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import GetBatteryCompanyModel from "./getBatteryCompanyModel";
-function index({
-    onload,
-    onsubmit,
-    companyData,
-    batteryModel,
-    batteryCompanyModelData,
-}) {
+import { Form, Input, Button, Divider, Select, Row, Col, Upload } from "antd";
+import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import "./style.css";
+
+function index({ onload, onsubmit, companyData, batteryModel }) {
     const [fileList, setFileList] = useState([]);
     const Option = Select.Option;
     const [form] = Form.useForm();
@@ -29,12 +24,13 @@ function index({
     const onFinishmodel = (values) => {
         const batteryCompany = values.batteryCompany;
         const batteryModels = values.batteryModel;
-        console.log(values.batteryModel);
+
         const formData = new FormData();
         formData.append("file", fileList[0].originFileObj);
         //fd.append('PackageName',JSON.stringify(PackageName))
         formData.append("batteryCompany", JSON.stringify(batteryCompany));
         formData.append("batteryModel", batteryModels);
+        formData.append("fields", JSON.stringify(values.fields));
         batteryModel(formData);
     };
 
@@ -73,15 +69,14 @@ function index({
                 </Col>
 
                 <Col xs={24} sm={24} md={18} lg={18} xl={18}>
-                <Form
-                            //form={form}
-                            layout="vertical"
-                            name="basic"
-                            onFinish={onFinishmodel}
-                        >
-                    <Row gutter={[16, 16]}>
-                        
-                            <Col xs={24} sm={24} md={10} lg={10} xl={10}>
+                    <Form
+                        //form={form}
+                        layout="vertical"
+                        name="basic"
+                        onFinish={onFinishmodel}
+                    >
+                        <Row gutter={[16, 16]}>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                 <Form.Item
                                     label="Select Battery Company"
                                     name="batteryCompany"
@@ -95,6 +90,12 @@ function index({
                                 >
                                     <Select
                                         showSearch
+                                        filterOption={(input, option) =>
+                                            option.children
+                                                .toLowerCase()
+                                                .indexOf(input.toLowerCase()) >=
+                                            0
+                                        }
                                         placeholder="Select a Make First"
                                     >
                                         {companyData
@@ -122,65 +123,113 @@ function index({
                                 >
                                     <Input />
                                 </Form.Item>
+                                <Row gutter={[16, 16]}>
+                                    <Col
+                                        xs={24}
+                                        sm={24}
+                                        md={12}
+                                        lg={12}
+                                        xl={12}
+                                    >
+                                        <Upload
+                                            beforeUpload={() => false}
+                                            listType="picture-card"
+                                            fileList={fileList}
+                                            onChange={onChange}
+                                            //onPreview={onPreview}
+                                        >
+                                            {fileList.length < 1 && "+ Upload"}
+                                        </Upload>
+                                    </Col>
+                                    <Col
+                                        xs={24}
+                                        sm={24}
+                                        md={12}
+                                        lg={12}
+                                        xl={12}
+                                    >
+                                       
+                                    </Col>
+                                </Row>
                             </Col>
-                            <Col xs={24} sm={24} md={10} lg={10} xl={10}>
-                                <Form.Item
-                                    label="Select Battery Price"
-                                    name="price"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please input your Battery Price!",
-                                        },
-                                    ]}
-                                >
-                                    <Input />
-                                </Form.Item>
-                                <Form.Item
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                              
+
+                                <Form.List
                                     label="Add Battery Model Description"
-                                    name="description"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message:
-                                                "Please input your Battery Description!",
-                                        },
-                                    ]}
+                                    name="fields"
                                 >
-                                    <Input />
-                                </Form.Item>
+                                    {(fields, { add, remove }) => {
+                                        return (
+                                            <div>
+                                                {fields.map((field, index) => (
+                                                    <div
+                                                        className="desc_box"
+                                                        key={field.key}
+                                                    >
+                                                        <Form.Item
+                                                            className="desc_input"
+                                                            name={[
+                                                                index,
+                                                                "desc",
+                                                            ]}
+                                                            label={
+                                                                "Description" +
+                                                                index
+                                                            }
+                                                        >
+                                                            <Input placeholder="field name" />
+                                                        </Form.Item>
+
+                                                        {fields.length > 1 ? (
+                                                            <Button
+                                                                type="danger"
+                                                                className="dynamic-delete-button"
+                                                                onClick={() =>
+                                                                    remove(
+                                                                        field.name
+                                                                    )
+                                                                }
+                                                                icon={
+                                                                    <MinusCircleOutlined />
+                                                                }
+                                                            >
+                                                                Remove Above
+                                                                Field
+                                                            </Button>
+                                                        ) : null}
+                                                    </div>
+                                                ))}
+                                                <Divider />
+                                                <Form.Item>
+                                                    <Button
+                                                        type="dashed"
+                                                        onClick={() => add()}
+                                                        style={{
+                                                            width: "60%",
+                                                        }}
+                                                    >
+                                                        <PlusOutlined /> Add
+                                                        field
+                                                    </Button>
+                                                </Form.Item>
+                                            </div>
+                                        );
+                                    }}
+                                </Form.List>
+                                <Form.Item></Form.Item>
                             </Col>
-                            <Col xs={24} sm={24} md={4} lg={4} xl={4}>
-                                <Upload
-                                    beforeUpload={() => false}
-                                    listType="picture-card"
-                                    fileList={fileList}
-                                    onChange={onChange}
-                                    //onPreview={onPreview}
-                                >
-                                    {fileList.length < 1 && "+ Upload"}
-                                </Upload>
-                            </Col>
-                          
-                    </Row>
-                    <Button
-                                type="primary"
-                                shape="round"
-                                htmlType="submit"
-                                icon={<PlusOutlined />}
-                                //size={size}
-                            >
-                                Add Battery
-                            </Button>
-                        </Form>
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    <GetBatteryCompanyModel
-                        batteryCompanyModelData={batteryCompanyModelData}
-                    />
+                        </Row>
+                        <Button
+                            type="primary"
+                            shape="round"
+                            htmlType="submit"
+                            icon={<PlusOutlined />}
+                            //size={size}
+                        >
+                            Add Battery
+                        </Button>
+                    </Form>
                 </Col>
             </Row>
         </>

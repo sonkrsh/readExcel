@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "antd";
 
 function getMake({ modelData }) {
-    console.log(modelData);
+   
     const columns = [
         {
             title: "Id.",
