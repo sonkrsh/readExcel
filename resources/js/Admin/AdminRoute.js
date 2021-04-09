@@ -1,17 +1,16 @@
-import React,{lazy,Suspense} from "react";
+import React, { lazy, Suspense } from "react";
 import AdminLoginPage from "./Containers/AdminLoginPage";
 import AdminLayout from "./Containers/AdminLayout";
 import { Switch, Route } from "react-router-dom";
 
-const PrivateRoute = lazy(()=>import("./utils/PrivateRoute"))
-const ProtectedRoute = lazy(()=>import("./utils/ProtectedRoute"))
+const PrivateRoute = lazy(() => import("./utils/PrivateRoute"));
+const ProtectedRoute = lazy(() => import("./utils/ProtectedRoute"));
 
 function AdminRoute(props) {
     console.log(props);
     return (
         <div>
-           
-                <Suspense fallback={<div>Loading.....</div>}>
+            <Suspense fallback={<div>Loading.....</div>}>
                 <Switch>
                     <ProtectedRoute
                         exact
@@ -24,8 +23,7 @@ function AdminRoute(props) {
                         component={AdminLayout}
                     />
                 </Switch>
-                </Suspense>
-  
+            </Suspense>
         </div>
     );
 }

@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Homepage from "./User";
+import Homepage from "./User/Containers/Homepage";
 import AdminRoute from "./Admin/AdminRoute";
 import { Provider } from "react-redux";
 import store from "./Store/store";
+import './style.css'
+
 
 function Index(props) {
     return (

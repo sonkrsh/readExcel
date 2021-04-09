@@ -1,0 +1,32 @@
+.ant-card-body {
+    position: relative;
+}
+.ant-card {
+    left: 3px;
+    top: 4px;
+    background: whitesmoke !important;
+}
+.child_drop {
+    position: absolute;
+    top: -25%;
+    background: whitesmoke;
+    bottom: 0;
+    left: 0;
+    width: 96%;
+}
+.ant-card-extra {
+    width: 100% !important;
+    float: none;
+    margin-left: none;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+a {
+    color: blue !important;
+}
+.ant-select-dropdown-hidden {
+    display: inline-block !important;
+}
