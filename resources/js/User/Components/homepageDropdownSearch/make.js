@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Card, Select } from "antd";
 
-function make({ onClick, selectValue }) {
+function make({ onClick, selectValue, makeArray }) {
     const { Option } = Select;
 
     return (
@@ -23,6 +23,7 @@ function make({ onClick, selectValue }) {
             style={{ textAlign: "center" }}
         >
             <Select
+                dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(3);
                     selectValue(id, name?.children);
@@ -38,9 +39,11 @@ function make({ onClick, selectValue }) {
                         .indexOf(input.toLowerCase()) >= 0
                 }
             >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
+                {makeArray.map((value, key) => (
+                    <Option key={key} value={value?.id}>
+                        {value?.name}
+                    </Option>
+                ))}
             </Select>
         </Card>
     );

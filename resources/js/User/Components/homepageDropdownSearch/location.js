@@ -1,20 +1,20 @@
 import React from "react";
 import { Card, Select } from "antd";
 
-function location({ onClick, selectValue }) {
+function location({ onClick, selectValue, locationArray }) {
     const { Option } = Select;
     return (
         <Card
             extra={
                 <div className="header">
                     <div className="back">
-                        <a onClick={()=>onClick(0)}>Back</a>
+                        <a onClick={() => onClick(0)}>Back</a>
                     </div>
                     <div className="title">
                         <h6>Location</h6>
                     </div>
                     <div className="cancel">
-                    <a onClick={()=>onClick(0)}>Cancel</a>
+                        <a onClick={() => onClick(0)}>Cancel</a>
                     </div>
                 </div>
             }
@@ -22,6 +22,7 @@ function location({ onClick, selectValue }) {
             style={{ textAlign: "center" }}
         >
             <Select
+                dropdownStyle={{ display: "block" }}
                 showSearch
                 onChange={(id, name) => {
                     onClick(0);
@@ -37,9 +38,11 @@ function location({ onClick, selectValue }) {
                         .indexOf(input.toLowerCase()) >= 0
                 }
             >
-                <Option value="0">Jack</Option>
-                <Option value="1">Lucy</Option>
-                <Option value="2">Tom</Option>
+                {locationArray.map((value, key) => (
+                    <Option key={key} value={value.id}>
+                        {value.location}
+                    </Option>
+                ))}
             </Select>
         </Card>
     );

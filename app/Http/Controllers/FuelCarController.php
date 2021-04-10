@@ -15,7 +15,7 @@ class FuelCarController extends Controller
     public function index()
     {
         try {
-            $fuelData = FuelCar::orderBy('id', 'DESC')->get();
+            $fuelData = FuelCar::orderBy('id', 'DESC')->get(['name','id']);
             return $fuelData;
         } catch (\Throwable $th) {
             //throw $th;

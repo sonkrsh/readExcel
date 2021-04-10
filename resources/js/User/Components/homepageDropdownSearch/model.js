@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Card, Select } from "antd";
 
-function model({ onClick, selectValue }) {
+function model({ onClick, selectValue, modelArray }) {
     const { Option } = Select;
 
     return (
@@ -23,6 +23,7 @@ function model({ onClick, selectValue }) {
             style={{ textAlign: "center" }}
         >
             <Select
+                dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(4);
                     selectValue(id, name?.children);
@@ -38,9 +39,11 @@ function model({ onClick, selectValue }) {
                         .indexOf(input.toLowerCase()) >= 0
                 }
             >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
+                {modelArray.map((value, key) => (
+                    <Option key={key} value={value.id}>
+                        {value.name}
+                    </Option>
+                ))}
             </Select>
         </Card>
     );

@@ -17,13 +17,13 @@ Route::group([
 ], function ($router) {
     Route::get('checkToken', [AuthController::class,'checkToken']);
     Route::post('storeMake', [MakeCarController::class,'store']);
-    Route::get('getMake', [MakeCarController::class,'index']);
+    
 
     Route::post('storeModel', [ModelCarController::class,'store']);
-    Route::get('getModel', [ModelCarController::class,'index']);
+   
 
     Route::post('storeFuel', [FuelCarController::class,'store']);
-    Route::get('getFuel', [FuelCarController::class,'index']);
+   
 
     Route::post('storeBatteryCompany', [BatteryCompanyController::class,'store']);
     Route::get('getBatteryCompany', [BatteryCompanyController::class,'index']);
@@ -33,7 +33,7 @@ Route::group([
     Route::post('image', [BatteryModelController::class,'create']);
 
     Route::post('storeLocation', [LocationController::class,'store']);
-    Route::get('getLocation', [LocationController::class,'index']);
+    
 
     Route::get('getBatteryProduct', [BatteryProductController::class,'index']);
     Route::post('storeBatteryProduct', [BatteryProductController::class,'store']);
@@ -42,6 +42,14 @@ Route::group([
 Route::group([
     'prefix' => 'auth/admin'
 ], function ($router) {
+    Route::get('getMake', [MakeCarController::class,'index']);
+    Route::get('getModel', [ModelCarController::class,'index']);
+    Route::get('getFuel', [FuelCarController::class,'index']);
+    Route::get('getLocation', [LocationController::class,'index']);
+
+
+
+
     //Route::get('checkToken', [AuthController::class,'checkToken']);
     Route::post('login', [AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
@@ -54,3 +62,13 @@ Route::group([
     Route::post('me', [AuthController::class,'me']);
 
 });
+
+
+Route::group([
+    'prefix' => 'v1'
+], function ($router) {
+    Route::post('makeId', [MakeCarController::class,'getModelbyMakeId']);
+
+});
+
+   

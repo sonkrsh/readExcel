@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MakeCar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MakeCarController extends Controller
 {
@@ -22,9 +23,11 @@ class MakeCarController extends Controller
         }
     }
 
-    public function create()
+    public function getModelbyMakeId(Request $request)
     {
-        //
+        $makeId = $request->makeid;
+        $data = DB::table('model_cars')->where('make_id',$makeId)->get(['name','id'])->all();
+        return response()->json(['data'=>$data], 200);
     }
 
     public function store(Request $request)

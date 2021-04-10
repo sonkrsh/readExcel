@@ -6,7 +6,7 @@ import Fuel from "./fuel";
 import Location from "./location";
 import "./style.css";
 
-function index() {
+function index({ makeArray, locationArray, makeId, modelArray, fuelArray }) {
     const [form] = Form.useForm();
     const [trigger, settrigger] = useState(0);
 
@@ -42,6 +42,7 @@ function index() {
             id: id,
             name: name,
         });
+        makeId(id);
     };
 
     const handleModel = (id, name) => {
@@ -79,6 +80,7 @@ function index() {
                 {trigger === 1 ? (
                     <div className="child_drop">
                         <Location
+                            locationArray={locationArray}
                             onClick={(event) => {
                                 settrigger(event);
                             }}
@@ -91,6 +93,7 @@ function index() {
                 {trigger === 2 ? (
                     <div className="child_drop">
                         <Make
+                            makeArray={makeArray}
                             onClick={(event) => {
                                 settrigger(event);
                             }}
@@ -103,6 +106,7 @@ function index() {
                 {trigger === 3 ? (
                     <div className="child_drop">
                         <Model
+                            modelArray={modelArray}
                             onClick={(event) => {
                                 settrigger(event);
                             }}
@@ -115,6 +119,7 @@ function index() {
                 {trigger === 4 ? (
                     <div className="child_drop">
                         <Fuel
+                            fuelArray={fuelArray}
                             onClick={(event) => {
                                 settrigger(event);
                             }}

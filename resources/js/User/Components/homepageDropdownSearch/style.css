@@ -12,7 +12,7 @@
     background: whitesmoke;
     bottom: 0;
     left: 0;
-    width: 96%;
+    width: 100%;
 }
 .ant-card-extra {
     width: 100% !important;
@@ -26,7 +26,4 @@
 }
 a {
     color: blue !important;
-}
-.ant-select-dropdown-hidden {
-    display: inline-block !important;
 }

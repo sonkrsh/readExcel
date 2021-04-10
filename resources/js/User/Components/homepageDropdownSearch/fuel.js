@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Select } from "antd";
 
-function fuel({ onClick, selectValue }) {
+function fuel({ onClick, selectValue, fuelArray }) {
     const { Option } = Select;
     return (
         <Card
@@ -22,6 +22,7 @@ function fuel({ onClick, selectValue }) {
             style={{ textAlign: "center" }}
         >
             <Select
+                dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(0);
                     selectValue(id, name?.children);
@@ -37,9 +38,11 @@ function fuel({ onClick, selectValue }) {
                         .indexOf(input.toLowerCase()) >= 0
                 }
             >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
+                {fuelArray.map((value, key) => (
+                    <Option key={key} value={value?.id}>
+                        {value?.name}
+                    </Option>
+                ))}
             </Select>
         </Card>
     );
