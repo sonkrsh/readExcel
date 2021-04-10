@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     makeData,
     locationData,
-    fuelData
+    fuelData,
 } from "../../../Admin/Containers/Make-Model-Fuel/action";
-import {getModel} from './action'
+import { getModel } from "./action";
 
-
-function index() {
+function index(props) {
+    console.log(props);
     const dispatch = useDispatch();
     const reducerProps = useSelector((state) => state?.MakeModelFuelreducer);
     const originReducer = useSelector((state) => state?.Homepage);
@@ -28,7 +28,14 @@ function index() {
                     makeArray={reducerProps?.makeData}
                     modelArray={originReducer?.modelData}
                     fuelArray={reducerProps?.fuelData}
-                    makeId={(id)=>{dispatch(getModel(id))}}
+                    makeId={(id) => {
+                        dispatch(getModel(id));
+                    }}
+                    onSubmit={(data) => {
+                        props?.history?.push(
+                            `/${data?.makeName}/${data?.modelName}/${data?.fuelName}/${data?.locationName}`
+                        );
+                    }}
                 />
             </Col>
         </Row>

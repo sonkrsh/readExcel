@@ -20,6 +20,9 @@ function* formSubmit({ payload }) {
             message.success(data.message, 2);
             yield put({ type: GET_PRODUCT_DATA });
         }
+        if(data?.error){
+            message.error(data?.error,3)
+        }
     } catch (error) {
         yield put(fetchingFormValueError());
     }

@@ -68,7 +68,7 @@ Route::group([
     'prefix' => 'v1'
 ], function ($router) {
     Route::post('makeId', [MakeCarController::class,'getModelbyMakeId']);
-
+    Route::post('getProducts', [BatteryProductController::class,'getProductsByMakeModelFuelLocationId']);
 });
 
    

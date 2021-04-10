@@ -42,9 +42,38 @@ class BatteryProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getProductsByMakeModelFuelLocationId(Request $request)
     {
-        //
+        $makeName = $request->makeName;
+        $modelName = $request->modelName;
+        $fuelName = $request->fuelName;
+        $locationName = $request->locationName;
+        try {
+            //$data =[];
+            $makeData  = DB::table('make_cars')->where('name',$makeName)->get(['id','name']);
+            $modelData  = DB::table('model_cars')->where('name',$modelName)->get(['id','name']);
+            $fuelData  = DB::table('fuel_cars')->where('name',$fuelName)->get(['id','name']);
+            $locationData  = DB::table('locations')->where('location',$locationName)->get(['id','location']);
+    
+            $productData = DB::table('battery_products')->where([['carId',$modelData[0]->id],['fuelId',$fuelData[0]->id],['locationId',$locationData[0]->id]])
+            ->join('battery_models','battery_models.id','battery_products.batteryId')
+            ->join('battery_companies','battery_companies.id','battery_models.battery_id')
+            ->get(['battery_products.id','carId','fuelId','batteryId','batteryModel_name','locationId','desc','image','name','price','priceWithExchange','priceWithOutExchange']);
+            if($productData[0]->id){
+                return response()->json(['success'=>$productData], 200);
+            }
+            /* foreach ($productData as $p) {
+                $mapData = DB::table('battery_models')
+                ->join('battery_companies','battery_companies.id','battery_models.battery_id')->where('battery_models.id',$p->batteryId)->get(['batteryModel_name','desc','image','name']);
+                array_push($data,$mapData);
+                }     */ 
+     
+            //$array =  $productData->concat($data);
+           
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'No Data Found'], 200);
+        }
+       
     }
 
     /**
@@ -64,8 +93,25 @@ class BatteryProductController extends Controller
             $batteryProduct->price = $request->price;
             $batteryProduct->priceWithExchange = $request->withExchangeprice;
             $batteryProduct->priceWithOutExchange = $request->withOutExchangeprice;
-            $batteryProduct->save();
-            return response()->json(['message'=>'success'], 200);
+            try {
+                $dataExists = DB::table('battery_products')->where([['carId',$request->modelid],['fuelId',$request->fuelid],['batteryId', $request->battery],['locationId',$request->locationid]])->get();
+
+                if($dataExists[0]->id){
+                    return response()->json(['error'=>'Duplicate Entry '], 200);
+                }
+            } catch (\Throwable $th) {
+                 $batteryProduct->save();
+                 return response()->json(['message'=>'success'], 200);
+            }
+          
+            //return $dataExists[0]->id;
+            /* if($dataExists[0]->id){
+                return response()->json(['error'=>'Duplicate Entry '.$request->make], 200);
+            }
+            else{
+                $batteryProduct->save();
+                return response()->json(['message'=>'success'], 200);
+            } */
         } catch (\Exception  $th) {
             $errorCode  = $th->errorInfo[1];
             if ($errorCode === 1062) { // Duplicate Entry error code

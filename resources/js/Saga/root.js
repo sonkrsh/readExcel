@@ -5,6 +5,7 @@ import makeModelFuelDefaultSaga from "../Admin/Containers/Make-Model-Fuel/saga";
 import BatteryDefaultSaga from '../Admin/Containers/Battery/saga'
 import AllocateBatteryDefaultSaga from '../Admin/Containers/AllocateBattery/saga'
 import HomepageDefaultSaga from '../User/Containers/Homepage/saga'
+import ProductsDefaultSaga from '../User/Containers/Products/saga'
 
 export default function* root() {
     yield all([
@@ -12,6 +13,7 @@ export default function* root() {
         makeModelFuelDefaultSaga(),
         BatteryDefaultSaga(),
         AllocateBatteryDefaultSaga(),
-        HomepageDefaultSaga()
+        HomepageDefaultSaga(),
+        ProductsDefaultSaga()
     ]);
 }

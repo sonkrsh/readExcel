@@ -5,8 +5,9 @@ import Model from "./model";
 import Fuel from "./fuel";
 import Location from "./location";
 import "./style.css";
+import { isEqual } from "lodash";
 
-function index({ makeArray, locationArray, makeId, modelArray, fuelArray }) {
+function index({ makeArray, locationArray, makeId, modelArray, fuelArray,onSubmit }) {
     const [form] = Form.useForm();
     const [trigger, settrigger] = useState(0);
 
@@ -59,6 +60,36 @@ function index({ makeArray, locationArray, makeId, modelArray, fuelArray }) {
         form.setFieldsValue({
             car: makeData?.name + "-" + modelData?.name + "-" + name,
         });
+    };
+
+    const handleSubmit = () => {
+        if (isEqual(locationData?.id, null)) {
+            return form.setFields([
+                {
+                    name: "location",
+                    errors: ["Please Input Location First !"],
+                },
+            ]);
+        }
+        if (
+            isEqual(makeData?.id, null) &&
+            isEqual(modelData?.id, null) &&
+            isEqual(fuel?.id, null)
+        ) {
+            return form.setFields([
+                {
+                    name: "car",
+                    errors: ["Please Input your Car First !"],
+                },
+            ]);
+        }
+        const combineData = {
+            locationName:locationData?.name,
+            makeName:makeData?.name,
+            modelName:modelData?.name,
+            fuelName:fuel?.name
+        }
+        onSubmit(combineData)
     };
 
     return (
@@ -129,6 +160,9 @@ function index({ makeArray, locationArray, makeId, modelArray, fuelArray }) {
                         />
                     </div>
                 ) : null}
+                <Button type="primary" htmlType="submit" onClick={handleSubmit}>
+                    Submit
+                </Button>
             </Card>
         </div>
     );
