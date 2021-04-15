@@ -95,16 +95,16 @@ function index({ makeArray, locationArray, makeId, modelArray, fuelArray,onSubmi
     return (
         <div className="site-card-border-less-wrapper">
             <Card
-                title="AutomobileCrunch"
+                title="Find Right Price"
                 bordered={false}
                 style={{ textAlign: "center" }}
             >
                 <Form form={form} layout="vertical">
-                    <Form.Item label="Location" name="location">
-                        <Input onClick={() => settrigger(1)} />
+                    <Form.Item label=" " name="location">
+                        <Input placeholder="Location" onClick={() => settrigger(1)} />
                     </Form.Item>
-                    <Form.Item label="Select You Car" name="car">
-                        <Input onClick={() => settrigger(2)} />
+                    <Form.Item label=" " name="car">
+                        <Input placeholder="Select Car" onClick={() => settrigger(2)} />
                     </Form.Item>
                 </Form>
 

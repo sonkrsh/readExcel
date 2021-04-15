@@ -1,0 +1,16 @@
+nav{
+    background-color: white !important;
+}
+
+a{
+    font-size: 1.2rem !important;
+    color: black !important;
+}
+.navbar-collapse{
+    margin-left: 3rem !important;
+}
+.navbar-nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 37% !important;
+}

@@ -8,6 +8,7 @@ import {
     fuelData,
 } from "../../../Admin/Containers/Make-Model-Fuel/action";
 import { getModel } from "./action";
+import "./style.css";
 
 function index(props) {
     console.log(props);
@@ -21,8 +22,8 @@ function index(props) {
     }, []);
 
     return (
-        <Row gutter={[16, 16]}>
-            <Col xs={24} sm={24} md={24} lg={11} xl={11}>
+        <Row id="homepageSearchBox" gutter={[16, 16]}>
+            <Col id="SearchCar" xs={24} sm={24} md={24} lg={9} xl={9}>
                 <HomepageDropdownSearch
                     locationArray={reducerProps?.locationData}
                     makeArray={reducerProps?.makeData}
@@ -37,6 +38,9 @@ function index(props) {
                         );
                     }}
                 />
+            </Col>
+            <Col id="homePageLeftImg" xs={0} sm={0} md={0} lg={14} xl={14}>
+                <img src="/storage/images/Banner.png" alt="" srcset="" />
             </Col>
         </Row>
     );

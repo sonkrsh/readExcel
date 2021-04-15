@@ -1,8 +1,10 @@
 import React from "react";
+import './style.css'
+
 
 export default function index() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="show">
+        <nav className="navbar navbar-expand-lg navbar-light">
             <a style={{width:'17%'}} className="navbar-brand" href="#">
                 <img style={{width:'100%'}} src="/storage/images/Logo.png" alt="" srcset=""/>
             </a>
@@ -30,10 +32,15 @@ export default function index() {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            Link
+                            Blog
                         </a>
                     </li>
-                    <li className="nav-item dropdown">
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">
+                            About Us
+                        </a>
+                    </li>
+                   {/*  <li className="nav-item dropdown">
                         <a
                             className="nav-link dropdown-toggle"
                             href="#"
@@ -43,7 +50,7 @@ export default function index() {
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            Dropdown
+                            About us
                         </a>
                         <div
                             className="dropdown-menu"
@@ -65,9 +72,9 @@ export default function index() {
                         <a className="nav-link disabled" href="#">
                             Disabled
                         </a>
-                    </li>
+                    </li> */}
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
+               {/*  <form className="form-inline my-2 my-lg-0">
                     <input
                         className="form-control mr-sm-2"
                         type="search"
@@ -80,7 +87,7 @@ export default function index() {
                     >
                         Search
                     </button>
-                </form>
+                </form> */}
             </div>
         </nav>
     );

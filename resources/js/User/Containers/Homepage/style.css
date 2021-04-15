@@ -1,0 +1,23 @@
+/* .rc-virtual-list-holder {
+    max-height: 185px !important;
+} */
+#SearchCar{
+    padding: 10rem 3rem;
+}
+#homepageSearchBox {
+    background-color: #0093e9;
+    background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+    border-radius: 2rem;
+}
+img{
+    width: 70% !important;
+}
+#homePageLeftImg{
+    display: flex ;
+/*     width: 100%; */
+    justify-content: end;
+    align-items: center;
+    justify-content: flex-end;
+ 
+}
+

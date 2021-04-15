@@ -1,10 +1,12 @@
 .ant-card-body {
     position: relative;
 }
+.rc-virtual-list-holder{
+    height: 23vh;
+}
 .ant-card {
     left: 3px;
     top: 4px;
-    background: whitesmoke !important;
 }
 .child_drop {
     position: absolute;
@@ -26,4 +28,7 @@
 }
 a {
     color: blue !important;
+}
+button{
+    background-color: #6c757d !important;
 }
