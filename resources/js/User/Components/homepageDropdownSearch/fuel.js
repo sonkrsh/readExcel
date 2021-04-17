@@ -19,7 +19,7 @@ function fuel({ onClick, selectValue, fuelArray }) {
                 </div>
             }
             bordered={false}
-            style={{ textAlign: "center" }}
+            style={{ textAlign:"center" }}
         >
             <Select
                 dropdownStyle={{ display: "block" }}
