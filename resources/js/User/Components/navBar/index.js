@@ -5,8 +5,8 @@ import './style.css'
 export default function index() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
-            <a style={{width:'17%'}} className="navbar-brand" href="#">
-                <img style={{width:'100%'}} src="/storage/images/Logo.png" alt="" srcset=""/>
+            <a style={{width:'17%'}} className="navbar-brand" href="/">
+                <img style={{width:'100%'}} src="/storage/images/Logo.png" alt="" srcSet=""/>
             </a>
             <button
                 className="navbar-toggler"
@@ -26,7 +26,7 @@ export default function index() {
             >
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#">
+                        <a className="nav-link" href="/">
                             Home <span className="sr-only">(current)</span>
                         </a>
                     </li>

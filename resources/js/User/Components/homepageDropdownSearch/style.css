@@ -1,9 +1,6 @@
 .ant-card-body {
     position: relative;
 }
-.rc-virtual-list-holder{
-    height: 23vh;
-}
 .ant-card {
     left: 3px;
     top: 4px;
