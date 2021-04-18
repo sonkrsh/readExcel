@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BatteryModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BatteryModelController extends Controller
 {
@@ -20,7 +21,9 @@ class BatteryModelController extends Controller
         ->join('battery_models','battery_companies.id','battery_models.battery_id')
         ->orderBy('battery_models.id', 'desc')
         ->get();
-         return response()->json($data, 200);
+        $disk =  Storage::disk('google')->files();
+        $url = $disk->url('NIKCeJU0XSIF3BGE7fsJ7Qqs5i7SnNPgjfgQZP0T.png');
+         return response()->json([$url], 200);
     } catch (\Exception  $thh) {
         if ($errorCode === 1062) { // Duplicate Entry error code
             return response()->json(['error'=>'Duplicate Entry '.$request->make], 200);
@@ -56,8 +59,10 @@ class BatteryModelController extends Controller
                 $data->battery_id =   $request->input("batteryCompany");
                 $data->batteryModel_name = $request->input("batteryModel");
                 $data->desc = $request->input("fields");
-                $data->image = $request->file('file')->store('images');
+                /* Storage::disk('google')->put('hello.txt','hello wordls'); */
+                
                 $data->save();
+                $data->image = $request->file('file')->store('','google');
                 return response()->json(['message'=>'success'], 200);
                  
             }

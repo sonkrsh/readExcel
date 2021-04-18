@@ -14,3 +14,6 @@ a{
     justify-content: space-between !important;
     width: 37% !important;
 }
+nav{
+    padding: 0 !important;
+}

@@ -6,7 +6,7 @@ export default function index() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
             <a style={{width:'17%'}} className="navbar-brand" href="/">
-                <img style={{width:'100%'}} src="/storage/images/Logo.png" alt="" srcSet=""/>
+                <img style={{width:'100%',paddingLeft:'2rem'}} src="/storage/images/Logo.png" alt="" srcSet=""/>
             </a>
             <button
                 className="navbar-toggler"

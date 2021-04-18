@@ -40,7 +40,7 @@ function index(props) {
                 />
             </Col>
             <Col id="homePageLeftImg" xs={0} sm={0} md={0} lg={14} xl={14}>
-                <img src="/storage/images/Banner.png" alt="" srcset="" />
+                <img src="/storage/images/banner.svg" height="200" width="200" alt="" srcset="" />
             </Col>
         </Row>
     );
