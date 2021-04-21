@@ -7,6 +7,7 @@ use App\Http\Controllers\FuelCarController;
 use App\Http\Controllers\MakeCarController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ModelCarController;
+use App\Http\Controllers\AddImagesController;
 use App\Http\Controllers\BatteryModelController;
 use App\Http\Controllers\BatteryCompanyController;
 use App\Http\Controllers\BatteryProductController;
@@ -37,6 +38,9 @@ Route::group([
 
     Route::get('getBatteryProduct', [BatteryProductController::class,'index']);
     Route::post('storeBatteryProduct', [BatteryProductController::class,'store']);
+
+    Route::post('storeImages', [AddImagesController::class,'store']);
+    
 });
 
 Route::group([

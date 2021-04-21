@@ -22,6 +22,7 @@ function fuel({ onClick, selectValue, fuelArray }) {
             style={{ textAlign:"center" }}
         >
             <Select
+            listHeight={180}
                 dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(0);

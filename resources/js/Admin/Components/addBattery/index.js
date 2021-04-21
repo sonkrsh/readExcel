@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Divider, Select, Row, Col, Upload } from "antd";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import AddImages from '../addImages'
 import "./style.css";
 
 function index({ onload, onsubmit, companyData, batteryModel }) {
-    const [fileList, setFileList] = useState([]);
+
     const Option = Select.Option;
     const [form] = Form.useForm();
-    const onChange = ({ fileList: newFileList }) => {
-        //console.log(newFileList[0].originFileObj);
-        setFileList(newFileList);
-    };
+    const formData = new FormData();
 
     useEffect(() => {
         onload();
@@ -24,10 +22,6 @@ function index({ onload, onsubmit, companyData, batteryModel }) {
     const onFinishmodel = (values) => {
         const batteryCompany = values.batteryCompany;
         const batteryModels = values.batteryModel;
-
-        const formData = new FormData();
-        formData.append("file", fileList[0].originFileObj);
-        //fd.append('PackageName',JSON.stringify(PackageName))
         formData.append("batteryCompany", JSON.stringify(batteryCompany));
         formData.append("batteryModel", batteryModels);
         formData.append("fields", JSON.stringify(values.fields));
@@ -131,15 +125,7 @@ function index({ onload, onsubmit, companyData, batteryModel }) {
                                         lg={12}
                                         xl={12}
                                     >
-                                        <Upload
-                                            beforeUpload={() => false}
-                                            listType="picture-card"
-                                            fileList={fileList}
-                                            onChange={onChange}
-                                            //onPreview={onPreview}
-                                        >
-                                            {fileList.length < 1 && "+ Upload"}
-                                        </Upload>
+                                       <AddImages onSubmit={(event)=>{ formData.append("file", event.get('file'))}}/>
                                     </Col>
                                     <Col
                                         xs={24}
@@ -147,14 +133,10 @@ function index({ onload, onsubmit, companyData, batteryModel }) {
                                         md={12}
                                         lg={12}
                                         xl={12}
-                                    >
-                                       
-                                    </Col>
+                                    ></Col>
                                 </Row>
                             </Col>
                             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                              
-
                                 <Form.List
                                     label="Add Battery Model Description"
                                     name="fields"

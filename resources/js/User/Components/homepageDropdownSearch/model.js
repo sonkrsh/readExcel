@@ -23,6 +23,7 @@ function model({ onClick, selectValue, modelArray }) {
             style={{ textAlign: "center" }}
         >
             <Select
+            listHeight={180}
                 dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(4);

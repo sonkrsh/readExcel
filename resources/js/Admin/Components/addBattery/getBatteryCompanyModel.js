@@ -1,8 +1,7 @@
-import React from 'react'
+import React from "react";
 import { Table } from "antd";
 
-
-function getBatteryCompanyModel({batteryCompanyModelData}) {
+function getBatteryCompanyModel({ batteryCompanyModelData }) {
     const columns = [
         {
             title: "Id.",
@@ -28,7 +27,9 @@ function getBatteryCompanyModel({batteryCompanyModelData}) {
             dataIndex: "image",
             key: "image",
             render: (value, key, time) => (
-                <img style={{height:"3rem"}} src={"/storage/"+value} />
+                <svg width="200" height="200">
+                <image href={value} height="200" width="200"/>
+              </svg>
             ),
             /*  responsive: ['lg'], */
         },
@@ -37,27 +38,19 @@ function getBatteryCompanyModel({batteryCompanyModelData}) {
             dataIndex: "desc",
             key: "desc",
             render: (value, key, time) => {
-                var fun=null
+                var fun = null;
                 try {
-                  fun   = JSON.parse(value)
-                  return(
-                    fun.map((value,key)=>{
-                        return(
-                            <p key={key}>{value.desc}</p>
-                        )
-                    })
-                  )
-               
-                } catch (error) {
-                    
-                } 
-            }
-                /* console.log('value',value) */
-               /*  <img style={{height:"3rem"}} src={"/storage/"+value} /> */
-            
+                    fun = JSON.parse(value);
+                    return fun.map((value, key) => {
+                        return <p key={key}>{value.desc}</p>;
+                    });
+                } catch (error) {}
+            },
+            /* console.log('value',value) */
+            /*  <img style={{height:"3rem"}} src={"/storage/"+value} /> */
+
             /*  responsive: ['lg'], */
         },
-       
     ];
 
     return (
@@ -72,4 +65,4 @@ function getBatteryCompanyModel({batteryCompanyModelData}) {
     );
 }
 
-export default getBatteryCompanyModel
+export default getBatteryCompanyModel;

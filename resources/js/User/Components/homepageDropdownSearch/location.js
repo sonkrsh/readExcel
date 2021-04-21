@@ -28,6 +28,7 @@ function location({ onClick, selectValue, locationArray }) {
                     onClick(0);
                     selectValue(id, name?.children);
                 }}
+                listHeight={180}
                 placeholder="Please Select location"
                 optionFilterProp="children"
                 defaultOpen={true}

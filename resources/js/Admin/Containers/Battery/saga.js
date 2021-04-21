@@ -56,7 +56,6 @@ function* batteryCompanydata() {
 
 
 function* batteryModeldata({payload}) {
-    console.log(payload)
     try {
         const options = {
             url: "/storeBatteryModel",

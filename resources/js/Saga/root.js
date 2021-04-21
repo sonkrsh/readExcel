@@ -6,7 +6,7 @@ import BatteryDefaultSaga from '../Admin/Containers/Battery/saga'
 import AllocateBatteryDefaultSaga from '../Admin/Containers/AllocateBattery/saga'
 import HomepageDefaultSaga from '../User/Containers/Homepage/saga'
 import ProductsDefaultSaga from '../User/Containers/Products/saga'
-
+import AddImagesDefaultSaga from '../Admin/Containers/AddImages/saga'
 export default function* root() {
     yield all([
         adminLoginPageDefaultSaga(),
@@ -14,6 +14,7 @@ export default function* root() {
         BatteryDefaultSaga(),
         AllocateBatteryDefaultSaga(),
         HomepageDefaultSaga(),
-        ProductsDefaultSaga()
+        ProductsDefaultSaga(),
+        AddImagesDefaultSaga()
     ]);
 }

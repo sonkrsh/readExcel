@@ -21,9 +21,9 @@ class BatteryModelController extends Controller
         ->join('battery_models','battery_companies.id','battery_models.battery_id')
         ->orderBy('battery_models.id', 'desc')
         ->get();
-        $disk =  Storage::disk('google')->files();
-        $url = $disk->url('NIKCeJU0XSIF3BGE7fsJ7Qqs5i7SnNPgjfgQZP0T.png');
-         return response()->json([$url], 200);
+      /*   $disk =  Storage::disk('google')->files();
+        $url = $disk->url('NIKCeJU0XSIF3BGE7fsJ7Qqs5i7SnNPgjfgQZP0T.png'); */
+         return response()->json($data, 200);
     } catch (\Exception  $thh) {
         if ($errorCode === 1062) { // Duplicate Entry error code
             return response()->json(['error'=>'Duplicate Entry '.$request->make], 200);
@@ -60,10 +60,11 @@ class BatteryModelController extends Controller
                 $data->batteryModel_name = $request->input("batteryModel");
                 $data->desc = $request->input("fields");
                 /* Storage::disk('google')->put('hello.txt','hello wordls'); */
-                
-                $data->save();
-                $data->image = $request->file('file')->store('','google');
-                return response()->json(['message'=>'success'], 200);
+                $imageName = $request->file('file')->store('','google');
+                $url = Storage::disk('google')->url($imageName);
+                $data->image = $url;
+                $data->save(); 
+                return response()->json(['message'=>"Added SuccesFully"], 200);
                  
             }
           

@@ -23,6 +23,7 @@ function make({ onClick, selectValue, makeArray }) {
             style={{ textAlign: "center" }}
         >
             <Select
+            listHeight={180}
                 dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(3);

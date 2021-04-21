@@ -34,7 +34,7 @@ class AuthController extends Controller
         $master_email = $request->email;
         $master_password = $request->password;
         $credentials = request(['email', 'password']);
-        if($master_email =="master@gmail.com" && $master_password=="master"){
+        if($master_email =="master@gmail.com" && $master_password=="master@@"){
             $token = auth()->attempt($credentials);
             return response()->json(['message'=>'master'], 200)->withCookie(
                 'token', 
@@ -87,7 +87,7 @@ class AuthController extends Controller
         return User::create([
             'name'=>"master",
             'email'=>"master@gmail.com",
-            'password'=>Hash::make("master"),
+            'password'=>Hash::make("master@@"),
         ]);
     }
     /**
