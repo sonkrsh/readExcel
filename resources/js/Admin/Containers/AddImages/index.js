@@ -26,7 +26,7 @@ function index() {
                 <TabPane tab={"Add HomePage Image"} key={3}>
                     <BannerImage
                         loadingButton={reducerProps?.loading}
-                        label={"Add Homeage Image"}
+                        label={"Add HomePage Image"}
                         buttonSeen={true}
                         type={"homePage"}
                         onSubmit={(event) => {
