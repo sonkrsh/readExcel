@@ -8,7 +8,7 @@ function index() {
     const dispatch = useDispatch();
     const { TabPane } = Tabs;
     const reducerProps = useSelector((state) => state.AddImages);
-    
+
     return (
         <div>
             <Tabs defaultActiveKey="2" tabPosition={"top"}>
@@ -23,7 +23,17 @@ function index() {
                         }}
                     />
                 </TabPane>
-                <TabPane tab={"Add HomePage Image"} key={3}></TabPane>
+                <TabPane tab={"Add HomePage Image"} key={3}>
+                    <BannerImage
+                        loadingButton={reducerProps?.loading}
+                        label={"Add Homeage Image"}
+                        buttonSeen={true}
+                        type={"homePage"}
+                        onSubmit={(event) => {
+                            dispatch(addImage(event));
+                        }}
+                    />
+                </TabPane>
             </Tabs>
         </div>
     );
