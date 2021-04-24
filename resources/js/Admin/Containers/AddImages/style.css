@@ -1,5 +1,9 @@
-.heading{
-    display:flex;
-    justify-content: center;
-    padding: 2rem
+.buutons{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding-bottom: 4rem;
+}
+.buutons Button{
+    border: 1px solid;
 }

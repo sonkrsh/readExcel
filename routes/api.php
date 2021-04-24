@@ -40,7 +40,7 @@ Route::group([
     Route::post('storeBatteryProduct', [BatteryProductController::class,'store']);
 
     Route::post('storeImages', [AddImagesController::class,'store']);
-    
+    Route::post('deleteLogo', [AddImagesController::class,'destroy']);
 });
 
 Route::group([
@@ -52,6 +52,7 @@ Route::group([
     Route::get('getLocation', [LocationController::class,'index']);
 
 
+    Route::get('getImages', [AddImagesController::class,'index']);
 
 
     //Route::get('checkToken', [AuthController::class,'checkToken']);

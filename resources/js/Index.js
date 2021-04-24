@@ -14,7 +14,7 @@ function Index(props) {
     return (
         <Provider store={store}>
             <div className="container-fluid">
-                <Navbar/>
+                <Navbar />
                 <Switch>
                     <Route exact path="/" component={Homepage} />
                     <Route

@@ -1,29 +1,26 @@
 import React, { useState } from "react";
 import { Button, Upload } from "antd";
 
-function index({ label, buttonSeen, onSubmit,type,loadingButton }) {
-
-    console.log("===",loadingButton)
+function index({ label, buttonSeen, onSubmit, type, loadingButton }) {
     const [fileList, setFileList] = useState([]);
     const formData = new FormData();
 
     const onChange = ({ fileList: newFileList }) => {
-        if(!buttonSeen){
+        if (!buttonSeen) {
             setFileList(newFileList);
             formData.append("file", newFileList[0].originFileObj);
-            if(type){
+            if (type) {
                 formData.append("type", JSON.stringify(type));
             }
             onSubmit(formData);
-        }
-        else{
+        } else {
             setFileList(newFileList);
         }
     };
 
     const handleClick = () => {
         formData.append("file", fileList[0].originFileObj);
-        if(type){
+        if (type) {
             formData.append("type", type);
         }
         onSubmit(formData);
@@ -42,7 +39,11 @@ function index({ label, buttonSeen, onSubmit,type,loadingButton }) {
                 {fileList.length < 1 && "+ Upload"}
             </Upload>
             {buttonSeen ? (
-                <Button loading={loadingButton} onClick={handleClick} type="primary">
+                <Button
+                    loading={loadingButton}
+                    onClick={handleClick}
+                    type="primary"
+                >
                     {label}
                 </Button>
             ) : (

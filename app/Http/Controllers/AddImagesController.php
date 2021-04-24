@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AddImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AddImagesController extends Controller
@@ -15,7 +16,12 @@ class AddImagesController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $imageData = DB::table('add_images')->get(['type','url','id']);
+            return $imageData;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -97,8 +103,15 @@ class AddImagesController extends Controller
      * @param  \App\Models\AddImages  $addImages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AddImages $addImages)
+    public function destroy(Request $addImages)
     {
-        //
+        $deleteId = $addImages->logoId;
+        $data = DB::table('add_images')->where('id',$deleteId)->delete();
+        if($data){
+            return response()->json(['message'=>"Deleted SuccesFully"], 200);
+        }
+       else{
+        return response()->json(['message'=>"Not Such File"], 400);
+       }
     }
 }

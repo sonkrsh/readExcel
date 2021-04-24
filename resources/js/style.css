@@ -10,3 +10,6 @@ html {
 .ant-row{
     width: 100% !important;
 }
+.container-fluid{
+  padding: 0;
+}

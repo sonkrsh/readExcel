@@ -1,12 +1,31 @@
-import React from "react";
-import './style.css'
-
+import React, { useEffect, useState } from "react";
+import "./style.css";
+import { useSelector } from "react-redux";
 
 export default function index() {
+    const [imageUrl, setimageUrl] = useState("");
+    const AddImages = useSelector((state) => state?.AddImages?.imageData);
+
+    useEffect(() => {
+        var check = false;
+        AddImages?.map((value, key) => {
+            if (!check) {
+                if (value?.type == "logo") {
+                    check = true;
+                    setimageUrl(value.url);
+                }
+            }
+        });
+    }, [AddImages]);
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
-            <a style={{width:'17%'}} className="navbar-brand" href="/">
-                <img style={{width:'100%',paddingLeft:'2rem'}} src="/storage/images/Logo.png" alt="" srcSet=""/>
+            <a style={{ width: "12%" }} className="navbar-brand" href="/">
+                <img
+                    style={{ width: "100%", paddingLeft: "2rem" }}
+                    src={imageUrl}
+                    alt=""
+                    srcSet=""
+                />
             </a>
             <button
                 className="navbar-toggler"
@@ -40,7 +59,7 @@ export default function index() {
                             About Us
                         </a>
                     </li>
-                   {/*  <li className="nav-item dropdown">
+                    {/*  <li className="nav-item dropdown">
                         <a
                             className="nav-link dropdown-toggle"
                             href="#"
@@ -74,7 +93,7 @@ export default function index() {
                         </a>
                     </li> */}
                 </ul>
-               {/*  <form className="form-inline my-2 my-lg-0">
+                {/*  <form className="form-inline my-2 my-lg-0">
                     <input
                         className="form-control mr-sm-2"
                         type="search"
