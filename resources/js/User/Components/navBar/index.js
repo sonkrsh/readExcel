@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
-import {getImages} from '../../../Admin/Containers/AddImages/actions'
+import { Image,Spin } from 'antd';
+
 export default function index() {
-
     const logo = useSelector((state) => state?.AddImages?.logoData);
-
-
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
             <a className="navbar-brand" href="/">
-                <img
+                <Image
+                preview={false}
+                className="antImage"
+                    width={180}
                     src={logo?.url}
-                    alt=""
-                    srcSet=""
+                    placeholder={
+                        <Spin />
+                    }
                 />
+             
             </a>
             <button
                 className="navbar-toggler"

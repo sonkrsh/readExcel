@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Card, Select } from "antd";
+import { BackwardOutlined,CloseOutlined } from '@ant-design/icons';
 
 function model({ onClick, selectValue, modelArray }) {
     const { Option } = Select;
@@ -9,13 +10,13 @@ function model({ onClick, selectValue, modelArray }) {
             extra={
                 <div className="header">
                     <div className="back">
-                        <a onClick={() => onClick(2)}>Back</a>
+                        <a onClick={() => onClick(0)}><BackwardOutlined /></a>
                     </div>
                     <div className="title">
-                        <h6>Model</h6>
+                        <h6>Make (Manufacture)</h6>
                     </div>
                     <div className="cancel">
-                        <a onClick={() => onClick(0)}>Cancel</a>
+                        <a onClick={() => onClick(0)}><CloseOutlined /></a>
                     </div>
                 </div>
             }

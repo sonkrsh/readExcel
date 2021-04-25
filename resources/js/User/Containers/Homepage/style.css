@@ -11,4 +11,10 @@ img {
     align-items: center;
     justify-content: flex-end;
 }
-
+.ant-card{
+    width: 98%;
+}
+.ant-spin {
+    display: flex !important;
+    justify-content: center !important;
+}

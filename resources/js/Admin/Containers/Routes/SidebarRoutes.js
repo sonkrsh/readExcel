@@ -1,6 +1,11 @@
-import { CarOutlined, BoldOutlined,CameraOutlined } from "@ant-design/icons";
+import { CarOutlined, BoldOutlined,CameraOutlined,DashboardOutlined } from "@ant-design/icons";
 
 const SidebarRoutes = [
+    {
+        title: "DashBoard",
+        icon: <DashboardOutlined />,
+        url: "/Dashboard",
+    },
    {
       title: "AddImages",
       icon: <CameraOutlined />,

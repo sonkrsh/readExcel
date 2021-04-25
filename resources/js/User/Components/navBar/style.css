@@ -23,14 +23,9 @@ nav{
     padding: 0 !important;
 }
 .navbar-brand img{
-    width: 100%;
     margin-left: 2rem;
 }
-.navbar a{
-    width: 15%;
+.antImage{
+    display: flex;
+    justify-content: center;
 }
-@media screen and (max-width: 480px) {
-    .navbar a{
-        width: 35%;
-    }
-  }
