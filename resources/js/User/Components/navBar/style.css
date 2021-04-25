@@ -5,11 +5,32 @@ a{
 .navbar-collapse{
     margin-left: 3rem !important;
 }
+.navbar{
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+}
 .navbar-nav {
     display: flex !important;
     justify-content: space-between !important;
     width: 37% !important;
 }
+.navbar-nav li a{
+    width: 100%;
+}
 nav{
     padding: 0 !important;
 }
+.navbar-brand img{
+    width: 100%;
+    margin-left: 2rem;
+}
+.navbar a{
+    width: 15%;
+}
+@media screen and (max-width: 480px) {
+    .navbar a{
+        width: 35%;
+    }
+  }

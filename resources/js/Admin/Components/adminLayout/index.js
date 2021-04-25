@@ -11,12 +11,21 @@ function index(props) {
 
     const [windowSize, setwindowSize] = useState(null);
     const [collapsed, setcollapsed] = useState(false);
+    var w = window.outerWidth;
 
     const toggle = () => {
-        setcollapsed(!collapsed);
+
+        if (w >= 768) {
+            
+        }
+        else{
+            setwindowSize(0);
+            setcollapsed(!collapsed);
+        }
+        //
     };
     useEffect(() => {
-        var w = window.outerWidth;
+       
         if (w <= 768) {
             setcollapsed(true);
             setwindowSize(0);
@@ -24,9 +33,9 @@ function index(props) {
             setcollapsed(false);
             setwindowSize(60);
         }
-    }, []);
-    const updateWidthAndHeight = () => {
-        var w = window.outerWidth;
+    }, [w]);
+
+    const updateWidthAndHeight = () => {;
         if (w <= 768) {
             setcollapsed(true);
             setwindowSize(0);
@@ -71,14 +80,9 @@ function index(props) {
                         collapsible
                         collapsed={collapsed}
                     >
-                        <div className="logo">
-                            <h4>AutomobileCrunch</h4>
-                        </div>
-
                         <Menu
                             theme="dark"
                             mode="inline"
-                            //defaultSelectedKeys={["0"]}
                         >
                             {sidebarRoutes.map((value, key) => {
                                 if (value.submenu) {

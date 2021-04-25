@@ -5,16 +5,13 @@ import {getImages} from '../../../Admin/Containers/AddImages/actions'
 export default function index() {
 
     const logo = useSelector((state) => state?.AddImages?.logoData);
- /*    useEffect(() => {
-        getImages()
-    }, [logo]); */
+
 
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
-            <a style={{ width: "12%" }} className="navbar-brand" href="/">
+            <a className="navbar-brand" href="/">
                 <img
-                    style={{ width: "100%", paddingLeft: "2rem" }}
                     src={logo?.url}
                     alt=""
                     srcSet=""

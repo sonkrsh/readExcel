@@ -30,7 +30,7 @@ function index(props) {
 
    
     return (
-        <Row id="homepageSearchBox" style={{backgroundImage: `url(${homePageimg?.url})`,backgroundSize:'cover'}}>
+        <Row id="homepageSearchBox" style={{backgroundImage: `url(${homePageimg?.url})`,backgroundSize:'cover',height:'92vh'}}>
             <Col id="SearchCar" xs={24} sm={24} md={24} lg={9} xl={9}>
                 <HomepageDropdownSearch
                     locationArray={reducerProps?.locationData}
