@@ -80,9 +80,26 @@ class AddImagesController extends Controller
      * @param  \App\Models\AddImages  $addImages
      * @return \Illuminate\Http\Response
      */
-    public function edit(AddImages $addImages)
+    public function edit(Request $addImages)
     {
-        //
+        if ($addImages->hasFile('file')){
+            $data = new AddImages();
+            $googleId =   $addImages->input("googleId");
+            $editId =   $addImages->input("editId");
+            Storage::disk('google')->delete($googleId);
+            $imageName = $addImages->file('file')->store('1QB_vQjqRYY4yOMWRDZ9KfIHPXttXuckj','google');
+            $url = Storage::disk('google')->url($imageName);
+            $data = DB::table('add_images')->where('id', $editId)->update(['url'=>$url]);
+            if($data){
+                return response()->json(['message'=>"Updated Image SuccesFully"], 200);
+            }
+          /*   $data->url = $url;
+            $data->save();  */
+           
+        }
+        else{
+            return $addImages;
+        }
     }
 
     /**
@@ -105,13 +122,15 @@ class AddImagesController extends Controller
      */
     public function destroy(Request $addImages)
     {
-        $deleteId = $addImages->logoId;
+        $deleteId = $addImages->imageId;
+        $googleId = $addImages->googleId;
+        Storage::disk('google')->delete($googleId);
         $data = DB::table('add_images')->where('id',$deleteId)->delete();
         if($data){
             return response()->json(['message'=>"Deleted SuccesFully"], 200);
         }
        else{
         return response()->json(['message'=>"Not Such File"], 400);
-       }
+       } 
     }
 }

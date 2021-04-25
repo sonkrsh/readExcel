@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
-
+import {getImages} from '../../../Admin/Containers/AddImages/actions'
 export default function index() {
-    const [imageUrl, setimageUrl] = useState("");
-    const AddImages = useSelector((state) => state?.AddImages?.imageData);
 
-    useEffect(() => {
-        var check = false;
-        AddImages?.map((value, key) => {
-            if (!check) {
-                if (value?.type == "logo") {
-                    check = true;
-                    setimageUrl(value.url);
-                }
-            }
-        });
-    }, [AddImages]);
+    const logo = useSelector((state) => state?.AddImages?.logoData);
+ /*    useEffect(() => {
+        getImages()
+    }, [logo]); */
+
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
             <a style={{ width: "12%" }} className="navbar-brand" href="/">
                 <img
                     style={{ width: "100%", paddingLeft: "2rem" }}
-                    src={imageUrl}
+                    src={logo?.url}
                     alt=""
                     srcSet=""
                 />

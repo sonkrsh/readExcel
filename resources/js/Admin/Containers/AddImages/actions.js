@@ -3,7 +3,8 @@ import {
     ADD_IMAGE_SUCCESS,
     GET_IMAGE,
     GET_IMAGE_SUCCESS,
-    DELETE_IMAGE
+    DELETE_IMAGE,
+    EDIT_IMAGE
 } from "./constants";
 
 export function addImage(payload) {
@@ -37,6 +38,12 @@ export function getImagesSuccess(payload) {
 export function deleteImage(payload) {
     return {
         type: DELETE_IMAGE,
+        payload,
+    };
+}
+export function editImage(payload) {
+    return {
+        type: EDIT_IMAGE,
         payload,
     };
 }

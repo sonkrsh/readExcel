@@ -41,6 +41,8 @@ Route::group([
 
     Route::post('storeImages', [AddImagesController::class,'store']);
     Route::post('deleteLogo', [AddImagesController::class,'destroy']);
+    Route::post('editImage', [AddImagesController::class,'edit']);
+    
 });
 
 Route::group([

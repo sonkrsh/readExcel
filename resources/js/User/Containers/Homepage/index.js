@@ -17,9 +17,8 @@ function index(props) {
 
     const dispatch = useDispatch();
     const reducerProps = useSelector((state) => state?.MakeModelFuelreducer);
-    const AddImages = useSelector((state) => state?.AddImages?.imageData);
+    const homePageimg = useSelector((state) => state?.AddImages?.homePageData);
     const originReducer = useSelector((state) => state?.Homepage);
-
 
     
     useEffect(() => {
@@ -29,20 +28,9 @@ function index(props) {
         dispatch(getImages());
     }, []);
 
-    useEffect(() => {
-        var check = false;
-        AddImages.map((value,key)=>{
-            if (!check) {
-                if (value?.type == "homePage") {
-                    check = true;
-                    setimageUrl(value.url);
-                    /* break; */
-                }
-            }
-        })
-    }, [AddImages])
+   
     return (
-        <Row id="homepageSearchBox" style={{backgroundImage: `url(${imageUrl})`,backgroundSize:'cover'}}>
+        <Row id="homepageSearchBox" style={{backgroundImage: `url(${homePageimg?.url})`,backgroundSize:'cover'}}>
             <Col id="SearchCar" xs={24} sm={24} md={24} lg={9} xl={9}>
                 <HomepageDropdownSearch
                     locationArray={reducerProps?.locationData}
@@ -60,7 +48,7 @@ function index(props) {
                 />
             </Col>
             <Col id="homePageLeftImg" xs={0} sm={0} md={0} lg={14} xl={14}>
-                <img src="/storage/images/banner.svg" height="200" width="200" alt="" srcSet="" />
+              {/*   <img src="/storage/images/banner.svg" height="200" width="200" alt="" srcSet="" /> */}
             </Col>
         </Row>
     );
