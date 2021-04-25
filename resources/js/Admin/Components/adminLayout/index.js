@@ -55,7 +55,6 @@ function index(props) {
                     shape="circle"
                     icon="user"
                     size={"small"}
-                    style={{ marginLeft: "10px" }}
                     type={collapsed ? "menu-unfold" : "menu-fold"}
                     onClick={toggle}
                 />
@@ -65,7 +64,6 @@ function index(props) {
                     shape="circle"
                     icon="user"
                     size={"small"}
-                    style={{ marginLeft: "10px" }}
                     type={collapsed ? "menu-unfold" : "menu-fold"}
                     onClick={toggle}
                 />
