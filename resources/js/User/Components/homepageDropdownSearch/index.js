@@ -7,7 +7,14 @@ import Location from "./location";
 import "./style.css";
 import { isEqual } from "lodash";
 
-function index({ makeArray, locationArray, makeId, modelArray, fuelArray,onSubmit }) {
+function index({
+    makeArray,
+    locationArray,
+    makeId,
+    modelArray,
+    fuelArray,
+    onSubmit,
+}) {
     const [form] = Form.useForm();
     const [trigger, settrigger] = useState(0);
 
@@ -84,27 +91,43 @@ function index({ makeArray, locationArray, makeId, modelArray, fuelArray,onSubmi
             ]);
         }
         const combineData = {
-            locationName:locationData?.name,
-            makeName:makeData?.name,
-            modelName:modelData?.name,
-            fuelName:fuel?.name
-        }
-        onSubmit(combineData)
+            locationName: locationData?.name,
+            makeName: makeData?.name,
+            modelName: modelData?.name,
+            fuelName: fuel?.name,
+        };
+        onSubmit(combineData);
     };
 
     return (
         <div className="site-card-border-less-wrapper">
             <Card
-                title="Find Right Price"
+                title={
+                    <div className="filterHeading">
+                        <h4>No Need Visit Workshop.</h4>
+                        <h4>Get Replaced At Your Doorstep.</h4>
+                    </div>
+                }
                 bordered={false}
-                style={{ textAlign: "center" }}
+                style={{ textAlign: "center", borderRadius: "5px" }}
             >
-                <Form form={form} layout="vertical">
-                    <Form.Item label=" " name="location">
-                        <Input placeholder="Location" onClick={() => settrigger(1)} />
+                <h2>Get Instant Affordable Quotes</h2>
+                <Form style={{ margin: 0 }} form={form} layout="vertical">
+                    <Form.Item style={{ margin: 0 }} label=" " name="location">
+                        <Input
+                            style={{ fontSize: "1.5rem" }}
+                            className="inputBorder"
+                            placeholder={"Location"}
+                            onClick={() => settrigger(1)}
+                        />
                     </Form.Item>
                     <Form.Item label=" " name="car">
-                        <Input placeholder="Select Car" onClick={() => settrigger(2)} />
+                        <Input
+                            style={{ fontSize: "1.5rem" }}
+                            className="inputBorder"
+                            placeholder="Select Car"
+                            onClick={() => settrigger(2)}
+                        />
                     </Form.Item>
                 </Form>
 
@@ -160,8 +183,14 @@ function index({ makeArray, locationArray, makeId, modelArray, fuelArray,onSubmi
                         />
                     </div>
                 ) : null}
-                <Button type="primary" htmlType="submit" onClick={handleSubmit}>
-                    Submit
+                <Button
+                    className="primary"
+                    style={{ width: "80%", paddingBottom: "2.3rem" }}
+                    type="primary"
+                    htmlType="submit"
+                    onClick={handleSubmit}
+                >
+                    <span style={{ fontSize: "1.4rem" }}>Check Best Price</span>
                 </Button>
             </Card>
         </div>

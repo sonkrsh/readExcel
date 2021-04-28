@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getProducts } from "./action";
 import { useDispatch, useSelector } from "react-redux";
 import {  Row, Col,Button } from "antd";
+import ProductBanner from '../../Components/productBanner';
 
 function index() {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ function index() {
 
     const originReducer = useSelector((state) => state?.Products);
     const { allBattery } = originReducer;
+
     useEffect(() => {
         const combineData = {
             makeName: makeName,
@@ -22,13 +24,14 @@ function index() {
 
     return (
         <Row gutter={[16, 16]}>
+
+        <ProductBanner />        
+
             <Col xs={0} sm={0} md={3} lg={3} xl={3}></Col>
             <Col xs={24} sm={24} md={21} lg={21} xl={21}>
                 <Row gutter={[16, 16]}>
                     {allBattery.map((value, key) => {
-                        console.log(value);
                         let descption = JSON.parse(value?.desc);
-                        console.log(descption);
                         return (
                             <Col
                                 style={{
@@ -54,7 +57,7 @@ function index() {
                                                     width: "100%",
                                                     height: "100%",
                                                 }}
-                                                src={"/storage/" + value?.image}
+                                                src={value?.image}
                                             />
                                         </Col>
                                         <Col span={11}>
@@ -102,32 +105,7 @@ function index() {
                 </Row>
             </Col>
         </Row>
-        /*       <div style={{display:'flex'}}>
-            {allBattery.map((value, key) => {
-                let descption = JSON.parse(value?.desc);
-                return (
-                    <Card key={key} style={{ width: 300,margin:'3rem' }}>
-                        <div className="batteryImage">
-                            <img
-                                style={{ width: "100%" }}
-                                src={"/storage/" + value?.image}
-                            />
-                        </div>
-                        <div className="batteryDescription">
-                            {descption.map((value, key) => (
-                                <p key={key}>{`Description : -${value.desc}`} {value?.desc}</p>
-                            ))}
-                        </div>
-                        <div className="batteryPrice">
-                            <p>{`Price : -${value.price}`}</p>
-                            <p>{`
-                            price With Exchange : -${value.priceWithExchange}`}</p>
-                            <p>{`Price Without Exchange : -${value.priceWithOutExchange}`}</p>
-                        </div>
-                    </Card>
-                );
-            })}
-        </div> */
+    
     );
 }
 

@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
-import { Image,Spin } from 'antd';
+import { Image, Spin } from "antd";
 
 export default function index() {
     const logo = useSelector((state) => state?.AddImages?.logoData);
+
+    // localStorage.setItem('logo', logo?.url);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
             <a className="navbar-brand" href="/">
                 <Image
-                preview={false}
-                className="antImage"
+                    preview={false}
+                    className="antImage"
                     width={180}
-                    src={logo?.url}
-                    placeholder={
-                        <Spin />
+                    src={
+                        localStorage.getItem("logo")
+                            ? localStorage.getItem("logo")
+                            : logo?.url
                     }
+                    placeholder={<Spin />}
                 />
-             
             </a>
             <button
                 className="navbar-toggler"

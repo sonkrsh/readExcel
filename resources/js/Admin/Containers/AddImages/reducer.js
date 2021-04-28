@@ -36,6 +36,8 @@ const reducer = (state = initialState, action) => {
             }
             const homePageData = state?.homePage;
             const logoData = state.logo;
+            localStorage.setItem('logo', logoData?.url);
+            localStorage.setItem('homePage', homePageData?.url);
             return {
                 homePageData,
                 logoData,

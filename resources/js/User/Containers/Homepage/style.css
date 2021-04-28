@@ -4,12 +4,8 @@
 img {
     width: 95% !important;
 }
-#homePageLeftImg {
-    display: flex;
-    /*     width: 100%; */
-    justify-content: end;
-    align-items: center;
-    justify-content: flex-end;
+#homePageLeftImg h3{
+    color: white;
 }
 .ant-card{
     width: 98%;
@@ -17,4 +13,9 @@ img {
 .ant-spin {
     display: flex !important;
     justify-content: center !important;
+}
+#homepageSearchBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
