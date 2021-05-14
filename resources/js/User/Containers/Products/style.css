@@ -1,0 +1,50 @@
+
+.ant-tabs-tab-active{
+    background-color: yellow !important;
+}.ant-tabs-tab{
+    width: 100% !important;
+    border-radius: 1rem !important;
+   /*  background-color: cadetblue !important; */
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem !important;
+}
+.ant-tabs-nav{
+    padding-left: 2rem;
+   padding-right: 1rem;
+}
+.upperPart h1{
+    text-align: center;
+}
+.battery{
+    display: flex;
+}
+.batteryPic{
+    width: 45%;
+}
+.batteryDesc{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 1rem;
+}
+.batteryDesc p{
+    font-size: 1.4rem;
+}
+.price{
+    display: flex;
+    justify-content: space-between;
+}
+.price h3{
+    font-weight: bold;
+}
+.holePrice{
+    display: flex;
+}
+.holePrice h3{
+    font-weight: bold;
+}
+.holePrice strike{
+    color: grey;
+}

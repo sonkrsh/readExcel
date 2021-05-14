@@ -22,9 +22,7 @@ a{
 nav{
     padding: 0 !important;
 }
-.navbar-brand img{
-    margin-left: 2rem;
-}
+
 .antImage{
     display: flex;
     justify-content: center;

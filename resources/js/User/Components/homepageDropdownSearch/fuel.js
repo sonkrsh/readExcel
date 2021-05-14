@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Select } from "antd";
-import { BackwardOutlined,CloseOutlined } from '@ant-design/icons';
+import { BackwardOutlined, CloseOutlined } from "@ant-design/icons";
 
 function fuel({ onClick, selectValue, fuelArray }) {
     const { Option } = Select;
@@ -9,21 +9,25 @@ function fuel({ onClick, selectValue, fuelArray }) {
             extra={
                 <div className="header">
                     <div className="back">
-                        <a onClick={() => onClick(0)}><BackwardOutlined /></a>
+                        <a onClick={() => onClick(0)}>
+                            <BackwardOutlined />
+                        </a>
                     </div>
                     <div className="title">
                         <h6>Make (Manufacture)</h6>
                     </div>
                     <div className="cancel">
-                        <a onClick={() => onClick(0)}><CloseOutlined /></a>
+                        <a onClick={() => onClick(0)}>
+                            <CloseOutlined />
+                        </a>
                     </div>
                 </div>
             }
             bordered={false}
-            style={{ textAlign:"center" }}
+            style={{ textAlign: "center" }}
         >
             <Select
-            listHeight={180}
+                listHeight={180}
                 dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(0);

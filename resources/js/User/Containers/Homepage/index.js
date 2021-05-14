@@ -13,8 +13,6 @@ import "./style.css";
 import FaqCollapse from "../../Components/faqCollapse";
 
 function index(props) {
-    const [imageUrl, setimageUrl] = useState("");
-
     const dispatch = useDispatch();
     const reducerProps = useSelector((state) => state?.MakeModelFuelreducer);
     const homePageimg = useSelector((state) => state?.AddImages?.homePageData);
@@ -32,7 +30,11 @@ function index(props) {
             <Row
                 id="homepageSearchBox"
                 style={{
-                    backgroundImage: `url(${localStorage.getItem('homePage')?localStorage.getItem('homePage'):homePageimg?.url})`,
+                    backgroundImage: `url(${
+                        localStorage.getItem("homePage")
+                            ? localStorage.getItem("homePage")
+                            : homePageimg?.url
+                    })`,
                     backgroundSize: "cover",
                 }}
             >
@@ -53,7 +55,7 @@ function index(props) {
                     />
                 </Col>
                 <Col id="homePageLeftImg" xs={0} sm={0} md={0} lg={14} xl={14}>
-                  <h3>Write here WhatEver You Want TO Write</h3>
+                    {/*   <h3>Write here WhatEver You Want TO Write</h3> */}
                 </Col>
             </Row>
             <FaqCollapse />

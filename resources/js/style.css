@@ -1,15 +1,23 @@
 html {
-    font-family: 'Crimson Text', serif !important;
-  }
-  
-  body {
-    font-family: 'Crimson Text', serif !important;
-  }
+    font-family: "Crimson Text", serif !important;
+}
 
-
-.ant-row{
+body {
+    font-family: "Crimson Text", serif !important;
+}
+input[type="button"] {
+    background-color: lightslategray !important;
+    border: 1px solid black !important;
+}
+.primary {
+    background-color: lightslategray !important;
+    border: 1px solid black !important;
+}
+.ant-row {
+    margin: 0px !important;
     width: 100% !important;
 }
-.container-fluid{
-  padding: 0;
+.container-fluid {
+    padding: 0;
+    margin: 0;
 }

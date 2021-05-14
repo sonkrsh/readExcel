@@ -102,6 +102,7 @@ function index({
     return (
         <div className="site-card-border-less-wrapper">
             <Card
+                id="homePageCard"
                 title={
                     <div className="filterHeading">
                         <h4>No Need Visit Workshop.</h4>
@@ -115,7 +116,6 @@ function index({
                 <Form style={{ margin: 0 }} form={form} layout="vertical">
                     <Form.Item style={{ margin: 0 }} label=" " name="location">
                         <Input
-                            style={{ fontSize: "1.5rem" }}
                             className="inputBorder"
                             placeholder={"Location"}
                             onClick={() => settrigger(1)}
@@ -123,7 +123,6 @@ function index({
                     </Form.Item>
                     <Form.Item label=" " name="car">
                         <Input
-                            style={{ fontSize: "1.5rem" }}
                             className="inputBorder"
                             placeholder="Select Car"
                             onClick={() => settrigger(2)}
@@ -131,6 +130,18 @@ function index({
                     </Form.Item>
                 </Form>
 
+                <Button
+                    className="primary"
+                    style={{
+                        width: "80%",
+                        paddingBottom: "2.3rem",
+                        marginTop: "2rem",
+                    }}
+                    htmlType="submit"
+                    onClick={handleSubmit}
+                >
+                    <span style={{ fontSize: "1.4rem" }}>Check Best Price</span>
+                </Button>
                 {trigger === 1 ? (
                     <div className="child_drop">
                         <Location
@@ -183,15 +194,6 @@ function index({
                         />
                     </div>
                 ) : null}
-                <Button
-                    className="primary"
-                    style={{ width: "80%", paddingBottom: "2.3rem" }}
-                    type="primary"
-                    htmlType="submit"
-                    onClick={handleSubmit}
-                >
-                    <span style={{ fontSize: "1.4rem" }}>Check Best Price</span>
-                </Button>
             </Card>
         </div>
     );

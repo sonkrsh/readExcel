@@ -4,17 +4,15 @@
 img {
     width: 95% !important;
 }
-#homePageLeftImg h3{
+#homePageLeftImg h3 {
     color: white;
 }
-.ant-card{
-    width: 98%;
-}
+
 .ant-spin {
     display: flex !important;
     justify-content: center !important;
 }
-#homepageSearchBox{
+#homepageSearchBox {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,22 +1,12 @@
-.ant-card-body {
-    position: relative;
-}
-.ant-card {
-    left: 3px;
-    top: 4px;
-}
 .child_drop {
     position: absolute;
-    top: -36%;
+    top: 0%;
     background: whitesmoke;
     bottom: 0;
     left: 0;
     width: 100%;
 }
-.primary{
-    background-color: lightslategray !important;
-    border: 1px solid black !important;
-}
+
 .ant-card-extra {
     width: 100% !important;
     float: none;
@@ -27,14 +17,12 @@
     justify-content: space-between;
     width: 100%;
 }
-a {
-    color: blue !important;
-}
 .filterHeading h2 {
     padding: 0 !important;
     margin: 0 !important;
 }
 .inputBorder {
+    font-size: 1.5rem !important;
     border: 1px solid black !important;
     height: 3rem !important;
 }
@@ -43,10 +31,11 @@ a {
     padding: 0 !important;
     margin: 0 !important;
 }
-.placeHolderFont {
-    font-size: 4rem;
-    font-weight: bold;
+#homePageCard {
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 9px 20px #777;
+    width: 98%;
+    left: 3px;
+    top: 4px;
 }
-/* button{
-    background-color: #6c757d !important;
-} */
