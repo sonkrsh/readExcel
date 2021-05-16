@@ -4,9 +4,7 @@
     align-items: center;
     height: 90vh;
 }
-img {
-    width: 95% !important;
-}
+
 #homePageLeftImg h3 {
     color: white;
 }

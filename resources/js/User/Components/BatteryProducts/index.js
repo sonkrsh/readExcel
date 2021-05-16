@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Button } from "antd";
-import ProductBanner from "../../Components/productBanner";
 import { Tabs } from "antd";
+import StyledImage from "../StyledComponents/StyledImage";
 
 function index({ allBattery }) {
     const { TabPane } = Tabs;
@@ -43,12 +43,8 @@ function index({ allBattery }) {
                                             }`}</h1>
                                             <div className="battery">
                                                 <div className="batteryPic">
-                                                    <img
-                                                        style={{
-                                                            width: "100%",
-                                                            height: "100%",
-                                                        }}
-                                                        src={value?.image}
+                                                    <StyledImage
+                                                        url={value?.image}
                                                     />
                                                 </div>
 

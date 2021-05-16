@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { getProducts } from "./action";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Button } from "antd";
-import ProductBanner from "../../Components/productBanner";
 import { Tabs } from "antd";
 import BatteryProducts from "../../Components/BatteryProducts";
 import "./style.css";
+import StyledImage from "../../Components/StyledComponents/StyledImage";
 
 function index() {
     const { TabPane } = Tabs;
@@ -29,7 +29,14 @@ function index() {
 
     return (
         <div>
-            <Tabs type="card" id="batteryTab" animated centered size="small">
+            <Tabs
+                type="card"
+                tabBarGutter={30}
+                id="batteryTab"
+                animated
+                centered
+                size="small"
+            >
                 <TabPane
                     tab={
                         <div>
@@ -41,12 +48,19 @@ function index() {
                     }
                     key="1"
                 >
-                    <ProductBanner />
+                    <Row>
+                        <Col lg={24}>
+                    <StyledImage
+                        url={
+                            "https://cdn.pixabay.com/photo/2016/09/01/19/53/pocket-watch-1637396_1280.jpg"
+                        }
+                    />
+                    </Col>
+                    </Row>
+                   
                     <BatteryProducts allBattery={allBattery} />
                 </TabPane>
-                <TabPane tab="Glass" key="2">
-                    <ProductBanner />
-                </TabPane>
+                <TabPane tab="Glass" key="2"></TabPane>
                 <TabPane tab="Others" key="3">
                     Content of Tab Pane 3
                 </TabPane>
