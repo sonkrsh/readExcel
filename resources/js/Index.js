@@ -10,7 +10,6 @@ import store from "./Store/store";
 import "./style.css";
 
 function Index(props) {
-    console.log(props);
     return (
         <Provider store={store}>
             <div className="container-fluid">

@@ -6,6 +6,7 @@ import Fuel from "./fuel";
 import Location from "./location";
 import "./style.css";
 import { isEqual } from "lodash";
+import StyledButton from "../StyledComponents/StyledButton";
 
 function index({
     makeArray,
@@ -113,7 +114,11 @@ function index({
                 style={{ textAlign: "center", borderRadius: "5px" }}
             >
                 <h2>Get Instant Affordable Quotes</h2>
-                <Form style={{ margin: 0 }} form={form} layout="vertical">
+                <Form
+                    style={{ margin: 0, paddingBottom: "2rem" }}
+                    form={form}
+                    layout="vertical"
+                >
                     <Form.Item style={{ margin: 0 }} label=" " name="location">
                         <Input
                             className="inputBorder"
@@ -129,19 +134,12 @@ function index({
                         />
                     </Form.Item>
                 </Form>
-
-                <Button
-                    className="primary"
-                    style={{
-                        width: "80%",
-                        paddingBottom: "2.3rem",
-                        marginTop: "2rem",
-                    }}
-                    htmlType="submit"
+                <StyledButton
+                    text={"Check Best Price"}
+                    fontSize={"1.5rem"}
                     onClick={handleSubmit}
-                >
-                    <span style={{ fontSize: "1.4rem" }}>Check Best Price</span>
-                </Button>
+                />
+
                 {trigger === 1 ? (
                     <div className="child_drop">
                         <Location

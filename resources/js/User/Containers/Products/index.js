@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BoldOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { getProducts } from "./action";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,8 +29,18 @@ function index() {
 
     return (
         <div>
-            <Tabs /* onChange={callback}  */ type="card">
-                <TabPane tab="Battery" key="1">
+            <Tabs type="card" id="batteryTab" animated centered size="small">
+                <TabPane
+                    tab={
+                        <div>
+                            <div>
+                                <BoldOutlined />
+                            </div>
+                            <div>Battery</div>
+                        </div>
+                    }
+                    key="1"
+                >
                     <ProductBanner />
                     <BatteryProducts allBattery={allBattery} />
                 </TabPane>

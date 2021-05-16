@@ -11,7 +11,6 @@ import { getImages } from "../../../Admin/Containers/AddImages/actions";
 import { getModel } from "./action";
 import "./style.css";
 import FaqCollapse from "../../Components/faqCollapse";
-
 function index(props) {
     const dispatch = useDispatch();
     const reducerProps = useSelector((state) => state?.MakeModelFuelreducer);
@@ -38,7 +37,7 @@ function index(props) {
                     backgroundSize: "cover",
                 }}
             >
-                <Col id="SearchCar" xs={24} sm={24} md={24} lg={9} xl={9}>
+                <Col id="SearchCar" xs={24} sm={24} md={24} lg={8} xl={8}>
                     <HomepageDropdownSearch
                         locationArray={reducerProps?.locationData}
                         makeArray={reducerProps?.makeData}
@@ -54,7 +53,7 @@ function index(props) {
                         }}
                     />
                 </Col>
-                <Col id="homePageLeftImg" xs={0} sm={0} md={0} lg={14} xl={14}>
+                <Col id="homePageLeftImg" xs={0} sm={0} md={0} lg={15} xl={15}>
                     {/*   <h3>Write here WhatEver You Want TO Write</h3> */}
                 </Col>
             </Row>

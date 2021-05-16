@@ -1,16 +1,14 @@
 #SearchCar {
-    padding: 10rem 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
 }
 img {
     width: 95% !important;
 }
 #homePageLeftImg h3 {
     color: white;
-}
-
-.ant-spin {
-    display: flex !important;
-    justify-content: center !important;
 }
 #homepageSearchBox {
     display: flex;

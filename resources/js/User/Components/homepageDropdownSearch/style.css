@@ -26,7 +26,9 @@
     border: 1px solid black !important;
     height: 3rem !important;
 }
-
+.site-card-border-less-wrapper{
+    width: 100%;
+}
 .site-card-border-less-wrapper h2 {
     padding: 0 !important;
     margin: 0 !important;
@@ -35,7 +37,4 @@
     position: relative;
     border-radius: 5px;
     box-shadow: 0 9px 20px #777;
-    width: 98%;
-    left: 3px;
-    top: 4px;
 }
