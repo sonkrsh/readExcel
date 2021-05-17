@@ -14,15 +14,17 @@ function Index(props) {
         <Provider store={store}>
             <div className="container-fluid">
                 <Navbar />
-                <Switch>
-                    <Route exact path="/" component={Homepage} />
-                    <Route
-                        exact
-                        path="/:makeName/:modelName/:fuelName/:locationName?"
-                        component={Products}
-                    />
-                    <Route component={AdminRoute} />
-                </Switch>
+                <div className="pageContent">
+                    <Switch>
+                        <Route exact path="/" component={Homepage} />
+                        <Route
+                            exact
+                            path="/:makeName/:modelName/:fuelName/:locationName?"
+                            component={Products}
+                        />
+                        <Route component={AdminRoute} />
+                    </Switch>
+                </div>
             </div>
         </Provider>
     );

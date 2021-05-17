@@ -21,6 +21,8 @@ a{
 }
 nav{
     padding: 0 !important;
+    position: fixed !important;
+    z-index: 1 !important;
 }
 
 .antImage{
