@@ -22,6 +22,7 @@ body {
     justify-content: center;
 }
 .ant-tabs-tab-active {
+    border-bottom: 4px solid green !important;
     background-color: gray !important;
 }
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {

@@ -3,12 +3,11 @@ import { BoldOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { getProducts } from "./action";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Drawer,Tabs } from "antd";
+import { Row, Col, Drawer, Tabs } from "antd";
 import BatteryProducts from "../../Components/BatteryProducts";
 import "./style.css";
 import StyledImage from "../../Components/StyledComponents/StyledImage";
-import RightSideBar from '../../Components/StyledComponents/RightSideBar';
-
+import RightSideBar from "../../Components/StyledComponents/RightSideBar";
 
 function index() {
     const { TabPane } = Tabs;
@@ -59,7 +58,6 @@ function index() {
                         </Row>
 
                         <BatteryProducts allBattery={allBattery} />
-                          <BatteryProducts allBattery={allBattery} />
                     </TabPane>
                     <TabPane tab="Glass" key="2"></TabPane>
                     <TabPane tab="Others" key="3">
@@ -68,7 +66,7 @@ function index() {
                 </Tabs>
             </Col>
             <Col lg={6} md={0} xs={0} xl={6}>
-               <RightSideBar/>
+                <RightSideBar />
             </Col>
         </Row>
     );

@@ -11,6 +11,8 @@ import { getImages } from "../../../Admin/Containers/AddImages/actions";
 import { getModel } from "./action";
 import "./style.css";
 import FaqCollapse from "../../Components/faqCollapse";
+
+
 function index(props) {
     const dispatch = useDispatch();
     const reducerProps = useSelector((state) => state?.MakeModelFuelreducer);
