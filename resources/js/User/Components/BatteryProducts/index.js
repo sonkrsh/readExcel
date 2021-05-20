@@ -5,13 +5,15 @@ import StyledImage from "../StyledComponents/StyledImage";
 import StyledText from "../StyledComponents/StyledText";
 import "./style.css";
 import StyledButton from "../StyledComponents/StyledButton";
+import Recommended from "../StyledComponents/Recommended";
+import sample from "lodash/sample";
 
 function index({ allBattery }) {
     const { TabPane } = Tabs;
     const { Meta } = Card;
-
+    const [priceSelect, setpriceSelect] = useState(1);
     const Checkboxfunction = (value) => {
-        const [priceSelect, setpriceSelect] = useState(1);
+       
         return (
             <>
                 <div className="BatteryPrice">
@@ -44,13 +46,13 @@ function index({ allBattery }) {
                 <div className="BatteryPrice">
                     <div className="price">
                         <StyledText
-                            Text={`Rs${value?.priceWithExchange}`}
+                            Text={`Rs${value?.priceWithOutExchange}`}
                             Size={"1rem"}
                             Color={"black"}
                             Weight={"bold"}
                         />
                         <StyledText
-                            Text={`with Old Battery`}
+                            Text={`withOut Old Battery`}
                             Size={"1rem"}
                             Color={"black"}
                             Weight={"bold"}
@@ -82,21 +84,27 @@ function index({ allBattery }) {
             >
                 <Row gutter={[40, 16]}>
                     {allBattery.map((value, key) => {
-                        let descption = JSON.parse(value?.desc);
+                        const backgroundColor = sample([
+                            "orange",
+                            "blue",
+                            "green",
+                            "pink",
+                        ]);
+                        if (value?.recommentId) {
+                            return "";
+                        }
+                        let descption = "";
+                        if (value?.desc) {
+                            descption = JSON.parse(value?.desc);
+                        }
+
                         return (
-                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                            <Col key={key} xs={24} sm={24} md={8} lg={8} xl={8}>
                                 <Card
-                                    style={{
-                                        width: "100%",
-                                        boxShadow:
-                                            "rgb(0 0 0 / 12%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px",
-                                    }}
+                                    className="boxShadow"
                                     cover={
                                         <div
-                                            style={{
-                                                backgroundColor: "gray",
-                                                height: "25vh",
-                                            }}
+                                            className={`cardHeight${" "}${backgroundColor}`}
                                         >
                                             <StyledImage url={value?.image} />
                                         </div>
@@ -119,25 +127,46 @@ function index({ allBattery }) {
                                                     Color={"black"}
                                                     Weight={"bold"}
                                                 />
-
-                                                {descption.map((value, key) => (
-                                                    <div>
-                                                        <StyledText
-                                                            Text={value?.desc}
-                                                            Size={"1.2rem"}
-                                                            Color={"black"}
-                                                            Weight={"normal"}
-                                                        />
-                                                    </div>
-                                                ))}
+                                                {descption
+                                                    ? descption?.map(
+                                                          (value, key) => (
+                                                              <div key={key}>
+                                                                  <StyledText
+                                                                      Text={
+                                                                          value?.desc
+                                                                      }
+                                                                      Size={
+                                                                          "1.2rem"
+                                                                      }
+                                                                      Color={
+                                                                          "black"
+                                                                      }
+                                                                      Weight={
+                                                                          "normal"
+                                                                      }
+                                                                  />
+                                                              </div>
+                                                          )
+                                                      )
+                                                    : "    "}
                                             </>
                                         }
                                         description={
                                             <>{Checkboxfunction(value)}</>
                                         }
                                     />
+                                    {allBattery?.[0]?.recommentId ==
+                                    value.id ? (
+                                        <Recommended />
+                                    ) : (
+                                        ""
+                                    )}
 
-                                    <StyledButton marginTop="1rem" text={"Add To Cart"} />
+
+                                    <StyledButton
+                                        marginTop="1rem"
+                                        text={"Add To Cart"}
+                                    />
                                 </Card>
                             </Col>
                         );

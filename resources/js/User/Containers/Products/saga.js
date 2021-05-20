@@ -3,6 +3,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../../utils/request";
 import { message } from "antd";
 import { getProductsSuccess } from "./action";
+import toNumber from 'lodash/toNumber';
 
 function* getProducts({ payload }) {
     try {
@@ -14,9 +15,17 @@ function* getProducts({ payload }) {
 
         const response = yield call(request, options);
         const { data } = response;
-
+        var total =0;
+        var recommentid=0;
         if (data?.success) {
-            yield put(getProductsSuccess(data?.success));
+            data?.success.map((value,key)=>{
+                if(toNumber(value?.priceWithExchange)>total){
+                    total=toNumber(value?.priceWithExchange);
+                    recommentid=value?.id
+                }
+            })
+            const concatData = [{recommentId:recommentid}].concat(data?.success);
+            yield put(getProductsSuccess(concatData));
         }
         if (data?.error) {
             message.error(data?.error, 3);

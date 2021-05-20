@@ -13,21 +13,30 @@ body {
     padding: 0;
     margin: 0;
 }
-.ant-tabs-nav-list {
+.custom-tab .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list {
     width: 100%;
 }
-.ant-tabs-tab {
+.custom-tab .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.ant-tabs-tab-active {
+.custom-tab
+    .ant-tabs-nav
+    .ant-tabs-nav-wrap
+    .ant-tabs-nav-list
+    .ant-tabs-tab-active {
     border-bottom: 4px solid green !important;
     background-color: gray !important;
 }
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+.custom-tab
+    .ant-tabs-nav
+    .ant-tabs-nav-wrap
+    .ant-tabs-nav-list
+    .ant-tabs-tab-active
+    .ant-tabs-tab-btn {
     color: white !important;
 }
-.pageContent{
+.pageContent {
     padding-top: 5rem;
 }

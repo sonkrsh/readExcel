@@ -15,7 +15,12 @@ const MyButton = styled(Button)`
         border: 1px solid black;
     }
     &:focus {
-        color: black;
+        background: black;
+        color: white;
+        border: 1px solid black;
+    }
+    &:active {
+        background: black;
         border: 1px solid black;
     }
 `;
@@ -28,6 +33,7 @@ function StyledButton({ text, buttonColor, color, size, onClick, marginTop }) {
             fontSize={size}
             color={color}
             onClick={() => onClick()}
+            htmlType="submit"
         >
             {text}
         </MyButton>

@@ -31,14 +31,17 @@ function index() {
         <Row>
             <Col lg={18} md={24} xs={24} xl={18}>
                 <Tabs
+                 className="custom-tab"
                     type="card"
                     tabBarGutter={30}
                     id="batteryTab"
                     animated
                     centered
                     size="small"
+                    
                 >
                     <TabPane
+                    tabBarStyle={{backgroundColor:'gray'}}
                         tab={
                             <div>
                                 <div>
