@@ -4,3 +4,6 @@ export const GET_PRODUCTS_SUCCESS = "resources/js/User/Containers/Products/GET_P
 export const ADD_TO_CART = "resources/js/User/Containers/Products/ADD_TO_CART";
 export const ADD_TO_CART_SUCCESS = "resources/js/User/Containers/Products/ADD_TO_CART_SUCCESS";
 export const LOCAL_STORAGE_ITEM_GET = "resources/js/User/Containers/Products/LOCAL_STORAGE_ITEM_GET";
+
+
+export const DELETE_ITEM_FROM_CART = "resources/js/User/Containers/Products/DELETE_ITEM_FROM_CART";

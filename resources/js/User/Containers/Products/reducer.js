@@ -20,7 +20,6 @@ const reducer = (state = initialState, action) => {
             ...state,
             cart: action.payload,
            }
-         /*   console.log("===>chala",JSON.parse(action.payload)) */
         default:
             return state;
     }

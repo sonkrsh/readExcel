@@ -1,10 +1,19 @@
-import { GET_PRODUCTS, ADD_TO_CART, ADD_TO_CART_SUCCESS } from "./constants";
+import {
+    GET_PRODUCTS,
+    ADD_TO_CART,
+    ADD_TO_CART_SUCCESS,
+    DELETE_ITEM_FROM_CART,
+} from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../../utils/request";
 import { message } from "antd";
-import { getProductsSuccess, addToCartSuccess,localStorageItemGet } from "./action";
+import {
+    getProductsSuccess,
+    addToCartSuccess,
+    localStorageItemGet,
+} from "./action";
 import toNumber from "lodash/toNumber";
-import { useDispatch, useSelector } from "react-redux";
+import remove from "lodash/remove";
 
 function* getProducts({ payload }) {
     try {
@@ -47,6 +56,7 @@ function* addToCart({ payload, battery }) {
                     }
                 );
             }
+
             batteryProducts.push(payload);
             localStorage.setItem(
                 "batterySessionId",
@@ -84,11 +94,54 @@ function* addToCartSuccessSaga({ payload, battery }) {
             }
         });
     });
-    yield put(localStorageItemGet(myobjArray))
+    yield put(localStorageItemGet(myobjArray));
+}
+function* deleteItemFromCart({ payload, cart }) {
+
+
+    if (JSON.parse(localStorage.getItem("batterySessionId"))) {
+        var batteryProducts = [];
+        JSON.parse(localStorage.getItem("batterySessionId"))?.map(
+            (value, key) => {
+                if(value?.productId==payload){
+
+                }else{
+                    batteryProducts.push(value); 
+                }
+             
+            }
+        );
+        localStorage.setItem(
+            "batterySessionId",
+            JSON.stringify(batteryProducts)
+        );
+        remove(cart, { id: payload })
+        yield put(localStorageItemGet(cart));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+   /*  if(remove(cart, { id: payload })){
+      
+        yield put(localStorageItemGet(cart));
+
+    }; */
+    
 }
 
 export default function* ProductsDefaultSaga() {
     yield takeLatest(GET_PRODUCTS, getProducts);
     yield takeLatest(ADD_TO_CART, addToCart);
     yield takeLatest(ADD_TO_CART_SUCCESS, addToCartSuccessSaga);
+    yield takeLatest(DELETE_ITEM_FROM_CART, deleteItemFromCart);
 }

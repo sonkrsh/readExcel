@@ -4,6 +4,7 @@ import {
     ADD_TO_CART,
     ADD_TO_CART_SUCCESS,
     LOCAL_STORAGE_ITEM_GET,
+    DELETE_ITEM_FROM_CART
 } from "./constants";
 
 export function getProducts(payload) {
@@ -39,5 +40,12 @@ export function localStorageItemGet(payload) {
     return {
         type: LOCAL_STORAGE_ITEM_GET,
         payload,
+    };
+}
+
+export function deleteItemFromCart(payload,cart) {
+    return {
+        type: DELETE_ITEM_FROM_CART,
+        payload,cart,
     };
 }

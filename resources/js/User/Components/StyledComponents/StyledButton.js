@@ -25,7 +25,7 @@ const MyButton = styled(Button)`
     }
 `;
 
-function StyledButton({ text, buttonColor, color, size, onClick, marginTop }) {
+function StyledButton({ text, buttonColor, color, size, onClick, marginTop,disabled }) {
     return (
         <MyButton
             buttoncolor={buttonColor}
@@ -34,6 +34,7 @@ function StyledButton({ text, buttonColor, color, size, onClick, marginTop }) {
             color={color}
             onClick={() => (onClick ? onClick() : null)}
             htmlType="submit"
+            disabled={disabled}
         >
             {text}
         </MyButton>

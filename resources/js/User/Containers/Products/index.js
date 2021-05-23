@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BoldOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
-import { getProducts, addToCart, addToCartSuccess } from "./action";
+import { getProducts, addToCart, addToCartSuccess,deleteItemFromCart } from "./action";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Drawer, Tabs } from "antd";
 import BatteryProducts from "../../Components/BatteryProducts";
 import "./style.css";
 import StyledImage from "../../Components/StyledComponents/StyledImage";
-import RightSideBar from "../../Components/StyledComponents/RightSideBar";
+import LocalStorageCart from "../../Components/Cart/LocalStorageCart";
 import isEmpty from "lodash/isEmpty";
 
 function index() {
@@ -70,7 +70,7 @@ function index() {
                             onclick={(data) =>
                                 dispatch(addToCart(data, allBattery))
                             }
-                           
+                            cartItem={originReducer?.cart}
                         />
                     </TabPane>
                     <TabPane tab="Glass" key="2"></TabPane>
@@ -80,7 +80,12 @@ function index() {
                 </Tabs>
             </Col>
             <Col lg={6} md={0} xs={0} xl={6}>
-                <RightSideBar  cartItem={originReducer?.cart} />
+                <LocalStorageCart
+                    cartItem={originReducer?.cart}
+                    removeCartItem={(removeId) =>
+                        dispatch(deleteItemFromCart(removeId,originReducer?.cart))
+                    }
+                />
             </Col>
         </Row>
     );

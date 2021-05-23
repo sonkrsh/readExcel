@@ -6,10 +6,10 @@ import "./style.css";
 import StyledButton from "../StyledComponents/StyledButton";
 import Recommended from "../StyledComponents/Recommended";
 import sample from "lodash/sample";
+import { isEqual, get } from "lodash";
 
-function index({ allBattery, onclick }) {
+function index({ allBattery, onclick, cartItem }) {
     const { Meta } = Card;
-
     return (
         <Row gutter={[16, 16]}>
             <Col
@@ -117,6 +117,11 @@ function index({ allBattery, onclick }) {
                                                     </Form.Item>
                                                     <Form.Item>
                                                         <StyledButton
+                                                            disabled={cartItem.find(
+                                                                (x) =>
+                                                                    x.id ==
+                                                                    value.id
+                                                            )}
                                                             marginTop="1rem"
                                                             text={"Add To Cart"}
                                                         />

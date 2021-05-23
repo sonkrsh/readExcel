@@ -1,0 +1,9 @@
+.rightSideBar{
+    border: 1px solid;
+    height: 89%;
+    position: fixed;
+    width: 25%;
+    padding: 1rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
