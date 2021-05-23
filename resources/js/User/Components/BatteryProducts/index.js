@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Row, Col, Button, Card, Avatar, Checkbox } from "antd";
-import { Tabs } from "antd";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Button, Card, Radio, Checkbox, Form, Switch } from "antd";
 import StyledImage from "../StyledComponents/StyledImage";
 import StyledText from "../StyledComponents/StyledText";
 import "./style.css";
@@ -8,70 +7,9 @@ import StyledButton from "../StyledComponents/StyledButton";
 import Recommended from "../StyledComponents/Recommended";
 import sample from "lodash/sample";
 
-function index({ allBattery }) {
-    const { TabPane } = Tabs;
+function index({ allBattery, onclick }) {
     const { Meta } = Card;
-    const [priceSelect, setpriceSelect] = useState(1);
-    const Checkboxfunction = (value) => {
-       
-        return (
-            <>
-                <div className="BatteryPrice">
-                    <div className="price">
-                        <StyledText
-                            Text={`Rs${value?.priceWithExchange}`}
-                            Size={"1rem"}
-                            Color={"black"}
-                            Weight={"bold"}
-                        />
-                        <StyledText
-                            Text={`with Old Battery`}
-                            Size={"1rem"}
-                            Color={"black"}
-                            Weight={"bold"}
-                        />
-                    </div>
 
-                    <Checkbox
-                        checked={priceSelect == 1 ? true : false}
-                        onChange={(e) =>
-                            e.target.checked == true
-                                ? setpriceSelect(1)
-                                : setpriceSelect(0)
-                        }
-                    >
-                        {" "}
-                    </Checkbox>
-                </div>
-                <div className="BatteryPrice">
-                    <div className="price">
-                        <StyledText
-                            Text={`Rs${value?.priceWithOutExchange}`}
-                            Size={"1rem"}
-                            Color={"black"}
-                            Weight={"bold"}
-                        />
-                        <StyledText
-                            Text={`withOut Old Battery`}
-                            Size={"1rem"}
-                            Color={"black"}
-                            Weight={"bold"}
-                        />
-                    </div>
-                    <Checkbox
-                        checked={priceSelect == 1 ? false : true}
-                        onChange={(e) =>
-                            e.target.checked == true
-                                ? setpriceSelect(0)
-                                : setpriceSelect(1)
-                        }
-                    >
-                        {" "}
-                    </Checkbox>
-                </div>
-            </>
-        );
-    };
     return (
         <Row gutter={[16, 16]}>
             <Col
@@ -152,7 +90,39 @@ function index({ allBattery }) {
                                             </>
                                         }
                                         description={
-                                            <>{Checkboxfunction(value)}</>
+                                            <>
+                                                <Form
+                                                    name="basic"
+                                                    onFinish={(batteryId) => {
+                                                        const myObj = {
+                                                            ...batteryId,
+                                                            productId:
+                                                                value?.id,
+                                                        };
+                                                        onclick(myObj);
+                                                    }}
+                                                    initialValues={{
+                                                        batteryType: "AC-B-WE",
+                                                    }}
+                                                >
+                                                    <Form.Item name="batteryType">
+                                                        <Radio.Group>
+                                                            <Radio value="AC-B-WE">
+                                                                {`With Old Battery ${value?.priceWithExchange}`}
+                                                            </Radio>
+                                                            <Radio value="AC-B-WOE">
+                                                                {`WithOut Old Battery ${value?.priceWithOutExchange}`}
+                                                            </Radio>
+                                                        </Radio.Group>
+                                                    </Form.Item>
+                                                    <Form.Item>
+                                                        <StyledButton
+                                                            marginTop="1rem"
+                                                            text={"Add To Cart"}
+                                                        />
+                                                    </Form.Item>
+                                                </Form>
+                                            </>
                                         }
                                     />
                                     {allBattery?.[0]?.recommentId ==
@@ -161,12 +131,6 @@ function index({ allBattery }) {
                                     ) : (
                                         ""
                                     )}
-
-
-                                    <StyledButton
-                                        marginTop="1rem"
-                                        text={"Add To Cart"}
-                                    />
                                 </Card>
                             </Col>
                         );

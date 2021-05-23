@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BoldOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
-import { getProducts } from "./action";
+import { getProducts, addToCart, addToCartSuccess } from "./action";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Drawer, Tabs } from "antd";
 import BatteryProducts from "../../Components/BatteryProducts";
 import "./style.css";
 import StyledImage from "../../Components/StyledComponents/StyledImage";
 import RightSideBar from "../../Components/StyledComponents/RightSideBar";
+import isEmpty from "lodash/isEmpty";
 
 function index() {
     const { TabPane } = Tabs;
@@ -15,7 +16,9 @@ function index() {
     let { makeName, modelName, locationName, fuelName } = useParams();
 
     const originReducer = useSelector((state) => state?.Products);
+
     const { allBattery } = originReducer;
+    let myobjArray = [];
 
     useEffect(() => {
         const combineData = {
@@ -27,21 +30,24 @@ function index() {
         dispatch(getProducts(combineData));
     }, []);
 
+    useEffect(() => {
+        dispatch(addToCart("", allBattery));
+    }, [allBattery]);
+
     return (
         <Row>
             <Col lg={18} md={24} xs={24} xl={18}>
                 <Tabs
-                 className="custom-tab"
+                    className="custom-tab"
                     type="card"
                     tabBarGutter={30}
                     id="batteryTab"
                     animated
                     centered
                     size="small"
-                    
                 >
                     <TabPane
-                    tabBarStyle={{backgroundColor:'gray'}}
+                        tabBarStyle={{ backgroundColor: "gray" }}
                         tab={
                             <div>
                                 <div>
@@ -59,8 +65,13 @@ function index() {
                                 }
                             />
                         </Row>
-
-                        <BatteryProducts allBattery={allBattery} />
+                        <BatteryProducts
+                            allBattery={allBattery}
+                            onclick={(data) =>
+                                dispatch(addToCart(data, allBattery))
+                            }
+                           
+                        />
                     </TabPane>
                     <TabPane tab="Glass" key="2"></TabPane>
                     <TabPane tab="Others" key="3">
@@ -69,7 +80,7 @@ function index() {
                 </Tabs>
             </Col>
             <Col lg={6} md={0} xs={0} xl={6}>
-                <RightSideBar />
+                <RightSideBar  cartItem={originReducer?.cart} />
             </Col>
         </Row>
     );

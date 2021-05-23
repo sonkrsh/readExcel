@@ -1,9 +1,11 @@
 import {
     GET_PRODUCTS_SUCCESS,
+    LOCAL_STORAGE_ITEM_GET
 } from "./constants";
 
 const initialState = {
-    allBattery :[]
+    allBattery :[],
+    cart:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +15,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 allBattery: action.payload,
             };
-       
+       case LOCAL_STORAGE_ITEM_GET:
+           return {
+            ...state,
+            cart: action.payload,
+           }
+         /*   console.log("===>chala",JSON.parse(action.payload)) */
         default:
             return state;
     }

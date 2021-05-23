@@ -12,7 +12,7 @@ const MyRecommended = styled.div`
     left: -1px;
 `;
 const MyRecommendedText = styled.div`
-    transform: rotate(329deg);
+    transform: rotate(328deg);
     color: wheat;
     padding-right: 3rem;
     font-size: 12px;

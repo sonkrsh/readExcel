@@ -32,7 +32,7 @@ function StyledButton({ text, buttonColor, color, size, onClick, marginTop }) {
             margintop={marginTop}
             fontSize={size}
             color={color}
-            onClick={() => onClick()}
+            onClick={() => (onClick ? onClick() : null)}
             htmlType="submit"
         >
             {text}

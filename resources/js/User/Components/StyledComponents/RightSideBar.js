@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Tabs } from "antd";
-
+import { Card } from "antd";
 const MySideBar = styled.div`
     border: 1px solid;
     height: 89%;
@@ -10,7 +10,8 @@ const MySideBar = styled.div`
     padding: 1rem;
 `;
 
-function RightSideBar() {
+function RightSideBar({ cartItem }) {
+    console.log("=====>", cartItem);
     const { TabPane } = Tabs;
     return (
         <MySideBar>
@@ -30,7 +31,27 @@ function RightSideBar() {
                         </div>
                     }
                     key="1"
-                ></TabPane>
+                >
+                    {cartItem.map((value, key) => {
+                        return (
+                            <Card>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <h4>
+                                        {`${value.name}${" "}${
+                                            value.batteryModel_name
+                                        }`}
+                                    </h4>
+                                    <h5>{`${value.cartPrice}`}</h5>
+                                </div>
+                            </Card>
+                        );
+                    })}
+                </TabPane>
                 <TabPane
                     tab={
                         <div>
