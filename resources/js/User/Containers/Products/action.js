@@ -4,7 +4,7 @@ import {
     ADD_TO_CART,
     ADD_TO_CART_SUCCESS,
     LOCAL_STORAGE_ITEM_GET,
-    DELETE_ITEM_FROM_CART
+    DELETE_ITEM_FROM_CART,
 } from "./constants";
 
 export function getProducts(payload) {
@@ -36,16 +36,18 @@ export function addToCartSuccess(payload, battery) {
     };
 }
 
-export function localStorageItemGet(payload) {
+export function localStorageItemGet(payload, total) {
     return {
         type: LOCAL_STORAGE_ITEM_GET,
         payload,
+        total,
     };
 }
 
-export function deleteItemFromCart(payload,cart) {
+export function deleteItemFromCart(payload, cart) {
     return {
         type: DELETE_ITEM_FROM_CART,
-        payload,cart,
+        payload,
+        cart,
     };
 }

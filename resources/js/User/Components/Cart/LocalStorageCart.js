@@ -3,7 +3,8 @@ import { Tabs, Card } from "antd";
 import "./style.css";
 import StyledButton from "../StyledComponents/StyledButton";
 import Form from "antd/lib/form/Form";
-function LocalStorageCart({ cartItem,removeCartItem }) {
+import size from "lodash/size";
+function LocalStorageCart({ cartItem, removeCartItem,total }) {
     const { TabPane } = Tabs;
 
     return (
@@ -25,9 +26,9 @@ function LocalStorageCart({ cartItem,removeCartItem }) {
                     }
                     key="1"
                 >
-                    {cartItem.map((value, key) => {
+                    {cartItem.map((value, key, { length }) => {
                         return (
-                            <Card>
+                            <Card key={key}>
                                 <Form></Form>
                                 <div
                                     style={{
@@ -57,6 +58,7 @@ function LocalStorageCart({ cartItem,removeCartItem }) {
                             </Card>
                         );
                     })}
+                    <h3>Total: {total}</h3>
                 </TabPane>
                 <TabPane
                     tab={

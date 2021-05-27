@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BoldOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
-import { getProducts, addToCart, addToCartSuccess,deleteItemFromCart } from "./action";
+import {
+    getProducts,
+    addToCart,
+    addToCartSuccess,
+    deleteItemFromCart,
+} from "./action";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Drawer, Tabs } from "antd";
 import BatteryProducts from "../../Components/BatteryProducts";
@@ -33,6 +38,7 @@ function index() {
     useEffect(() => {
         dispatch(addToCart("", allBattery));
     }, [allBattery]);
+
 
     return (
         <Row>
@@ -82,8 +88,9 @@ function index() {
             <Col lg={6} md={0} xs={0} xl={6}>
                 <LocalStorageCart
                     cartItem={originReducer?.cart}
+                    total={originReducer?.total}
                     removeCartItem={(removeId) =>
-                        dispatch(deleteItemFromCart(removeId,originReducer?.cart))
+                        dispatch(deleteItemFromCart(removeId, allBattery))
                     }
                 />
             </Col>

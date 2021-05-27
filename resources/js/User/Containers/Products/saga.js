@@ -10,10 +10,13 @@ import { message } from "antd";
 import {
     getProductsSuccess,
     addToCartSuccess,
+    addToCart,
     localStorageItemGet,
 } from "./action";
 import toNumber from "lodash/toNumber";
 import remove from "lodash/remove";
+import localStorageKeyMapping from "../../../utils/localStorageKeyMapping";
+import CryptoJS from "crypto-js";
 
 function* getProducts({ payload }) {
     try {
@@ -45,103 +48,103 @@ function* getProducts({ payload }) {
     } catch (error) {}
 }
 
-function* addToCart({ payload, battery }) {
+function* addToCartFunction({ payload, battery }) {
+    var batteryProducts = [];
+
     try {
         if (payload) {
-            var batteryProducts = [];
-            if (JSON.parse(localStorage.getItem("batterySessionId"))) {
-                JSON.parse(localStorage.getItem("batterySessionId"))?.map(
-                    (value, key) => {
-                        batteryProducts.push(value);
-                    }
-                );
-            }
-
+            var bytes = CryptoJS.AES.decrypt(
+                JSON.parse(localStorage.getItem("batterySessionId")),
+                localStorageKeyMapping("batterySessionId")
+            );
+            var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+            decryptedData?.map((value, key) => {
+                batteryProducts.push(value);
+            });
             batteryProducts.push(payload);
+            var ciphertext = CryptoJS.AES.encrypt(
+                JSON.stringify(batteryProducts),
+                localStorageKeyMapping("batterySessionId")
+            ).toString();
             localStorage.setItem(
                 "batterySessionId",
-                JSON.stringify(batteryProducts)
+                JSON.stringify(ciphertext)
             );
-
-            if (batteryProducts) {
-                message.success("Added To Cart SuccesFully", 1);
-                /* yield put(addToCartSuccess(batteryProducts)) */
-            }
-        }
-        if (battery) {
+            message.success("Added To Cart SuccesFully", 1);
             yield put(addToCartSuccess(batteryProducts, battery));
         }
-    } catch (error) {}
+        yield put(addToCartSuccess(batteryProducts, battery));
+    } catch (error) {
+        batteryProducts.push(payload);
+        var ciphertext = CryptoJS.AES.encrypt(
+            JSON.stringify(batteryProducts),
+            localStorageKeyMapping("batterySessionId")
+        ).toString();
+        localStorage.setItem("batterySessionId", JSON.stringify(ciphertext));
+        yield put(addToCartSuccess(batteryProducts, battery));
+    }
 }
 
 function* addToCartSuccessSaga({ payload, battery }) {
     let myobjArray = [];
     let price = "";
-    JSON.parse(localStorage.getItem("batterySessionId"))?.map((value, key) => {
-        battery?.map((valueOriginal, keyOriginal) => {
-            if (valueOriginal?.id == value.productId) {
-                if (value.batteryType == "AC-B-WE") {
-                    price = valueOriginal.priceWithExchange;
+    try {
+        var bytes = CryptoJS.AES.decrypt(
+            JSON.parse(localStorage.getItem("batterySessionId")),
+            localStorageKeyMapping("batterySessionId")
+        );
+        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        let total =0
+        decryptedData?.map((value, key) => {
+            battery?.map((valueOriginal, keyOriginal) => {
+                if (valueOriginal?.id == value.productId) {
+                    if (value.batteryType == "AC-B-WE") {
+                        price = valueOriginal.priceWithExchange;
+                    }
+                    if (value.batteryType == "AC-B-WOE") {
+                        price = valueOriginal.priceWithOutExchange;
+                    }
+                    total=total+toNumber(price)
+                    const myobj = {
+                        ...valueOriginal,
+                        cartPrice: price,
+                    };
+                    myobjArray.push(myobj);
                 }
-                if (value.batteryType == "AC-B-WOE") {
-                    price = valueOriginal.priceWithOutExchange;
-                }
-                const myobj = {
-                    ...valueOriginal,
-                    cartPrice: price,
-                };
-                myobjArray.push(myobj);
-            }
+            });
         });
-    });
-    yield put(localStorageItemGet(myobjArray));
+        yield put(localStorageItemGet(myobjArray,total));
+    } catch (error) {
+        localStorage.removeItem("batterySessionId");
+    }
 }
 function* deleteItemFromCart({ payload, cart }) {
+    var batteryProducts = [];
+    try {
+        var bytes = CryptoJS.AES.decrypt(
+            JSON.parse(localStorage.getItem("batterySessionId")),
+            localStorageKeyMapping("batterySessionId")
+        );
+        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-
-    if (JSON.parse(localStorage.getItem("batterySessionId"))) {
-        var batteryProducts = [];
-        JSON.parse(localStorage.getItem("batterySessionId"))?.map(
-            (value, key) => {
-                if(value?.productId==payload){
-
-                }else{
-                    batteryProducts.push(value); 
-                }
-             
+        decryptedData?.map((value, key) => {
+            if (value?.productId == payload) {
+            } else {
+                batteryProducts.push(value);
             }
-        );
-        localStorage.setItem(
-            "batterySessionId",
-            JSON.stringify(batteryProducts)
-        );
-        remove(cart, { id: payload })
-        yield put(localStorageItemGet(cart));
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-   /*  if(remove(cart, { id: payload })){
-      
-        yield put(localStorageItemGet(cart));
-
-    }; */
-    
+        });
+        var ciphertext = CryptoJS.AES.encrypt(
+            JSON.stringify(batteryProducts),
+            localStorageKeyMapping("batterySessionId")
+        ).toString();
+        localStorage.setItem("batterySessionId", JSON.stringify(ciphertext));
+        yield put(addToCart("", cart));
+    } catch (error) {}
 }
 
 export default function* ProductsDefaultSaga() {
     yield takeLatest(GET_PRODUCTS, getProducts);
-    yield takeLatest(ADD_TO_CART, addToCart);
+    yield takeLatest(ADD_TO_CART, addToCartFunction);
     yield takeLatest(ADD_TO_CART_SUCCESS, addToCartSuccessSaga);
     yield takeLatest(DELETE_ITEM_FROM_CART, deleteItemFromCart);
 }

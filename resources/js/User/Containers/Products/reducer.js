@@ -5,7 +5,8 @@ import {
 
 const initialState = {
     allBattery :[],
-    cart:[]
+    cart:[],
+    total:0
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const reducer = (state = initialState, action) => {
            return {
             ...state,
             cart: action.payload,
+            total:action.total
            }
         default:
             return state;
