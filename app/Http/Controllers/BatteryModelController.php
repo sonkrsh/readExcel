@@ -58,7 +58,7 @@ class BatteryModelController extends Controller
                 $data = new BatteryModel();
                 $data->battery_id =   $request->input("batteryCompany");
                 $data->batteryModel_name = $request->input("batteryModel");
-                $data->desc = $request->input("fields");
+                $data->descption = $request->input("fields");
                 /* Storage::disk('google')->put('hello.txt','hello wordls'); */
                 $imageName = $request->file('file')->store('','google');
                 $url = Storage::disk('google')->url($imageName);

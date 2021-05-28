@@ -12,7 +12,6 @@ function index() {
     const { TabPane } = Tabs;
     const reducerProps = useSelector((state) => state.AllocateBattery);
 
-    console.log(reducerProps.productData)
     useEffect(() => {
         dispatch(modelData());
         dispatch(fuelData());

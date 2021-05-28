@@ -91,7 +91,7 @@ function index(props) {
                                             title={value.title}
                                         >
                                             {value.data.map((value, key) => (
-                                                <Menu.Item onClick={toggle} key={key}>
+                                                <Menu.Item onClick={toggle} key={key+1000}>
                                                     <span>
                                                         {value.title}
                                                     </span>

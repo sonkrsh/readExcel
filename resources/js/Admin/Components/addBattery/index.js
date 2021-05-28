@@ -153,10 +153,10 @@ function index({ onload, onsubmit, companyData, batteryModel }) {
                                                             className="desc_input"
                                                             name={[
                                                                 index,
-                                                                "desc",
+                                                                "descption",
                                                             ]}
                                                             label={
-                                                                "Description" +
+                                                                `Description${" "}`+
                                                                 index
                                                             }
                                                         >

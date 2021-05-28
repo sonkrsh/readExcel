@@ -18,7 +18,7 @@ class CreateBatteryModelsTable extends Migration
             $table->string('battery_id');
             $table->string('batteryModel_name')->unique();
             $table->string('image')->nullable();
-            $table->string('desc')->nullable();
+            $table->string('descption')->nullable();
             $table->timestamps();
         });
     }

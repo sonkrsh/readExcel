@@ -7,7 +7,6 @@ const PrivateRoute = lazy(() => import("./utils/PrivateRoute"));
 const ProtectedRoute = lazy(() => import("./utils/ProtectedRoute"));
 
 function AdminRoute(props) {
-    console.log(props);
     return (
         <div>
             <Suspense fallback={<div>Loading.....</div>}>

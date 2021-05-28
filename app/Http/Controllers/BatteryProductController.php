@@ -23,7 +23,7 @@ class BatteryProductController extends Controller
             ->join('locations','locations.id','battery_products.locationId')
             ->join('battery_companies','battery_companies.id','battery_models.battery_id')
             ->join('make_cars','make_cars.id','model_cars.make_id')
-            ->select(DB::raw('make_cars.name, model_cars.name,battery_products.*,battery_models.batteryModel_name,battery_models.image,battery_models.desc,fuel_cars.name,locations.location,battery_companies.name,make_cars.name as makename,model_cars.name as modelname'))
+            ->select(DB::raw('make_cars.name, model_cars.name,battery_products.*,battery_models.batteryModel_name,battery_models.image,battery_models.descption,fuel_cars.name,locations.location,battery_companies.name,make_cars.name as makename,model_cars.name as modelname'))
             ->get();
            
              return response()->json($data, 200);
@@ -58,7 +58,7 @@ class BatteryProductController extends Controller
             $productData = DB::table('battery_products')->where([['carId',$modelData[0]->id],['fuelId',$fuelData[0]->id],['locationId',$locationData[0]->id]])
             ->join('battery_models','battery_models.id','battery_products.batteryId')
             ->join('battery_companies','battery_companies.id','battery_models.battery_id')
-            ->get(['battery_products.id','carId','fuelId','batteryId','batteryModel_name','locationId','desc','image','name','price','priceWithExchange','priceWithOutExchange']);
+            ->get(['battery_products.id','carId','fuelId','batteryId','batteryModel_name','locationId','descption','image','name','price','priceWithExchange','priceWithOutExchange']);
             if($productData[0]->id){
                 return response()->json(['success'=>$productData], 200);
             }

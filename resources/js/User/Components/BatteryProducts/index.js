@@ -32,8 +32,8 @@ function index({ allBattery, onclick, cartItem }) {
                             return "";
                         }
                         let descption = "";
-                        if (value?.desc) {
-                            descption = JSON.parse(value?.desc);
+                        if (value?.descption) {
+                            descption = JSON.parse(value?.descption);
                         }
 
                         return (

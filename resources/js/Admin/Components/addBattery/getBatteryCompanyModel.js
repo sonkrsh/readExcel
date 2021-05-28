@@ -35,8 +35,8 @@ function getBatteryCompanyModel({ batteryCompanyModelData }) {
         },
         {
             title: "Description",
-            dataIndex: "desc",
-            key: "desc",
+            dataIndex: "descption",
+            key: "descption",
             render: (value, key, time) => {
                 var fun = null;
                 try {
