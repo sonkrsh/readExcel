@@ -2,12 +2,8 @@
 .ant-layout-sider-children ul{
     width: 100%;
 }
-.sidebar{
-    margin-top: 4rem;
-}
 .trigger{
     margin-left: 10px;
-    margin-top: 3.3rem;
     position: fixed;
 }
 @media screen and (max-width: 768px) {
