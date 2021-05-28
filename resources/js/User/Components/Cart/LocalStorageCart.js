@@ -1,10 +1,10 @@
 import React from "react";
-import { Tabs, Card } from "antd";
+import { Tabs, Card,Row,Col } from "antd";
 import "./style.css";
 import StyledButton from "../StyledComponents/StyledButton";
-import Form from "antd/lib/form/Form";
-import size from "lodash/size";
-function LocalStorageCart({ cartItem, removeCartItem,total }) {
+import { DeleteOutlined } from "@ant-design/icons";
+
+function LocalStorageCart({ cartItem, removeCartItem, total }) {
     const { TabPane } = Tabs;
 
     return (
@@ -29,36 +29,37 @@ function LocalStorageCart({ cartItem, removeCartItem,total }) {
                     {cartItem.map((value, key, { length }) => {
                         return (
                             <Card key={key}>
-                                <Form></Form>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                    }}
-                                >
-                                    <>
-                                        <h4>
-                                            {`${value.name}${" "}${
-                                                value.batteryModel_name
-                                            }`}
-                                        </h4>
-                                        <h5>{`${value.cartPrice}`}</h5>
-                                    </>
-                                    <>
-                                        <StyledButton
-                                            text={"delete"}
-                                            buttonColor="black"
-                                            color={"white"}
+                                <Row gutter={[16, 16]}>
+                                    <Col
+                                        lg={13}
+                                        xl={13}
+                                    >
+                                        {`${value.name}${" "}${
+                                            value.batteryModel_name
+                                        }`}
+                                    </Col>
+                                    <Col
+                                       lg={9}
+                                       xl={9}
+                                    >
+                                        {`${value.cartPrice}`}
+                                    </Col>
+                                    <Col
+                                       lg={2}
+                                       xl={2}
+                                    >
+                                        <DeleteOutlined
                                             onClick={() =>
                                                 removeCartItem(value.id)
                                             }
                                         />
-                                    </>
-                                </div>
+                                    </Col>
+                                </Row>
                             </Card>
                         );
                     })}
-                    <h3>Total: {total}</h3>
+                    
+                    <h3 style={{display:'flex',justifyContent:'center'}}>Total: {total}</h3>
                 </TabPane>
                 <TabPane
                     tab={

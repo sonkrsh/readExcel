@@ -1,33 +1,56 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useState } from "react";
+import { Table, Popconfirm, Typography, Button } from "antd";
 
 function getMake({ makeData }) {
+    const [editKey, seteditKey] = useState(null);
+    const handleEdit = (id) => {
+        seteditKey(id);
+    };
+    const renderEdit = (id) => {
+        return editKey ? (
+            <span>
+                <a
+                    /* onClick={() => save(record.key)} */ style={{
+                        marginRight: 8,
+                    }}
+                >
+                    Save
+                </a>
+                <Popconfirm title="Sure to cancel?" onConfirm={()=>seteditKey(null)}>
+                    <a>Cancel</a>
+                </Popconfirm>
+            </span>
+        ) : (
+            <Typography.Link /* disabled={editingKey !== ''} */ onClick={() => handleEdit(id)}
+            >
+                Edit
+            </Typography.Link>
+        );
+    };
     const columns = [
         {
             title: "Id.",
             dataIndex: "id",
             key: "id",
-            render: (value, key, time) => <p>{time}</p>,
-            /*   render: text => <a>{text}</a>, */
+            render: (value, key, id) => <p>{id}</p>,
         },
         {
             title: "Make.",
             dataIndex: "name",
             key: "name",
-            /*  responsive: ['md'], */
         },
         {
             title: "Creation Data",
             dataIndex: "created_at",
             key: "created_at",
-            /*  responsive: ['lg'], */
         },
         {
             title: "Action",
-            dataIndex: "action",
-            key: "action",
-            render: (value, key, time) => <p>{time}</p>,
-            /* responsive: ['lg'], */
+            dataIndex: "id",
+            key: "id",
+            render: (value, key, time) => {
+                return  renderEdit(value)
+            },
         },
     ];
 
