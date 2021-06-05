@@ -11,7 +11,7 @@ import { getImages } from "../../../Admin/Containers/AddImages/actions";
 import { getModel } from "./action";
 import "./style.css";
 import FaqCollapse from "../../Components/faqCollapse";
-
+import firebase from "../../firebase";
 
 function index(props) {
     const dispatch = useDispatch();
@@ -24,8 +24,58 @@ function index(props) {
         dispatch(locationData());
         dispatch(fuelData());
         dispatch(getImages());
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+            "recapture",
+            {
+                size: "invisible",
+                "expired-callback": () => {
+                    window.recaptchaVerifier.clear();
+                },
+            }
+        );
     }, []);
 
+    const onSignInSubmit = (data) => {
+        console.log("====================================");
+
+        const phoneNumber = "+919818351953";
+        const appVerifier = window.recaptchaVerifier;
+        firebase
+            .auth()
+            .signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then((confirmationResult) => {
+                window.confirmationResult = confirmationResult;
+
+                getCode();
+            })
+            .catch((error) => {
+                window.recaptchaVerifier.render().then(function (widgetId) {
+                    grecaptcha.reset(widgetId);
+                });
+                console.log("====================================ddd", error);
+            });
+    };
+    const getCode = () => {
+        const code = prompt("enter Number");
+        confirmationResult
+            .confirm(code)
+            .then((result) => {
+                // User signed in successfully.
+                const user = result.user;
+                console.log(
+                    "====================================",
+                    user.phoneNumber
+                );
+
+                // ...
+            })
+            .catch((error) => {
+                window.recaptchaVerifier.clear();
+                window.recaptchaVerifier.render().then(function (widgetId) {
+                    grecaptcha.reset(widgetId);
+                });
+            });
+    };
     return (
         <>
             <Row
@@ -39,6 +89,8 @@ function index(props) {
                     backgroundSize: "cover",
                 }}
             >
+                <div id="recapture"></div>
+                <button onClick={() => onSignInSubmit()}>Click Me </button>
                 <Col id="SearchCar" xs={24} sm={24} md={24} lg={8} xl={8}>
                     <HomepageDropdownSearch
                         locationArray={reducerProps?.locationData}
