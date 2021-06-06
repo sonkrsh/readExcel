@@ -14,7 +14,6 @@ import {
     localStorageItemGet,
 } from "./action";
 import toNumber from "lodash/toNumber";
-import remove from "lodash/remove";
 import localStorageKeyMapping from "../../../utils/localStorageKeyMapping";
 import CryptoJS from "crypto-js";
 

@@ -90,7 +90,7 @@ function index(props) {
                 }}
             >
                 <div id="recapture"></div>
-                <button onClick={() => onSignInSubmit()}>Click Me </button>
+                {/*                 <button onClick={() => onSignInSubmit()}>Click Me </button> */}
                 <Col id="SearchCar" xs={24} sm={24} md={24} lg={8} xl={8}>
                     <HomepageDropdownSearch
                         locationArray={reducerProps?.locationData}

@@ -23,7 +23,7 @@ function index() {
     const originReducer = useSelector((state) => state?.Products);
 
     const { allBattery } = originReducer;
-    let myobjArray = [];
+
 
     useEffect(() => {
         const combineData = {
