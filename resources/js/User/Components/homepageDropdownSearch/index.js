@@ -123,14 +123,24 @@ function index({
                         <Input
                             className="inputBorder"
                             placeholder={"Location"}
-                            onClick={() => settrigger(1)}
+                            onClick={() => {
+                                form.setFieldsValue({
+                                    location: "",
+                                }),
+                                    settrigger(1);
+                            }}
                         />
                     </Form.Item>
                     <Form.Item label=" " name="car">
                         <Input
                             className="inputBorder"
                             placeholder="Select Car"
-                            onClick={() => settrigger(2)}
+                            onClick={() => {
+                                form.setFieldsValue({
+                                    car: "",
+                                }),
+                                    settrigger(2);
+                            }}
                         />
                     </Form.Item>
                 </Form>

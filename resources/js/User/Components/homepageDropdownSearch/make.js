@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Card, Select } from "antd";
-import { BackwardOutlined,CloseOutlined } from '@ant-design/icons';
+import { BackwardOutlined, CloseOutlined } from "@ant-design/icons";
 
 function make({ onClick, selectValue, makeArray }) {
     const { Option } = Select;
@@ -10,13 +10,17 @@ function make({ onClick, selectValue, makeArray }) {
             extra={
                 <div className="header">
                     <div className="back">
-                        <a onClick={() => onClick(0)}><BackwardOutlined /></a>
+                        <a onClick={() => onClick(0)}>
+                            <BackwardOutlined />
+                        </a>
                     </div>
                     <div className="title">
                         <h6>Make (Manufacture)</h6>
                     </div>
                     <div className="cancel">
-                        <a onClick={() => onClick(0)}><CloseOutlined /></a>
+                        <a onClick={() => onClick(0)}>
+                            <CloseOutlined />
+                        </a>
                     </div>
                 </div>
             }
@@ -24,7 +28,8 @@ function make({ onClick, selectValue, makeArray }) {
             style={{ textAlign: "center" }}
         >
             <Select
-            listHeight={180}
+                autoFocus
+                listHeight={180}
                 dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {
                     onClick(3);

@@ -27,6 +27,7 @@ function fuel({ onClick, selectValue, fuelArray }) {
             style={{ textAlign: "center" }}
         >
             <Select
+                autoFocus
                 listHeight={180}
                 dropdownStyle={{ display: "block" }}
                 onChange={(id, name) => {

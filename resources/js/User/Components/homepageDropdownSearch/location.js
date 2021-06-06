@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Select } from "antd";
-import { BackwardOutlined,CloseOutlined } from '@ant-design/icons';
+import { BackwardOutlined, CloseOutlined } from "@ant-design/icons";
 
 function location({ onClick, selectValue, locationArray }) {
     const { Option } = Select;
@@ -9,13 +9,17 @@ function location({ onClick, selectValue, locationArray }) {
             extra={
                 <div className="header">
                     <div className="back">
-                    <a onClick={() => onClick(0)}><BackwardOutlined /></a>
+                        <a onClick={() => onClick(0)}>
+                            <BackwardOutlined />
+                        </a>
                     </div>
                     <div className="title">
                         <h6>Location</h6>
                     </div>
                     <div className="cancel">
-                    <a onClick={() => onClick(0)}><CloseOutlined /></a>
+                        <a onClick={() => onClick(0)}>
+                            <CloseOutlined />
+                        </a>
                     </div>
                 </div>
             }
@@ -23,6 +27,7 @@ function location({ onClick, selectValue, locationArray }) {
             style={{ textAlign: "center" }}
         >
             <Select
+                autoFocus
                 dropdownStyle={{ display: "block" }}
                 showSearch
                 onChange={(id, name) => {
