@@ -106,7 +106,13 @@ function index({ allBattery, onclick, cartItem }) {
                                                     }}
                                                 >
                                                     <Form.Item name="batteryType">
-                                                        <Radio.Group>
+                                                        <Radio.Group
+                                                            disabled={cartItem.find(
+                                                                (x) =>
+                                                                    x.id ==
+                                                                    value.id
+                                                            )}
+                                                        >
                                                             <Radio value="AC-B-WE">
                                                                 {`With Old Battery ${value?.priceWithExchange}`}
                                                             </Radio>
