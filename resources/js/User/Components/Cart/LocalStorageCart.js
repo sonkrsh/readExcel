@@ -1,10 +1,10 @@
 import React from "react";
-import { Tabs, Card,Row,Col } from "antd";
+import { Tabs, Card, Row, Col } from "antd";
 import "./style.css";
 import StyledButton from "../StyledComponents/StyledButton";
 import { DeleteOutlined } from "@ant-design/icons";
 
-function LocalStorageCart({ cartItem, removeCartItem, total }) {
+function LocalStorageCart({ cartItem, removeCartItem, total,props }) {
     const { TabPane } = Tabs;
 
     return (
@@ -30,24 +30,15 @@ function LocalStorageCart({ cartItem, removeCartItem, total }) {
                         return (
                             <Card key={key}>
                                 <Row gutter={[16, 16]}>
-                                    <Col
-                                        lg={13}
-                                        xl={13}
-                                    >
+                                    <Col lg={13} xl={13}>
                                         {`${value.name}${" "}${
                                             value.batteryModel_name
                                         }`}
                                     </Col>
-                                    <Col
-                                       lg={9}
-                                       xl={9}
-                                    >
+                                    <Col lg={9} xl={9}>
                                         {`${value.cartPrice}`}
                                     </Col>
-                                    <Col
-                                       lg={2}
-                                       xl={2}
-                                    >
+                                    <Col lg={2} xl={2}>
                                         <DeleteOutlined
                                             onClick={() =>
                                                 removeCartItem(value.id)
@@ -58,8 +49,13 @@ function LocalStorageCart({ cartItem, removeCartItem, total }) {
                             </Card>
                         );
                     })}
-                    
-                    <h3 style={{display:'flex',justifyContent:'center'}}>Total: {total}</h3>
+
+                    <h3 style={{ display: "flex", justifyContent: "center" }}>
+                        Total: {total}
+                    </h3>
+                    <div className="btnToProcced">
+                        <StyledButton a text="Procced To Checkout" onClick={()=>props.history.push("/checkout")}/>
+                    </div>
                 </TabPane>
                 <TabPane
                     tab={

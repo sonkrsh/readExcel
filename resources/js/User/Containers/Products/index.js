@@ -15,7 +15,7 @@ import StyledImage from "../../Components/StyledComponents/StyledImage";
 import LocalStorageCart from "../../Components/Cart/LocalStorageCart";
 import isEmpty from "lodash/isEmpty";
 
-function index() {
+function index(props) {
     const { TabPane } = Tabs;
     const dispatch = useDispatch();
     let { makeName, modelName, locationName, fuelName } = useParams();
@@ -87,6 +87,7 @@ function index() {
             </Col>
             <Col lg={6} md={0} xs={0} xl={6}>
                 <LocalStorageCart
+                    props={props}
                     cartItem={originReducer?.cart}
                     total={originReducer?.total}
                     removeCartItem={(removeId) =>

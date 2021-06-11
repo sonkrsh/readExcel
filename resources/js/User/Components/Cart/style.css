@@ -7,3 +7,8 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+.btnToProcced{
+    position: fixed;
+    width: 21.5%;
+    bottom: 0;
+}
