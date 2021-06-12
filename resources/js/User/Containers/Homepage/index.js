@@ -11,7 +11,7 @@ import { getImages } from "../../../Admin/Containers/AddImages/actions";
 import { getModel } from "./action";
 import "./style.css";
 import FaqCollapse from "../../Components/faqCollapse";
-import firebase from "../../firebase";
+
 
 function index(props) {
     const dispatch = useDispatch();
@@ -24,15 +24,6 @@ function index(props) {
         dispatch(locationData());
         dispatch(fuelData());
         dispatch(getImages());
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-            "recapture",
-            {
-                size: "invisible",
-                "expired-callback": () => {
-                    window.recaptchaVerifier.clear();
-                },
-            }
-        );
     }, []);
 
     const onSignInSubmit = (data) => {

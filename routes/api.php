@@ -9,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ModelCarController;
 use App\Http\Controllers\AddImagesController;
 use App\Http\Controllers\BatteryModelController;
+use App\Http\Controllers\VerifiedUserController;
 use App\Http\Controllers\BatteryCompanyController;
 use App\Http\Controllers\BatteryProductController;
 
@@ -72,4 +73,5 @@ Route::group([
 ], function ($router) {
     Route::post('makeId', [MakeCarController::class, 'getModelbyMakeId']);
     Route::post('getProducts', [BatteryProductController::class, 'getProductsByMakeModelFuelLocationId']);
+    Route::post('verifyUser', [VerifiedUserController::class, 'store']);
 });
