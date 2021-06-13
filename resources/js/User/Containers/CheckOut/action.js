@@ -1,6 +1,7 @@
 import {
     CHECK_PHONE_NO,
-    CHECK_PHONE_NO_SUCCESS
+    CHECK_PHONE_NO_SUCCESS,
+    BUTTON_LOADING,
 } from "./constants";
 
 export function checkPhoneNo(payload) {
@@ -10,4 +11,9 @@ export function checkPhoneNo(payload) {
     };
 }
 
-
+export function buttonLoading(payload) {
+    return {
+        type: BUTTON_LOADING,
+        payload,
+    };
+}

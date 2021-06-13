@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-const index = ({ onClick }) => {
+const index = ({ onClick,loading }) => {
     return (
         <Form
             name="basic"
@@ -32,7 +32,7 @@ const index = ({ onClick }) => {
             </Form.Item>
 
             <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button loading={loading} type="primary" htmlType="submit">
                     Check
                 </Button>
             </Form.Item>

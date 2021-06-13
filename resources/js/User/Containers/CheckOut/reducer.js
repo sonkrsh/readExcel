@@ -1,17 +1,15 @@
-/* import {
-    GET_MODEL_SUCCESS,
-} from "./constants";
+import { BUTTON_LOADING } from "./constants";
 
 const initialState = {
-    modelData: [],
+    loading: false,
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_MODEL_SUCCESS:
+        case BUTTON_LOADING:
             return {
                 ...state,
-                modelData: action.payload,
+                loading: action.payload,
             };
 
         default:
@@ -19,4 +17,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer; */
+export default reducer;

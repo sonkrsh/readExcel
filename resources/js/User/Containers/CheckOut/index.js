@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import CheckOutPage from "../../Components/CheckOutPage";
 import Address from "../../Components/CheckOutPage/address";
 import { useDispatch, useSelector } from "react-redux";
-import { checkPhoneNo } from "./action";
+import { checkPhoneNo, buttonLoading } from "./action";
 import firebase from "../../firebase";
 import { Form, Input, Modal, Button } from "antd";
 
-const index = () => {
+const index = (props) => {
     const dispatch = useDispatch();
     const [isModalVisible, setisModalVisible] = useState(true);
     const [otpValue, setotpValue] = useState("");
+    const originReducer = useSelector((state) => state.CheckOut);
+
     useEffect(() => {
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
             "recapture",
@@ -30,7 +32,8 @@ const index = () => {
             .signInWithPhoneNumber(phoneNumber, appVerifier)
             .then((confirmationResult) => {
                 window.confirmationResult = confirmationResult;
-                getCode(data);
+                setotpValue(data);
+                dispatch(buttonLoading(false));
             })
             .catch((error) => {
                 window.recaptchaVerifier.render().then(function (widgetId) {
@@ -39,14 +42,11 @@ const index = () => {
             });
     };
 
-    const getCode = (data) => {
-        setotpValue(data);
-    };
-
     return (
         <div>
             <div id="recapture"></div>
             <Modal
+                centered
                 title="Basic Modal"
                 visible={isModalVisible}
                 cancelButtonProps={{
@@ -64,6 +64,7 @@ const index = () => {
                     <Form
                         name="basic"
                         onFinish={(value) => {
+                            dispatch(buttonLoading(true));
                             confirmationResult
                                 .confirm(value.otp)
                                 .then((result) => {
@@ -95,7 +96,11 @@ const index = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <Button
+                                loading={originReducer.loading}
+                                type="primary"
+                                htmlType="submit"
+                            >
                                 Validate
                             </Button>
                         </Form.Item>
@@ -103,12 +108,14 @@ const index = () => {
                 ) : (
                     <CheckOutPage
                         onClick={(data) => {
+                            dispatch(buttonLoading(true));
                             onSignInSubmit(data);
                         }}
+                        loading={originReducer.loading}
                     />
                 )}
             </Modal>
-            <Address />
+            {/*  <Address /> */}
         </div>
     );
 };
