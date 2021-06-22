@@ -1,5 +1,5 @@
-const mix = require('laravel-mix');
-let JavaScriptObfuscator = require('webpack-obfuscator');
+const mix = require("laravel-mix");
+/* let JavaScriptObfuscator = require("webpack-obfuscator"); */
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,15 +10,19 @@ let JavaScriptObfuscator = require('webpack-obfuscator');
  | file for the application as well as bundling up all the JS files.
  |
  */
- mix.webpackConfig({
-    plugins: [
-        new JavaScriptObfuscator ({
-            rotateUnicodeArray: true
-        }, [])
-    ],
-});
-mix.js('resources/js/app.js', 'public/js')
-    .react()
-    .sass('resources/sass/app.scss', 'public/css');
 
-mix.browserSync('localhost:8000');
+/* mix.webpackConfig({
+    plugins: [
+        new JavaScriptObfuscator(
+            {
+                rotateUnicodeArray: true,
+            },
+            []
+        ),
+    ],
+}); */
+mix.js("resources/js/app.js", "public/js")
+    .react()
+    .sass("resources/sass/app.scss", "public/css");
+
+mix.browserSync("localhost:8000");

@@ -4,11 +4,11 @@ import Address from "../../Components/CheckOutPage/address";
 import { useDispatch, useSelector } from "react-redux";
 import { checkPhoneNo, buttonLoading } from "./action";
 import firebase from "../../firebase";
-import { Form, Input, Modal, Button } from "antd";
+import { Form, Input, Modal, Button, message } from "antd";
 
 const index = (props) => {
     const dispatch = useDispatch();
-    const [isModalVisible, setisModalVisible] = useState(true);
+    const [isModalVisible, setisModalVisible] = useState(false);
     const [otpValue, setotpValue] = useState("");
     const originReducer = useSelector((state) => state.CheckOut);
 
@@ -73,6 +73,8 @@ const index = (props) => {
                                     setisModalVisible(false);
                                 })
                                 .catch((error) => {
+                                    message.error("InCorrect Otp");
+                                    dispatch(buttonLoading(false));
                                     window.recaptchaVerifier.clear();
                                     window.recaptchaVerifier
                                         .render()
@@ -115,7 +117,7 @@ const index = (props) => {
                     />
                 )}
             </Modal>
-            {/*  <Address /> */}
+            {isModalVisible ? null : <Address />}
         </div>
     );
 };
