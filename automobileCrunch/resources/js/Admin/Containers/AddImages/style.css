@@ -1,9 +1,0 @@
-.buutons{
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    padding-bottom: 4rem;
-}
-.buutons Button{
-    border: 1px solid;
-}

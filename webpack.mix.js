@@ -25,4 +25,4 @@ mix.js("resources/js/app.js", "public/js")
     .react()
     .sass("resources/sass/app.scss", "public/css");
 
-mix.browserSync("localhost:8000");
+mix.browserSync("localhost:8001");
