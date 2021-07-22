@@ -1,0 +1,13 @@
+.dynamic-delete-button{
+    margin-top: 1.8rem;
+    width: 5%;
+    height: 4.6vh;
+}
+.desc_box{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.desc_input{
+    width: 95%;
+}

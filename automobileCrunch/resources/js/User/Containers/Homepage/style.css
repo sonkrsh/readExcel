@@ -1,0 +1,15 @@
+#SearchCar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+#homePageLeftImg h3 {
+    color: white;
+}
+#homepageSearchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
