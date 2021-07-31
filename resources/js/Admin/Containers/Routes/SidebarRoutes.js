@@ -1,16 +1,21 @@
-import { CarOutlined, BoldOutlined,CameraOutlined,DashboardOutlined } from "@ant-design/icons";
+import {
+    CarOutlined,
+    BoldOutlined,
+    CameraOutlined,
+    DashboardOutlined,
+} from "@ant-design/icons";
 
 const SidebarRoutes = [
-   /*  {
+    /*  {
         title: "DashBoard",
         icon: <DashboardOutlined />,
         url: "/Dashboard",
     }, */
-   {
-      title: "AddImages",
-      icon: <CameraOutlined />,
-      url: "/Dashboard/addImages",
-  },
+    {
+        title: "AddImages",
+        icon: <CameraOutlined />,
+        url: "/Dashboard/addImages",
+    },
     {
         title: "Make,Model,Fuel",
         icon: <CarOutlined />,
@@ -30,6 +35,11 @@ const SidebarRoutes = [
                 url: "/Dashboard/allocate-battery",
             },
         ],
+    },
+    {
+        title: "Battery Glasses",
+        icon: <CarOutlined />,
+        url: "/Dashboard/battery-glasses",
     },
 ];
 
