@@ -12,6 +12,7 @@ use App\Http\Controllers\BatteryModelController;
 use App\Http\Controllers\VerifiedUserController;
 use App\Http\Controllers\BatteryCompanyController;
 use App\Http\Controllers\BatteryProductController;
+use App\Http\Controllers\GlassCategoryController;
 
 Route::group([
     'middleware' => 'jwt.auth',
@@ -43,6 +44,8 @@ Route::group([
     Route::post('storeImages', [AddImagesController::class, 'store']);
     Route::post('deleteLogo', [AddImagesController::class, 'destroy']);
     Route::post('editImage', [AddImagesController::class, 'edit']);
+
+    Route::post('storeGlassCategory', [GlassCategoryController::class, 'store']);
 });
 
 Route::group([

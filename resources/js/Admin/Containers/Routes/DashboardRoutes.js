@@ -2,7 +2,7 @@ import MakeModelFuel from "../Make-Model-Fuel";
 import Battery from "../Battery";
 import AllocateBattery from "../AllocateBattery";
 import AddImages from "../AddImages";
-import BatteryGlasses from "../BatteryGlasses";
+import BatteryGlasses from "../Glasses";
 /* import Dashboard from '../Dashboard' */
 const DashboardRoutes = [
     /*  {

@@ -6,6 +6,7 @@ import AllocateBatteryreducer from "../Admin/Containers/AllocateBattery/reducer"
 import Homepagereducer from "../User/Containers/Homepage/reducer";
 import Productsreducer from "../User/Containers/Products/reducer";
 import AddImagesreducer from "../Admin/Containers/AddImages/reducer";
+import Glassesreducer from "../Admin/Containers/Glasses/reducer";
 import CheckOutreducer from "../User/Containers/CheckOut/reducer";
 
 export default combineReducers({
@@ -17,4 +18,5 @@ export default combineReducers({
     Products: Productsreducer,
     AddImages: AddImagesreducer,
     CheckOut: CheckOutreducer,
+    Glasses: Glassesreducer,
 });
