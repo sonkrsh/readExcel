@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BoldOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
-import {
-    getProducts,
-    addToCart,
-    addToCartSuccess,
-    deleteItemFromCart,
-} from "./action";
+import { getProducts, addToCart, deleteItemFromCart } from "./action";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Drawer, Tabs } from "antd";
+import { Row, Col, Tabs, Card } from "antd";
 import BatteryProducts from "../../Components/BatteryProducts";
 import "./style.css";
 import StyledImage from "../../Components/StyledComponents/StyledImage";
 import LocalStorageCart from "../../Components/Cart/LocalStorageCart";
-import isEmpty from "lodash/isEmpty";
 
 function index(props) {
     const { TabPane } = Tabs;
@@ -23,7 +17,6 @@ function index(props) {
     const originReducer = useSelector((state) => state?.Products);
 
     const { allBattery } = originReducer;
-
 
     useEffect(() => {
         const combineData = {
@@ -38,7 +31,6 @@ function index(props) {
     useEffect(() => {
         dispatch(addToCart("", allBattery));
     }, [allBattery]);
-
 
     return (
         <Row>
@@ -64,13 +56,13 @@ function index(props) {
                         }
                         key="1"
                     >
-                        <Row>
+                        <Card>
                             <StyledImage
                                 url={
                                     "https://cdn.pixabay.com/photo/2016/09/01/19/53/pocket-watch-1637396_1280.jpg"
                                 }
                             />
-                        </Row>
+                        </Card>
                         <BatteryProducts
                             allBattery={allBattery}
                             onclick={(data) =>

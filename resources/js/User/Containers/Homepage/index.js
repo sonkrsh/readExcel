@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import HomepageDropdownSearch from "../../Components/homepageDropdownSearch";
 import { Row, Col } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,6 @@ import { getImages } from "../../../Admin/Containers/AddImages/actions";
 import { getModel } from "./action";
 import "./style.css";
 import FaqCollapse from "../../Components/faqCollapse";
-
 
 function index(props) {
     const dispatch = useDispatch();

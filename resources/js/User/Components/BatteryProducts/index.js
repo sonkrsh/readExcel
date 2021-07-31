@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Button, Card, Radio, Checkbox, Form, Switch } from "antd";
+import React from "react";
+import { Row, Col, Card, Radio, Form } from "antd";
 import StyledImage from "../StyledComponents/StyledImage";
 import StyledText from "../StyledComponents/StyledText";
 import "./style.css";
 import StyledButton from "../StyledComponents/StyledButton";
 import Recommended from "../StyledComponents/Recommended";
 import sample from "lodash/sample";
-import { isEqual, get } from "lodash";
 
 function index({ allBattery, onclick, cartItem }) {
     const { Meta } = Card;

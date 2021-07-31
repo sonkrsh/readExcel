@@ -10,22 +10,32 @@ const MyButton = styled(Button)`
     height: auto;
     font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
     margin-top: ${({ margintop }) => (margintop ? margintop : "0")};
-    &:hover {
-        color: black;
-        border: 1px solid black;
-    }
     &:focus {
         background: black;
         color: white;
         border: 1px solid black;
     }
+    &:hover {
+        background: white;
+        color: black;
+        border: 1px solid black;
+    }
+
     &:active {
         background: black;
         border: 1px solid black;
     }
 `;
 
-function StyledButton({ text, buttonColor, color, size, onClick, marginTop,disabled }) {
+function StyledButton({
+    text,
+    buttonColor,
+    color,
+    size,
+    onClick,
+    marginTop,
+    disabled,
+}) {
     return (
         <MyButton
             buttoncolor={buttonColor}

@@ -10,7 +10,7 @@ function model({ onClick, selectValue, modelArray }) {
             extra={
                 <div className="header">
                     <div className="back">
-                        <a onClick={() => onClick(0)}>
+                        <a onClick={() => onClick(2)}>
                             <BackwardOutlined />
                         </a>
                     </div>

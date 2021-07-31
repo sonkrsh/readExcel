@@ -16,25 +16,23 @@ const ProtectedRoute = lazy(() => import("./Admin/utils/ProtectedRoute"));
 function Index(props) {
     return (
         <Provider store={store}>
-            <div className="container-fluid">
-                <div className="pageContent">
-                    <Suspense fallback={<div>Loading.....</div>}>
-                        <Switch>
-                            <ProtectedRoute
-                                exact
-                                path="/admin-login"
-                                component={AdminLoginPage}
-                            />
-                            <PrivateRoute
-                                //exact
-                                path="/Dashboard"
-                                component={AdminLayout}
-                            />
+            <div className="pageContent">
+                <Suspense fallback={<div>Loading.....</div>}>
+                    <Switch>
+                        <ProtectedRoute
+                            exact
+                            path="/admin-login"
+                            component={AdminLoginPage}
+                        />
+                        <PrivateRoute
+                            //exact
+                            path="/Dashboard"
+                            component={AdminLayout}
+                        />
 
-                            <Route component={UserRoute} />
-                        </Switch>
-                    </Suspense>
-                </div>
+                        <Route component={UserRoute} />
+                    </Switch>
+                </Suspense>
             </div>
         </Provider>
     );

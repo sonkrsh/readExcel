@@ -1,4 +1,5 @@
-.rightSideBar{
+.rightSideBar {
+    margin-top: 5rem;
     border: 1px solid;
     height: 89%;
     position: fixed;
@@ -7,7 +8,8 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
-.btnToProcced{
+
+.btnToProcced {
     position: fixed;
     width: 21.5%;
     bottom: 0;

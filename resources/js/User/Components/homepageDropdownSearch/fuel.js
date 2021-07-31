@@ -9,7 +9,7 @@ function fuel({ onClick, selectValue, fuelArray }) {
             extra={
                 <div className="header">
                     <div className="back">
-                        <a onClick={() => onClick(0)}>
+                        <a onClick={() => onClick(3)}>
                             <BackwardOutlined />
                         </a>
                     </div>

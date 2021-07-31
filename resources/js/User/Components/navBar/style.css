@@ -1,31 +1,29 @@
-a{
+.nav-item a {
     font-size: 1.2rem !important;
     color: black !important;
 }
-.navbar-collapse{
+
+.navbar-collapse {
     margin-left: 3rem !important;
 }
-.navbar{
+
+.navbar {
     width: 100%;
-    /* position: fixed; */
-    /* z-index: 1; */
     background-color: white;
 }
+
 .navbar-nav {
     display: flex !important;
     justify-content: space-between !important;
     width: 37% !important;
 }
-.navbar-nav li a{
+
+.navbar-nav li a {
     width: 100%;
 }
-nav{
+
+nav {
     padding: 0 !important;
     position: fixed !important;
     z-index: 1 !important;
-}
-
-.antImage{
-    display: flex;
-    justify-content: center;
 }

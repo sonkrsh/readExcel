@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs, Card, Row, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import BannerImage from "../../Components/addImages";
-import { addImage, getImages, deleteImage,editImage } from "./actions";
+import { addImage, getImages, deleteImage, editImage } from "./actions";
 import { isEmpty } from "lodash";
 import HomePage from "../../Components/getHomeAndLogoImage/homePage";
 import Logo from "../../Components/getHomeAndLogoImage/logo";
@@ -15,7 +15,7 @@ function index() {
 
     const reducerProps = useSelector((state) => state.AddImages);
 
-    const { homePageData, loading, logoData,editLoading } = reducerProps;
+    const { homePageData, loading, logoData, editLoading } = reducerProps;
 
     useEffect(() => {
         dispatch(getImages());
@@ -29,8 +29,8 @@ function index() {
                         imageData={logoData}
                         loading={loading}
                         onSubmit={(e) => dispatch(addImage(e))}
-                        onDelete={(e)=>dispatch(deleteImage(e))}
-                        onEdit={(e)=>dispatch(editImage(e))}
+                        onDelete={(e) => dispatch(deleteImage(e))}
+                        onEdit={(e) => dispatch(editImage(e))}
                         editLoading={editLoading}
                     />
                 </TabPane>
@@ -40,8 +40,8 @@ function index() {
                         imageData={homePageData}
                         loading={loading}
                         onSubmit={(e) => dispatch(addImage(e))}
-                        onDelete={(e)=>dispatch(deleteImage(e))}
-                        onEdit={(e)=>dispatch(editImage(e))}
+                        onDelete={(e) => dispatch(deleteImage(e))}
+                        onEdit={(e) => dispatch(editImage(e))}
                         editLoading={editLoading}
                     />
                 </TabPane>

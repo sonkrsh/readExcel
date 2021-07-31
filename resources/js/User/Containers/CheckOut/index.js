@@ -8,9 +8,10 @@ import { Form, Input, Modal, Button, message } from "antd";
 
 const index = (props) => {
     const dispatch = useDispatch();
-    const [isModalVisible, setisModalVisible] = useState(false);
+    const [isModalVisible, setisModalVisible] = useState(true);
     const [otpValue, setotpValue] = useState("");
     const originReducer = useSelector((state) => state.CheckOut);
+
 
     useEffect(() => {
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
