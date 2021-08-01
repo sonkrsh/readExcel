@@ -3,7 +3,7 @@ import AllocateBattery from "../../Components/allocateBattery";
 import { modelData, fuelData, locationData } from "../Make-Model-Fuel/action";
 import { companyModelData } from "../Battery/action";
 import { useDispatch, useSelector } from "react-redux";
-import { getGlassCategory } from "./actions";
+import { getGlassCategory, addGlassPrice } from "./actions";
 import { Tabs } from "antd";
 import AllocateGlass from "../../Components/AllocateGlass";
 
@@ -25,7 +25,7 @@ function index() {
                 <TabPane tab={"Allocate Glass"} key={1}>
                     <AllocateGlass
                         glassCategoryData={reducerProps}
-                        onSubmit={(data) => console.log("==>>", data)}
+                        onSubmit={(data) => dispatch(addGlassPrice(data))}
                     />
                 </TabPane>
             </Tabs>

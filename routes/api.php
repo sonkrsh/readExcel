@@ -13,6 +13,7 @@ use App\Http\Controllers\VerifiedUserController;
 use App\Http\Controllers\BatteryCompanyController;
 use App\Http\Controllers\BatteryProductController;
 use App\Http\Controllers\GlassCategoryController;
+use App\Http\Controllers\GlassPriceController;
 
 Route::group([
     'middleware' => 'jwt.auth',
@@ -47,6 +48,8 @@ Route::group([
 
     Route::post('storeGlassCategory', [GlassCategoryController::class, 'store']);
     Route::get('getGlassCategory', [GlassCategoryController::class, 'index']);
+
+    Route::post('addGlassPrice', [GlassPriceController::class, 'store']);
 });
 
 Route::group([

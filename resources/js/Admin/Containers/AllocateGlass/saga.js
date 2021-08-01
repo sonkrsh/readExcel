@@ -1,4 +1,4 @@
-import { GET_GLASS_CATEGROY } from "./constants";
+import { GET_GLASS_CATEGROY, ADD_GLASS_PRICE } from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
 import { message } from "antd";
@@ -20,6 +20,24 @@ function* getGlassCategory({ payload }) {
     }
 }
 
+function* addGlassPrice({ payload }) {
+    try {
+        const options = {
+            url: "/addGlassPrice",
+            method: "post",
+            data: payload,
+        };
+
+        const response = yield call(request, options);
+        if (response.data.code == 200) {
+            message.success("Added SuccessFully");
+        }
+    } catch (error) {
+        message.error(error);
+    }
+}
+
 export default function* AllocateGlassDefaultSaga() {
     yield takeLatest(GET_GLASS_CATEGROY, getGlassCategory);
+    yield takeLatest(ADD_GLASS_PRICE, addGlassPrice);
 }
