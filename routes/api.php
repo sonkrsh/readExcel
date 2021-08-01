@@ -46,6 +46,7 @@ Route::group([
     Route::post('editImage', [AddImagesController::class, 'edit']);
 
     Route::post('storeGlassCategory', [GlassCategoryController::class, 'store']);
+    Route::get('getGlassCategory', [GlassCategoryController::class, 'index']);
 });
 
 Route::group([

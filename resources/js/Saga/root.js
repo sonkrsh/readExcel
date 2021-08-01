@@ -7,8 +7,9 @@ import AllocateBatteryDefaultSaga from "../Admin/Containers/AllocateBattery/saga
 import HomepageDefaultSaga from "../User/Containers/Homepage/saga";
 import ProductsDefaultSaga from "../User/Containers/Products/saga";
 import AddImagesDefaultSaga from "../Admin/Containers/AddImages/saga";
-import GlassesDefaultSaga from "../Admin/Containers/Glasses/saga";
 import CheckOutDefaultSaga from "../User/Containers/CheckOut/saga";
+import GlassesDefaultSaga from "../Admin/Containers/Glasses/saga";
+import AllocateGlassDefaultSaga from "../Admin/Containers/AllocateGlass/saga";
 
 export default function* root() {
     yield all([
@@ -21,5 +22,6 @@ export default function* root() {
         AddImagesDefaultSaga(),
         CheckOutDefaultSaga(),
         GlassesDefaultSaga(),
+        AllocateGlassDefaultSaga(),
     ]);
 }

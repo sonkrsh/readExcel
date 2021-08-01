@@ -1,27 +1,15 @@
-import {
-    ALLOCATEBATTERY_FORMSUBMIT,
-    GET_PRODUCT_DATA,
-    GET_PRODUCT_DATA_SUCCESS
-} from "./constants";
+import { GET_GLASS_CATEGROY, GET_GLASS_CATEGROY_SUCCESS } from "./constants";
 
-export function formSubmit(payload) {
+export function getGlassCategory(payload) {
     return {
-        type: ALLOCATEBATTERY_FORMSUBMIT,
+        type: GET_GLASS_CATEGROY,
         payload,
     };
 }
 
-export function getProductData(payload) {
+export function getGlassCategorySuccess(payload) {
     return {
-        type: GET_PRODUCT_DATA,
+        type: GET_GLASS_CATEGROY_SUCCESS,
         payload,
     };
 }
-
-export function getProductDataSuccess(payload) {
-    return {
-        type: GET_PRODUCT_DATA_SUCCESS,
-        payload,
-    };
-}
-

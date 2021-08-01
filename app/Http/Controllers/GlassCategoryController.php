@@ -15,7 +15,12 @@ class GlassCategoryController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $glassCategoryData = GlassCategory::orderBy('id', 'DESC')->get(['glass_category_name', 'id']);
+            return response()->json(['glassCategoryData' => $glassCategoryData, 'code' => 200]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -48,7 +53,7 @@ class GlassCategoryController extends Controller
                 $url = Storage::disk('google')->url($imageName);
                 $glass->glass_image_url = $url;
                 $glass->save();
-                return response()->json(['message' => "Added SuccesFully", 'code' => 200], 200);
+                return response()->json(['message' => "Added SuccesFully", 'code' => 200]);
             }
         } catch (\Exception  $th) {
             $errorCode  = $th->errorInfo[1];

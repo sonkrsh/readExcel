@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import MakeModelFuelLocation from "../../utils/makeModelFuelLocation";
-import BatteryMakeModel from "../../utils/batteryMakeModel";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-function index({ onSubmit }) {
+function index({ onSubmit, glassCategoryData }) {
     const [form] = Form.useForm();
     const [modelNDfuelId, setmodelNDfuelId] = useState({
         modelid: null,
         fuelid: null,
         locationid: null,
     });
-    const [battery, setbattery] = useState({
-        battery: null,
-    });
+
     const onFinish = (value) => {
-        const allData = { ...modelNDfuelId, ...battery, ...value };
+        const allData = { ...modelNDfuelId, ...value };
         onSubmit(allData);
     };
-
     return (
         <div>
             <MakeModelFuelLocation
@@ -36,13 +32,6 @@ function index({ onSubmit }) {
                     })
                 }
             />
-            <BatteryMakeModel
-                onclick={(event) =>
-                    setbattery({
-                        battery: event,
-                    })
-                }
-            />
 
             <Form
                 form={form}
@@ -51,37 +40,51 @@ function index({ onSubmit }) {
                 onFinish={onFinish}
             >
                 <Form.Item
-                    label="Add Price"
-                    name="price"
+                    label="Select glass Category"
+                    name="glass_category"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your Price!",
+                            message: "Please input !",
+                        },
+                    ]}
+                >
+                    <Select
+                        style={{ width: "100%" }}
+                        showSearch
+                        placeholder="Select a Glass Category"
+                        filterOption={(input, option) =>
+                            option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        {glassCategoryData?.glassCategory.map((value, key) => (
+                            <Option key={key} value={value.id}>
+                                {value.glass_category_name}
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    label="Enter Original Price"
+                    name="original_price"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input!",
                         },
                     ]}
                 >
                     <Input type="number" />
                 </Form.Item>
                 <Form.Item
-                    label="With Exchange Price"
-                    name="withExchangeprice"
+                    label="Enter Discount Price"
+                    name="discount_price"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your with Exchange price!",
-                        },
-                    ]}
-                >
-                    <Input type="number" />
-                </Form.Item>
-                <Form.Item
-                    label="WithOut Exchange Price"
-                    name="withOutExchangeprice"
-                    rules={[
-                        {
-                            required: true,
-                            message:
-                                "Please input your withOut Exchange price!",
+                            message: "Please input!",
                         },
                     ]}
                 >
@@ -94,7 +97,7 @@ function index({ onSubmit }) {
                     icon={<PlusOutlined />}
                     //size={size}
                 >
-                    Add Make
+                    Add Glass
                 </Button>
             </Form>
         </div>

@@ -1,16 +1,15 @@
-import {
-    GET_PRODUCT_DATA_SUCCESS
-} from "./constants";
+import { GET_GLASS_CATEGROY_SUCCESS } from "./constants";
 
 const initialState = {
-    productData: [],
+    glassCategory: [],
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_PRODUCT_DATA_SUCCESS:
+        case GET_GLASS_CATEGROY_SUCCESS:
             return {
-                productData: action.payload,
+                ...state,
+                glassCategory: action.payload,
             };
         default:
             return state;

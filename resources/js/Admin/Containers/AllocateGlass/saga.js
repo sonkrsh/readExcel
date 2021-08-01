@@ -1,53 +1,25 @@
-import { ALLOCATEBATTERY_FORMSUBMIT,GET_PRODUCT_DATA } from "./constants";
+import { GET_GLASS_CATEGROY } from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
 import { message } from "antd";
-import {
-    getProductDataSuccess,
-} from "./actions";
+import { getProductDataSuccess, getGlassCategorySuccess } from "./actions";
 
-function* formSubmit({ payload }) {
+function* getGlassCategory({ payload }) {
     try {
         const options = {
-            url: "/storeBatteryProduct",
-            method: "post",
-            data: payload,
-        };
-
-        const response = yield call(request, options);
-        const { data } = response;
-        if (data.message) {
-            message.success(data.message, 2);
-            yield put({ type: GET_PRODUCT_DATA });
-        }
-        if(data?.error){
-            message.error(data?.error,3)
-        }
-    } catch (error) {
-        yield put(fetchingFormValueError());
-    }
-}
-
-function* getProductData({ payload }) {
-    try {
-        const options = {
-            url: "/getBatteryProduct",
+            url: "/getGlassCategory",
             method: "get",
         };
 
         const response = yield call(request, options);
-        const { data } = response;
-        if (data) {
-            yield put(getProductDataSuccess(data))
+        if (response.data.code == 200) {
+            yield put(getGlassCategorySuccess(response.data.glassCategoryData));
         }
     } catch (error) {
-        yield put(fetchingFormValueError());
+        message.error(error);
     }
 }
 
-
-export default function* AllocateBatteryDefaultSaga() {
-    yield takeLatest(ALLOCATEBATTERY_FORMSUBMIT, formSubmit);
-    yield takeLatest(GET_PRODUCT_DATA, getProductData);
-   
+export default function* AllocateGlassDefaultSaga() {
+    yield takeLatest(GET_GLASS_CATEGROY, getGlassCategory);
 }
