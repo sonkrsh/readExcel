@@ -16,6 +16,8 @@ class CreateGlassCategoriesTable extends Migration
         Schema::create('glass_categories', function (Blueprint $table) {
             $table->id();
             $table->string('glass_category_name');
+            $table->string('glass_image_url');
+            $table->string('glass_features');
             $table->timestamps();
         });
     }

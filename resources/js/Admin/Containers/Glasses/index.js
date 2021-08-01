@@ -8,8 +8,8 @@ const index = () => {
     const { TabPane } = Tabs;
     const dispatch = useDispatch();
     return (
-        <Tabs defaultActiveKey="1" tabPosition={"top"}>
-            <TabPane tab={"Add Battery Category"} key={1}>
+        <Tabs defaultActiveKey="1">
+            <TabPane tab={"Add Glass Category"} key={1}>
                 <GlassesCategory
                     onSubmit={(data) => dispatch(addGlassCategory(data))}
                 />

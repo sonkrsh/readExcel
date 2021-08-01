@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GlassCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GlassCategoryController extends Controller
 {
@@ -35,11 +36,20 @@ class GlassCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
-            $glass = new GlassCategory();
-            $glass->glass_category_name = $request->glass_category;
-            $glass->save();
-            return response()->json(['message' => 'success', 'code' => 200]);
+
+            if ($request->hasFile('glass_image_url')) {
+                $glass = new GlassCategory();
+                $glass->glass_category_name =  $request->input("glass_category_name");
+                $glass->glass_features = $request->input("fields");
+
+                $imageName = $request->file('glass_image_url')->store('1j95u7hm-dUkDHsixnlf30OG5qoZgtkul', 'google');
+                $url = Storage::disk('google')->url($imageName);
+                $glass->glass_image_url = $url;
+                $glass->save();
+                return response()->json(['message' => "Added SuccesFully", 'code' => 200], 200);
+            }
         } catch (\Exception  $th) {
             $errorCode  = $th->errorInfo[1];
             if ($errorCode === 1062) { // Duplicate Entry error code

@@ -23,23 +23,29 @@ const SidebarRoutes = [
     },
     {
         title: "Battery",
-        icon: <BoldOutlined />,
-        submenu: true,
-        data: [
-            {
-                title: "Add",
-                url: "/Dashboard/Battery",
-            },
-            {
-                title: "Allocate Battery",
-                url: "/Dashboard/allocate-battery",
-            },
-        ],
+        icon: <CarOutlined />,
+        url: "/Dashboard/Battery",
     },
+
     {
         title: "Battery Glasses",
         icon: <CarOutlined />,
         url: "/Dashboard/battery-glasses",
+    },
+    {
+        title: "Allocate to Make Model Fuel",
+        icon: <BoldOutlined />,
+        submenu: true,
+        data: [
+            {
+                title: "Allocate Battery",
+                url: "/Dashboard/allocate-battery",
+            },
+            {
+                title: "Allocate glasss",
+                url: "/Dashboard/allocate-glass",
+            },
+        ],
     },
 ];
 

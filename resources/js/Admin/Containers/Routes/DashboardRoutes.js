@@ -3,6 +3,7 @@ import Battery from "../Battery";
 import AllocateBattery from "../AllocateBattery";
 import AddImages from "../AddImages";
 import BatteryGlasses from "../Glasses";
+import AllocateGlass from "../AllocateGlass";
 /* import Dashboard from '../Dashboard' */
 const DashboardRoutes = [
     /*  {
@@ -28,6 +29,10 @@ const DashboardRoutes = [
     {
         path: "/Dashboard/battery-glasses",
         component: BatteryGlasses,
+    },
+    {
+        path: "/Dashboard/allocate-glass",
+        component: AllocateGlass,
     },
 ];
 export default DashboardRoutes;
