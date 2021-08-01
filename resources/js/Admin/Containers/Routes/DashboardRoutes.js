@@ -4,12 +4,17 @@ import AllocateBattery from "../AllocateBattery";
 import AddImages from "../AddImages";
 import BatteryGlasses from "../Glasses";
 import AllocateGlass from "../AllocateGlass";
+import AddAdmin from "../AddAdmin";
 /* import Dashboard from '../Dashboard' */
 const DashboardRoutes = [
     /*  {
         path: "/Dashboard",
         component: Dashboard,
     }, */
+    {
+        path: "/Dashboard/add-admin",
+        component: AddAdmin,
+    },
     {
         path: "/Dashboard/addImages",
         component: AddImages,

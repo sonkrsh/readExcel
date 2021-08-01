@@ -1,4 +1,4 @@
-import {
+/* import {
     BATTERY_COMPANY_DATA_SUCCESS,
     BATTERY_COMPANY_MODEL_DATA_SUCCESS
 } from "./constants";
@@ -20,10 +20,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 batteryCompanyModel: action.payload
             }
-       
+
         default:
             return state;
     }
 };
 
 export default reducer;
+ */

@@ -10,6 +10,7 @@ import AddImagesDefaultSaga from "../Admin/Containers/AddImages/saga";
 import CheckOutDefaultSaga from "../User/Containers/CheckOut/saga";
 import GlassesDefaultSaga from "../Admin/Containers/Glasses/saga";
 import AllocateGlassDefaultSaga from "../Admin/Containers/AllocateGlass/saga";
+import AddAdminDefaultSaga from "../Admin/Containers/AddAdmin/saga";
 
 export default function* root() {
     yield all([
@@ -23,5 +24,6 @@ export default function* root() {
         CheckOutDefaultSaga(),
         GlassesDefaultSaga(),
         AllocateGlassDefaultSaga(),
+        AddAdminDefaultSaga(),
     ]);
 }

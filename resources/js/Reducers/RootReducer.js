@@ -9,6 +9,7 @@ import AddImagesreducer from "../Admin/Containers/AddImages/reducer";
 import CheckOutreducer from "../User/Containers/CheckOut/reducer";
 import Glassesreducer from "../Admin/Containers/Glasses/reducer";
 import AllocateGlassreducer from "../Admin/Containers/AllocateGlass/reducer";
+import AddAdminreducer from "../Admin/Containers/AddAdmin/reducer";
 
 export default combineReducers({
     AdminLoginPage: AdminLoginPagereducer,
@@ -21,4 +22,5 @@ export default combineReducers({
     CheckOut: CheckOutreducer,
     Glasses: Glassesreducer,
     AllocateGlass: AllocateGlassreducer,
+    AddAdmin: AddAdminreducer,
 });

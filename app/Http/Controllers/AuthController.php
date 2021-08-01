@@ -15,79 +15,88 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-  /*   public function __construct()
+    /*   public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login']]);
     } */
 
-    public function checkToken(Request $request){
-        if($request->cookie('token')){
-            return response()->json(['message'=>'success'], 200);
-        }
-        else{
-            return response()->json(['message'=>'Token Expired'], 400);
+    public function checkToken(Request $request)
+    {
+        if ($request->cookie('token')) {
+            return response()->json(['message' => 'success'], 200);
+        } else {
+            return response()->json(['message' => 'Token Expired'], 400);
         }
     }
 
     public function login(Request $request)
     {
-        $master_email = $request->email;
-        $master_password = $request->password;
-        $credentials = request(['email', 'password']);
-        if($master_email =="master@gmail.com" && $master_password=="master@@"){
-            $token = auth()->attempt($credentials);
-            return response()->json(['message'=>'master'], 200)->withCookie(
-                'token', 
-                auth()->getToken()->get(), 
-                config('jwt.ttl'), 
-                '/'
-            );
-        }
-        //return $master_email;
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        try {
+            $master_email = $request->email;
+            $master_password = $request->password;
+            $credentials = request(['email', 'password']);
+            if ($master_email == "master@gmail.com" && $master_password == "master@@") {
+                $token = auth()->attempt($credentials);
+                return response()->json(['message' => 'master'], 200)->withCookie(
+                    'token',
+                    auth()->getToken()->get(),
+                    config('jwt.ttl'),
+                    '/'
+                );
+            }
+            if (!$token = auth()->attempt($credentials)) {
+                return response()->json(['message' =>  $request->email + ' Not Found'], 401);
+            }
+            $userFound = User::where('email', $request->email)->get();
 
-        $OTP = rand(100000,999999);
-        Mail::to('sonkrsh@gmail.com')->send(new adminOtp($OTP));
-        Cache::put('otp_key', $OTP, now()->addSecond(120));
-        $token = $this->respondWithToken($token);
-        //return response()->json(['message'=>'Success'],200);
-        return response()->json(['message'=>'Success'], 200);
+            if ($userFound[0]->email) {
+                $OTP = rand(100000, 999999);
+                Mail::to($userFound[0]->email)->send(new adminOtp($OTP));
+                Cache::put('otp_key', $OTP, now()->addSecond(120));
+                $token = $this->respondWithToken($token);
+                //return response()->json(['message'=>'Success'],200);
+                return response()->json(['message' => 'Success'], 200);
+            } else {
+                return response()->json(['message' => $request->email + ' Not Found'], 400);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $request->email . ' Not Found'], 400);
+        }
     }
 
 
-    public function verify(Request $request){
+    public function verify(Request $request)
+    {
         $enter_otp = $request->remember_token;
         $email = $request->email;
         $cache_data = Cache::get('otp_key');
         //auth()->logout();
-        if($enter_otp==$cache_data){
-            
+        if ($enter_otp == $cache_data) {
+
             $credentials = request(['email', 'password']);
             $token = auth()->attempt($credentials);
 
             DB::table('users')
-            ->where('email', $email)
-            ->update(['remember_token' => Hash::make($token)]); 
-            return response()->json(['message'=>'Success'], 200)->withCookie(
-                'token', 
-                auth()->getToken()->get(), 
-                config('jwt.ttl'), 
+                ->where('email', $email)
+                ->update(['remember_token' => Hash::make($token)]);
+            return response()->json(['message' => 'Success'], 200)->withCookie(
+                'token',
+                auth()->getToken()->get(),
+                config('jwt.ttl'),
                 '/'
             );
-         }
-         else{
+        } else {
 
-             return response()->json(['message'=>'Enter Otp Is wrong'],400);
-         }
+            return response()->json(['message' => 'Enter Otp Is wrong'], 400);
+        }
     }
 
-    public function test(){
+    public function test()
+    {
         return User::create([
-            'name'=>"master",
-            'email'=>"master@gmail.com",
-            'password'=>Hash::make("master@@"),
+            'name' => "master",
+            'email' => "master@gmail.com",
+            'password' => Hash::make("master@@"),
         ]);
     }
     /**
@@ -95,12 +104,15 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request){
-        return User::create([
-            'name'=>$request->input('name'),
-            'email'=>$request->input('email'),
-            'password'=>Hash::make($request->input('password')),
+    public function register(Request $request)
+    {
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
+        return response()->json(['message' => "Added SuccesFully", 'code' => 200]);
     }
     public function me()
     {

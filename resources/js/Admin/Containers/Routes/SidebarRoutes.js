@@ -2,7 +2,8 @@ import {
     CarOutlined,
     BoldOutlined,
     CameraOutlined,
-    DashboardOutlined,
+    CheckOutlined,
+    UserOutlined,
 } from "@ant-design/icons";
 
 const SidebarRoutes = [
@@ -11,6 +12,12 @@ const SidebarRoutes = [
         icon: <DashboardOutlined />,
         url: "/Dashboard",
     }, */
+
+    {
+        title: "Add Admin",
+        icon: <UserOutlined />,
+        url: "/Dashboard/add-admin",
+    },
     {
         title: "AddImages",
         icon: <CameraOutlined />,
@@ -23,7 +30,7 @@ const SidebarRoutes = [
     },
     {
         title: "Battery",
-        icon: <CarOutlined />,
+        icon: <BoldOutlined />,
         url: "/Dashboard/Battery",
     },
 
@@ -34,7 +41,7 @@ const SidebarRoutes = [
     },
     {
         title: "Allocate to Make Model Fuel",
-        icon: <BoldOutlined />,
+        icon: <CheckOutlined />,
         submenu: true,
         data: [
             {
