@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import AdminLoginPage from "./Admin/Containers/AdminLoginPage";
 import AdminLayout from "./Admin/Containers/AdminLayout";
 
-import UserRoute from "./User/UserRoute";
+/* import UserRoute from "./User/UserRoute"; */
 
 import { Provider } from "react-redux";
 import store from "./Store/store";
@@ -30,7 +30,7 @@ function Index(props) {
                             component={AdminLayout}
                         />
 
-                        <Route component={UserRoute} />
+                        {/* <Route component={UserRoute} /> */}
                     </Switch>
                 </Suspense>
             </div>

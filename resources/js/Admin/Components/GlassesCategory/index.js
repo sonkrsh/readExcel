@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Row, Form, Input, Divider, Button } from "antd";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
-import AddImages from "../addImages";
 
 const index = ({ onSubmit }) => {
     const [form] = Form.useForm();
@@ -41,14 +40,14 @@ const index = ({ onSubmit }) => {
                             label="Add Glass Image"
                             name="glass_image_url"
                         >
-                            <AddImages
+                            {/*  <AddImages
                                 onSubmit={(event) => {
                                     formData.append(
                                         "glass_image_url",
                                         event.get("file")
                                     );
                                 }}
-                            />
+                            /> */}
                         </Form.Item>
                     </Col>
                     <Col xs={24} sm={24} md={6} lg={6} xl={6}>
