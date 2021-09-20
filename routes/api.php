@@ -15,10 +15,12 @@ use App\Http\Controllers\BatteryProductController;
 use App\Http\Controllers\GlassCategoryController;
 use App\Http\Controllers\GlassPriceController;
 
+
 Route::group([
     'middleware' => 'jwt.auth',
     'prefix' => 'auth/admin'
 ], function ($router) {
+
     Route::get('checkToken', [AuthController::class, 'checkToken']);
     Route::post('storeMake', [MakeCarController::class, 'store']);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\googleSheetService;
 use App\Models\FuelCar;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class FuelCarController extends Controller
     public function index()
     {
         try {
-            $fuelData = FuelCar::orderBy('id', 'DESC')->get(['name','id']);
+            $fuelData = FuelCar::orderBy('id', 'DESC')->get(['name', 'id']);
             return $fuelData;
         } catch (\Throwable $th) {
             //throw $th;
@@ -27,9 +28,10 @@ class FuelCarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function googlesheet(Request $request)
     {
-        //
+        $data = (new googleSheetService())->readSheet();
+        return response()->json($data['values']);
     }
 
     /**
@@ -44,11 +46,11 @@ class FuelCarController extends Controller
             $fuelCar = new FuelCar();
             $fuelCar->name = $request->fuel;
             $fuelCar->save();
-            return response()->json(['message'=>'success'], 200);
+            return response()->json(['message' => 'success'], 200);
         } catch (\Exception  $th) {
             $errorCode  = $th->errorInfo[1];
             if ($errorCode === 1062) { // Duplicate Entry error code
-                return response()->json(['error'=>'Duplicate Entry '.$request->make], 200);
+                return response()->json(['error' => 'Duplicate Entry ' . $request->make], 200);
             }
         }
     }
