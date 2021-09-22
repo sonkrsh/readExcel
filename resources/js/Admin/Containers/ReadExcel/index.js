@@ -6,6 +6,8 @@ import get from "lodash/get";
 function index() {
     const dispatch = useDispatch();
     const [sheetName, setsheetName] = useState(null);
+    const [sheetData, setsheetData] = useState(null);
+    const [sheetUpdateData, setsheetUpdateData] = useState([]);
     const [onLoadCall, setonLoadCall] = useState(false);
     const reducerProps = useSelector((state) => state.ReadExcel);
 
@@ -27,7 +29,21 @@ function index() {
         }
     }, [onLoadCall]);
 
-    console.log("===>>>",reducerProps.sheetData)
+    useEffect(() => {
+        setsheetData(reducerProps.sheetData)
+    }, [reducerProps.sheetData]);
+
+    for(let i=0;i<=sheetData?.length-1;i++){
+        console.log("----------------------------------------")
+        for(let j=0;j<=sheetData[0].length-1;j++){
+
+                //[sheetData[0][j]]:sheetData[i][j]
+
+
+        }
+        }
+
+
     return (
         <div>
             <Input
