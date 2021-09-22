@@ -14,13 +14,15 @@ use App\Http\Controllers\BatteryCompanyController;
 use App\Http\Controllers\BatteryProductController;
 use App\Http\Controllers\GlassCategoryController;
 use App\Http\Controllers\GlassPriceController;
-
+use App\Http\Controllers\ReadExcelController;
 
 Route::group([
     'middleware' => 'jwt.auth',
     'prefix' => 'auth/admin'
 ], function ($router) {
-
+    //Route::post('readExcel', [FuelCarController::class, 'googlesheet']);
+    Route::post('readExcel', [ReadExcelController::class, 'store']);
+    Route::get('fetchSheetName', [ReadExcelController::class, 'index']);
     Route::get('checkToken', [AuthController::class, 'checkToken']);
     Route::post('storeMake', [MakeCarController::class, 'store']);
 

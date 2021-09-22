@@ -17,6 +17,7 @@ class googleSheetService
 
     public function __construct()
     {
+
         $this->client = $this->getClient();
         $this->service = new Sheets($this->client);
         $this->documentId = '18h8yDqX9KGCEupt47NA4fcppJ-RwuVOTpBCAkUZfflc';
@@ -33,9 +34,9 @@ class googleSheetService
         return $client;
     }
 
-    public function readSheet()
+    public function readSheet(Request $request)
     {
-        $doc = $this->service->spreadsheets_values->get($this->documentId, $this->range);
+        $doc = $this->service->spreadsheets_values->get($this->documentId, $request->sheetName . "!" . $this->range);
         return $doc;
     }
 }
