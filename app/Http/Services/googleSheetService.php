@@ -36,7 +36,7 @@ class googleSheetService
 
     public function readSheet(Request $request)
     {
-        $doc = $this->service->spreadsheets_values->get($this->documentId, $request->sheetName . "!" . $this->range);
+        $doc = $this->service->spreadsheets_values->get($this->documentId, $request->sheetName . " !" . $this->range);
         return $doc;
     }
 }
