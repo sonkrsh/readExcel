@@ -38,11 +38,11 @@ class ReadExcelController extends Controller
     public function store(Request $request)
     {
         $data = (new googleSheetService())->readSheet($request);
-        if ($data) {
+        /* if ($data) {
             $sheetName = new ReadExcel();
             $sheetName->sheet_name = $request->sheetName;
             $sheetName->save();
-        }
+        } */
         return  response()->json($data['values']);
     }
 

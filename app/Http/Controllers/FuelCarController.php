@@ -28,7 +28,12 @@ class FuelCarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function googlesheet(Request $request)
+    {
+        $data = (new googleSheetService())->readSheet($request);
 
+        return  response()->json($data['values']);
+    }
 
     /**
      * Store a newly created resource in storage.

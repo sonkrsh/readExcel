@@ -20,7 +20,7 @@ class googleSheetService
 
         $this->client = $this->getClient();
         $this->service = new Sheets($this->client);
-        $this->documentId = '18h8yDqX9KGCEupt47NA4fcppJ-RwuVOTpBCAkUZfflc';
+        $this->documentId = '1vJDTHZGhKlU-KHqXfhQJ5shDc2bH04FFOMT8id9t7Cs';
         $this->range = 'A:Z';
     }
     public function getClient()
@@ -29,7 +29,7 @@ class googleSheetService
         $client->setApplicationName('demoSheet');
         $client->setRedirectUri('http://localhost:3000/googlesheet');
         $client->setScopes(Sheets::SPREADSHEETS);
-        $client->setAuthConfig('credentials.json');
+        $client->setAuthConfig('credentials2.json');
         $client->setAccessType('offline');
         return $client;
     }
