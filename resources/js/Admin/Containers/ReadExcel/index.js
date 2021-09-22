@@ -6,6 +6,7 @@ import get from "lodash/get";
 function index() {
     const dispatch = useDispatch();
     const [sheetName, setsheetName] = useState(null);
+    const [onLoadCall, setonLoadCall] = useState(false);
     const reducerProps = useSelector((state) => state.ReadExcel);
 
     useEffect(() => {
@@ -13,8 +14,18 @@ function index() {
     }, []);
 
     useEffect(() => {
-        setsheetName(get(reducerProps, "sheetName.sheet_name"));
+        if (get(reducerProps, "sheetName.sheet_name")) {
+            setsheetName(get(reducerProps, "sheetName.sheet_name"));
+            setonLoadCall(true);
+        }
     }, [reducerProps]);
+
+    useEffect(() => {
+        if (onLoadCall) {
+            const sheetNameVariable = { sheetName: sheetName, ongetCall: true };
+            dispatch(fetchExcelData(sheetNameVariable, true));
+        }
+    }, [onLoadCall]);
 
     return (
         <div>
