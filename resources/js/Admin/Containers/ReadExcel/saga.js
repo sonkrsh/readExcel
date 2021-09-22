@@ -1,7 +1,7 @@
 import { FETCH_EXCEL_DATA, FETCH_SHEET_NAME } from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
-import { fetchSheetNameSuccess } from "./actions";
+import { fetchSheetNameSuccess,fetchExcelDataSuccess } from "./actions";
 
 function* fetchExcelData({ payload }) {
     try {
@@ -13,7 +13,9 @@ function* fetchExcelData({ payload }) {
 
         const response = yield call(request, options);
         const { data } = response;
-        console.log("====>>>", data);
+        if(data){
+            yield put(fetchExcelDataSuccess(data))
+        }
     } catch (error) {
         console.log("====>>>", error);
         /*  yield put(fetchingFormValueError()); */

@@ -27,6 +27,7 @@ function index() {
         }
     }, [onLoadCall]);
 
+    console.log("===>>>",reducerProps.sheetData)
     return (
         <div>
             <Input
