@@ -3,6 +3,9 @@ import { fetchExcelData, fetchSheetName } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Input } from "antd";
 import get from "lodash/get";
+import trim from "lodash/trim";
+import groupBy from "lodash/groupBy";
+
 function index() {
     const dispatch = useDispatch();
     const [sheetName, setsheetName] = useState(null);
@@ -10,6 +13,7 @@ function index() {
     const [sheetUpdateData, setsheetUpdateData] = useState([]);
     const [onLoadCall, setonLoadCall] = useState(false);
     const reducerProps = useSelector((state) => state.ReadExcel);
+    var updatedArray =[];
 
     useEffect(() => {
         dispatch(fetchSheetName());
@@ -34,16 +38,18 @@ function index() {
     }, [reducerProps.sheetData]);
 
     for(let i=0;i<=sheetData?.length-1;i++){
-        console.log("----------------------------------------")
         for(let j=0;j<=sheetData[0].length-1;j++){
-
-                //[sheetData[0][j]]:sheetData[i][j]
-
-
+        var lock={
+            ...lock,
+            [trim(sheetData[0][j])]:trim(sheetData[i][j])
         }
         }
+        updatedArray.push(lock)
 
+        }
+        const groupData = groupBy(updatedArray, 'Category');
 
+        console.log("----------------------------------------",groupData)
     return (
         <div>
             <Input
