@@ -14,34 +14,18 @@ const columnName = () => {
         },
         {
             title: "October Requirement",
-            dataIndex: "MTD_Procured",
-            key: "MTD_Procured",
+            dataIndex: "Requirement",
+            key: "Requirement",
         },
         {
-            title: "MTD Delivered",
-            dataIndex: "MTD_Delivered",
-            key: "MTD_Delivered",
+            title: "Order Placed",
+            dataIndex: "Order_Placed",
+            key: "Order_Placed",
         },
         {
-            title: "MTD Delivered Percentage",
-            dataIndex: "MTD_Delivered_Percentage",
-            key: "MTD_Delivered_Percentage",
-        },
-        {
-            title: "MTD Pending",
-            dataIndex: "MTD_Pending",
-            key: "MTD_Pending",
-        },
-        {
-            title: "MTD Pending Percentage",
-            dataIndex: "MTD_Pending_Percentage",
-            key: "MTD_Pending_Percentage",
-        },
-
-        {
-            title: "New Request",
-            dataIndex: "New_Request",
-            key: "New_Request",
+            title: "Dilivered",
+            dataIndex: "Dilivered",
+            key: "Dilivered",
         },
     ];
 };

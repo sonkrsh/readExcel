@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchExcelData, fetchSheetName, sendEmail } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Input, Table } from "antd";
+import { Button, Input, Table, Row, Col } from "antd";
 import get from "lodash/get";
 import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
@@ -55,50 +55,33 @@ function index() {
         }
         const groupData = groupBy(updatedArray, "Category");
         const result = map(groupData, function (items, name) {
-            let mtdProcured = 0;
-            let mtdDilivered = 0;
-            let mtdDiliveredPercent = 0;
-            let mtdPending = 0;
-            let mtdPendingPercent = 0;
+            let requirement = 0;
+            let orderPlaced = 0;
             let inventory = 0;
+            let dilivered = 0;
 
-            let newRequest = 0;
             map(items, (data) => {
-                mtdProcured += isNaN(
+                inventory += isNaN(toNumber(get(data, "Inventory")))
+                    ? 0
+                    : toNumber(get(data, "Inventory"));
+                requirement += isNaN(
                     toNumber(get(data, "Total Qty. to be Procured"))
                 )
                     ? 0
                     : toNumber(get(data, "Total Qty. to be Procured"));
-                mtdDilivered += isNaN(
-                    toNumber(get(data, "Qty Already Delivered"))
-                )
+                orderPlaced += isNaN(toNumber(get(data, "Order Qty")))
+                    ? 0
+                    : toNumber(get(data, "Order Qty"));
+                dilivered += isNaN(toNumber(get(data, "Qty Already Delivered")))
                     ? 0
                     : toNumber(get(data, "Qty Already Delivered"));
-                mtdDiliveredPercent = isNaN((mtdProcured / mtdDilivered) * 100)
-                    ? 0
-                    : floor((mtdProcured / mtdDilivered) * 100, 2);
-                mtdPending += isNaN(toNumber(get(data, "Qty Pending Procured")))
-                    ? 0
-                    : toNumber(get(data, "Qty Pending Procured"));
-                mtdPendingPercent = isNaN((mtdPending / mtdDilivered) * 100)
-                    ? 0
-                    : floor((mtdPending / mtdDilivered) * 100, 2);
-                newRequest += isNaN(toNumber(get(data, "New Request")))
-                    ? 0
-                    : toNumber(get(data, "New Request"));
-                inventory += isNaN(toNumber(get(data, "Inventory")))
-                    ? 0
-                    : toNumber(get(data, "Inventory"));
             });
             return {
                 Product_Category: name,
-                MTD_Procured: mtdProcured,
-                MTD_Delivered: mtdDilivered,
-                MTD_Delivered_Percentage: mtdDiliveredPercent,
-                MTD_Pending: mtdPending,
-                MTD_Pending_Percentage: mtdPendingPercent,
                 Inventory: inventory,
-                New_Request: newRequest,
+                Requirement: requirement,
+                Order_Placed: orderPlaced,
+                Dilivered: dilivered,
             };
         });
         setdataSource(result);
@@ -106,28 +89,37 @@ function index() {
 
     return (
         <div>
-            <Input
-                value={sheetName}
-                onChange={(e) => setsheetName(e.target.value)}
-                placeholder="Basic usage"
-            />
-            <Button
-                onClick={() => {
-                    const sheetNameVariable = { sheetName: sheetName };
-                    dispatch(fetchExcelData(sheetNameVariable));
-                }}
-            >
-                Search
-            </Button>
-            <Button
-                onClick={() => {
-                    dispatch(sendEmail(dataSource));
-                }}
-            >
-                Send Email
-            </Button>
+            <Row>
+                <Col md={18} lg={18}>
+                    <Input
+                        value={sheetName}
+                        onChange={(e) => setsheetName(e.target.value)}
+                        placeholder="Basic usage"
+                    />
+                    <Button
+                        onClick={() => {
+                            const sheetNameVariable = { sheetName: sheetName };
+                            dispatch(fetchExcelData(sheetNameVariable));
+                        }}
+                    >
+                        Search
+                    </Button>
+                </Col>
+
+                <Col offset={2} md={4} lg={4}>
+                    <Button
+                        style={{ backgroundColor: "yellow" }}
+                        onClick={() => {
+                            dispatch(sendEmail(dataSource));
+                        }}
+                    >
+                        Send Email
+                    </Button>
+                </Col>
+            </Row>
+
             <Table
-                scroll={{ x: 1300 }}
+                scroll={{ x: 1000 }}
                 //loading={loading}
                 columns={columnName()}
                 dataSource={dataSource}
