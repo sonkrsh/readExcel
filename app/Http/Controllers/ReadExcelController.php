@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Mail\updatedExcel;
 use App\Models\ReadExcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\googleSheetService;
+use Illuminate\Support\Facades\Mail;
 
 class ReadExcelController extends Controller
 {
@@ -27,6 +30,21 @@ class ReadExcelController extends Controller
     public function create()
     {
         //
+    }
+    public function sendMail(Request $request)
+    {
+
+
+        /* foreach ($data2 as $sku) {
+            $data = $sku;
+        }
+        return $data; */
+        $data = Mail::to('sonkrsh@gmail.com')->send(new updatedExcel($request->all()));
+        if ($data) {
+            return 'Done';
+        } else {
+            return 'Failed';
+        }
     }
 
     /**

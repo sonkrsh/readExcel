@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchExcelData, fetchSheetName } from "./actions";
+import { fetchExcelData, fetchSheetName, sendEmail } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Input, Table } from "antd";
 import get from "lodash/get";
@@ -118,6 +118,13 @@ function index() {
                 }}
             >
                 Search
+            </Button>
+            <Button
+                onClick={() => {
+                    dispatch(sendEmail(dataSource));
+                }}
+            >
+                Send Email
             </Button>
             <Table
                 scroll={{ x: 1300 }}

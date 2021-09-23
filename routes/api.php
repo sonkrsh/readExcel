@@ -23,47 +23,13 @@ Route::group([
     //Route::post('readExcel', [FuelCarController::class, 'googlesheet']);
     Route::post('readExcel', [ReadExcelController::class, 'store']);
     Route::get('fetchSheetName', [ReadExcelController::class, 'index']);
+    Route::post('sendMail', [ReadExcelController::class, 'sendMail']);
     Route::get('checkToken', [AuthController::class, 'checkToken']);
-    Route::post('storeMake', [MakeCarController::class, 'store']);
-
-
-    Route::post('storeModel', [ModelCarController::class, 'store']);
-
-
-    Route::post('storeFuel', [FuelCarController::class, 'store']);
-
-
-    Route::post('storeBatteryCompany', [BatteryCompanyController::class, 'store']);
-    Route::get('getBatteryCompany', [BatteryCompanyController::class, 'index']);
-
-    Route::post('storeBatteryModel', [BatteryModelController::class, 'store']);
-    Route::get('BatteryCompanyModel', [BatteryModelController::class, 'index']);
-    Route::post('image', [BatteryModelController::class, 'create']);
-
-    Route::post('storeLocation', [LocationController::class, 'store']);
-
-
-    Route::get('getBatteryProduct', [BatteryProductController::class, 'index']);
-    Route::post('storeBatteryProduct', [BatteryProductController::class, 'store']);
-
-    Route::post('storeImages', [AddImagesController::class, 'store']);
-    Route::post('deleteLogo', [AddImagesController::class, 'destroy']);
-    Route::post('editImage', [AddImagesController::class, 'edit']);
-
-    Route::post('storeGlassCategory', [GlassCategoryController::class, 'store']);
-    Route::get('getGlassCategory', [GlassCategoryController::class, 'index']);
-
-    Route::post('addGlassPrice', [GlassPriceController::class, 'store']);
 });
 
 Route::group([
     'prefix' => 'auth/admin'
 ], function ($router) {
-    Route::get('getMake', [MakeCarController::class, 'index']);
-    Route::get('getModel', [ModelCarController::class, 'index']);
-    Route::get('getFuel', [FuelCarController::class, 'index']);
-    Route::get('getLocation', [LocationController::class, 'index']);
-    Route::get('getImages', [AddImagesController::class, 'index']);
 
 
     //Route::get('checkToken', [AuthController::class,'checkToken']);
@@ -82,7 +48,6 @@ Route::group([
 Route::group([
     'prefix' => 'v1'
 ], function ($router) {
-    Route::post('makeId', [MakeCarController::class, 'getModelbyMakeId']);
-    Route::post('getProducts', [BatteryProductController::class, 'getProductsByMakeModelFuelLocationId']);
+
     Route::post('verifyUser', [VerifiedUserController::class, 'store']);
 });
