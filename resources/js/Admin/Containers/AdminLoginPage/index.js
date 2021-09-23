@@ -15,7 +15,7 @@ function index(props) {
 
     const [modalVisible, setmodalVisible] = useState(null);
     const [email, setemail] = useState(null);
-    const [password, setpassword] = useState(null)
+    const [password, setpassword] = useState(null);
 
     const onFinish = (values) => {
         setemail(values.email);
@@ -28,14 +28,13 @@ function index(props) {
     }, [reducerProps.loginSucced]);
 
     useEffect(() => {
-        
-        if(reducerProps.otpVerified){
+        if (reducerProps.otpVerified) {
             history.push("Dashboard");
         }
         if (reducerProps.master) {
             history.push("/Dashboard");
         }
-    }, [reducerProps.master,reducerProps.otpVerified]);
+    }, [reducerProps.master, reducerProps.otpVerified]);
 
     return (
         <Row align="middle" justify="center" style={{ height: "100vh" }}>
@@ -45,7 +44,7 @@ function index(props) {
                     centered
                     visible={modalVisible}
                     footer={null}
-/*                     okText="Verify Otp"
+                    /*                     okText="Verify Otp"
                     onOk={() => dispatch(otpCheck({ ...e, email,password }))}
                     onCancel={() => setmodalVisible(false)} */
                 >
@@ -53,7 +52,7 @@ function index(props) {
                         layout="vertical"
                         name="basic"
                         onFinish={(e) => {
-                            dispatch(otpCheck({ ...e, email,password }));
+                            dispatch(otpCheck({ ...e, email, password }));
                         }}
                     >
                         <Form.Item
@@ -82,7 +81,7 @@ function index(props) {
                 <Col xs={{ span: 22 }} lg={{ span: 10 }}>
                     <Card>
                         <div className="heading">
-                            <h3>AutomobileCrunch</h3>
+                            <h3>Read Excel</h3>
                         </div>
 
                         <Form

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { fetchExcelData, fetchSheetName } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Input ,Table} from "antd";
+import { Button, Input, Table } from "antd";
 import get from "lodash/get";
 import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
 import map from "lodash/map";
-import isNaN from 'lodash/isNaN';
-import floor from 'lodash/floor';
-import toNumber from 'lodash/toNumber';
-import columnName from './columnName';
+import isNaN from "lodash/isNaN";
+import floor from "lodash/floor";
+import toNumber from "lodash/toNumber";
+import columnName from "./columnName";
 
 function index() {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function index() {
     const [onLoadCall, setonLoadCall] = useState(false);
     const reducerProps = useSelector((state) => state.ReadExcel);
     const [dataSource, setdataSource] = useState([]);
-    var updatedArray =[];
+    var updatedArray = [];
 
     useEffect(() => {
         dispatch(fetchSheetName());
@@ -40,66 +40,69 @@ function index() {
     }, [onLoadCall]);
 
     useEffect(() => {
-        setsheetData(reducerProps.sheetData)
+        setsheetData(reducerProps.sheetData);
     }, [reducerProps.sheetData]);
 
     useEffect(() => {
-        for(let i=0;i<=sheetData?.length-1;i++){
-            for(let j=0;j<=sheetData[0].length-1;j++){
-            var lock={
-                ...lock,
-                [trim(sheetData[0][j])]:trim(sheetData[i][j])
+        for (let i = 0; i <= sheetData?.length - 1; i++) {
+            for (let j = 0; j <= sheetData[0].length - 1; j++) {
+                var lock = {
+                    ...lock,
+                    [trim(sheetData[0][j])]: trim(sheetData[i][j]),
+                };
             }
-            }
-            updatedArray.push(lock)
+            updatedArray.push(lock);
+        }
+        const groupData = groupBy(updatedArray, "Category");
+        const result = map(groupData, function (items, name) {
+            let mtdProcured = 0;
+            let mtdDilivered = 0;
+            let mtdDiliveredPercent = 0;
+            let mtdPending = 0;
+            let mtdPendingPercent = 0;
+            let inventory = 0;
 
-            }
-            const groupData = groupBy(updatedArray, 'Category');
-            const result = map(groupData, function(items, name) {
-                let mtdProcured = 0;
-                let mtdDilivered = 0;
-                let mtdDiliveredPercent = 0;
-                let mtdPending = 0;
-                let mtdPendingPercent = 0;
-                const inventory = 'Samaj Nhi Aya merko';
-                const inventoryPercent = 'Samaj Nhi Aya merko';
-                let newRequest = 0;
-                map(items, data => {
-                  mtdProcured += isNaN(toNumber(get(data, 'Total Qty. to be Procured')))
+            let newRequest = 0;
+            map(items, (data) => {
+                mtdProcured += isNaN(
+                    toNumber(get(data, "Total Qty. to be Procured"))
+                )
                     ? 0
-                    : toNumber(get(data, 'Total Qty. to be Procured'));
-                  mtdDilivered += isNaN(toNumber(get(data, 'Qty Already Delivered')))
+                    : toNumber(get(data, "Total Qty. to be Procured"));
+                mtdDilivered += isNaN(
+                    toNumber(get(data, "Qty Already Delivered"))
+                )
                     ? 0
-                    : toNumber(get(data, 'Qty Already Delivered'));
-                  mtdDiliveredPercent = isNaN((mtdProcured / mtdDilivered) * 100)
+                    : toNumber(get(data, "Qty Already Delivered"));
+                mtdDiliveredPercent = isNaN((mtdProcured / mtdDilivered) * 100)
                     ? 0
                     : floor((mtdProcured / mtdDilivered) * 100, 2);
-                  mtdPending += isNaN(toNumber(get(data, 'Qty Pending Procured')))
+                mtdPending += isNaN(toNumber(get(data, "Qty Pending Procured")))
                     ? 0
-                    : toNumber(get(data, 'Qty Pending Procured'));
-                  mtdPendingPercent = isNaN((mtdPending / mtdDilivered) * 100)
+                    : toNumber(get(data, "Qty Pending Procured"));
+                mtdPendingPercent = isNaN((mtdPending / mtdDilivered) * 100)
                     ? 0
                     : floor((mtdPending / mtdDilivered) * 100, 2);
-                  newRequest += isNaN(toNumber(get(data, 'New Request')))
+                newRequest += isNaN(toNumber(get(data, "New Request")))
                     ? 0
-                    : toNumber(get(data, 'New Request'));
-                });
-                return {
-                  Product_Category: name,
-                  MTD_Procured: mtdProcured,
-                  MTD_Delivered: mtdDilivered,
-                  MTD_Delivered_Percentage: mtdDiliveredPercent,
-                  MTD_Pending: mtdPending,
-                  MTD_Pending_Percentage: mtdPendingPercent,
-                  Inventory: inventory,
-                  Inventory_Percent: inventoryPercent,
-                  New_Request: newRequest,
-                };
-              });
-              setdataSource(result);
-    }, [sheetData])
-
-
+                    : toNumber(get(data, "New Request"));
+                inventory += isNaN(toNumber(get(data, "Inventory")))
+                    ? 0
+                    : toNumber(get(data, "Inventory"));
+            });
+            return {
+                Product_Category: name,
+                MTD_Procured: mtdProcured,
+                MTD_Delivered: mtdDilivered,
+                MTD_Delivered_Percentage: mtdDiliveredPercent,
+                MTD_Pending: mtdPending,
+                MTD_Pending_Percentage: mtdPendingPercent,
+                Inventory: inventory,
+                New_Request: newRequest,
+            };
+        });
+        setdataSource(result);
+    }, [sheetData]);
 
     return (
         <div>
@@ -116,13 +119,13 @@ function index() {
             >
                 Search
             </Button>
-          <Table
-          scroll={{ x: 1300 }}
-          //loading={loading}
-          columns={columnName()}
-          dataSource={dataSource}
-          bordered
-        />
+            <Table
+                scroll={{ x: 1300 }}
+                //loading={loading}
+                columns={columnName()}
+                dataSource={dataSource}
+                bordered
+            />
         </div>
     );
 }
