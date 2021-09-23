@@ -34,16 +34,11 @@ class ReadExcelController extends Controller
     public function sendMail(Request $request)
     {
 
-
-        /* foreach ($data2 as $sku) {
-            $data = $sku;
-        }
-        return $data; */
-        $data = Mail::to('sonkrsh@gmail.com')->send(new updatedExcel($request->all()));
-        if ($data) {
-            return 'Done';
-        } else {
-            return 'Failed';
+        try {
+            $data = Mail::to('sonkrsh@gmail.com')->send(new updatedExcel($request->all()));
+            return response()->json(['message' => 'Mail Send Successfully'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Message Not Send'], 400);
         }
     }
 

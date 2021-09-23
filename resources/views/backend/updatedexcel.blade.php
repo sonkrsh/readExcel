@@ -8,11 +8,26 @@
 </head>
 <body>
     <div style="color:blue" class="h3">Updated Excel</div>
-    @foreach ($details as $user)
-    <div style="border: solid 1px">
-        <p>This is user {{ $user['Product_Category']}}</p>
-    </div>
+    <table border="1">
+        <tr>
+            <th>Product Category</th>
+            <th>Inventory</th>
+            <th>October Requirement</th>
+            <th>Order Placed</th>
+            <th>Delivered</th>
+        </tr>
+        @foreach ($details as $user)
+        <tr>
+            <td> {{ $user['Product_Category']}}</td>
+            <td> {{ $user['Inventory']}}</td>
+            <td> {{ $user['Requirement']}}</td>
+            <td> {{ $user['Order_Placed']}}</td>
+            <td> {{ $user['Dilivered']}}</td>
+        </tr>
+        @endforeach
 
-    @endforeach
+    </table>
+
+
 </body>
 </html>

@@ -7,7 +7,7 @@ import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
 import map from "lodash/map";
 import isNaN from "lodash/isNaN";
-import floor from "lodash/floor";
+import remove from "lodash/remove";
 import toNumber from "lodash/toNumber";
 import columnName from "./columnName";
 
@@ -84,7 +84,13 @@ function index() {
                 Dilivered: dilivered,
             };
         });
-        setdataSource(result);
+        const updatedTableData = remove(result, function (n, i) {
+            if (i == 0) {
+            } else {
+                return n;
+            }
+        });
+        setdataSource(updatedTableData);
     }, [sheetData]);
 
     return (
