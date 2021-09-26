@@ -5,18 +5,21 @@ import { Button, Input, Table, Row, Col, Select } from "antd";
 import get from "lodash/get";
 import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
+import floor from "lodash/floor";
+import sumBy from "lodash/sumBy";
 import map from "lodash/map";
+import isEmpty from "lodash/isEmpty";
 import isNaN from "lodash/isNaN";
 import remove from "lodash/remove";
 import toNumber from "lodash/toNumber";
 import columnName from "./columnName";
+import isEqual from "lodash/isEqual";
 
 function index() {
     const dispatch = useDispatch();
     const { Option } = Select;
     const [sheetName, setsheetName] = useState(null);
     const [sheetData, setsheetData] = useState(null);
-    const [sheetUpdateData, setsheetUpdateData] = useState([]);
     const [onLoadCall, setonLoadCall] = useState(false);
     const reducerProps = useSelector((state) => state.ReadExcel);
     const [dataSource, setdataSource] = useState([]);
@@ -78,12 +81,97 @@ function index() {
                 Dilivered: dilivered,
             };
         });
+
         const updatedTableData = remove(result, function (n, i) {
             if (i == 0) {
             } else {
                 return n;
             }
         });
+        const orderPlaced = sumBy(updatedTableData, (data) => {
+            return data.Order_Placed;
+        });
+        const orderRequirement = sumBy(updatedTableData, (data) => {
+            return data.Requirement;
+        });
+
+        const orderPlacedPercentage = (orderPlaced / orderRequirement) * 100;
+        updatedTableData.push({
+            orderPlacedPercentage: floor(orderPlacedPercentage, 2),
+        });
+
+        /* Above Table is used for Filter */
+        const target = groupBy(updatedArray, "Target Delivery Week");
+        /* updatedTableData.push({
+            oneToTen: get(target, "1-10")?.length
+                ? get(target, "1-10")?.length
+                : 0,
+            elevenToTwenty: get(target, "11-20")?.length
+                ? get(target, "11-20")?.length
+                : 0,
+            twentyOneToThirty: get(target, "21-30")?.length
+                ? get(target, "21-30")?.length
+                : 0,
+        }); */
+        var oneToTen = 0;
+        var elevenToTwenty = 0;
+        var twentyOneToThirty = 0;
+        var achievedOneToTen = 0;
+        var achievedEleventToTwenty = 0;
+        var achievedTwentyOneToThirty = 0;
+        map(target, (ddata, name) => {
+            if (isEqual(trim(name), "1-10")) {
+                map(ddata, (upddata) => {
+                    oneToTen += isNaN(toNumber(get(upddata, "Order Qty")))
+                        ? 0
+                        : toNumber(get(upddata, "Order Qty"));
+                    achievedOneToTen += isNaN(
+                        toNumber(get(upddata, "Qty Already Delivered"))
+                    )
+                        ? 0
+                        : toNumber(get(upddata, "Qty Already Delivered"));
+                });
+            }
+            if (isEqual(trim(name), "11-20")) {
+                map(ddata, (upddata) => {
+                    elevenToTwenty += isNaN(toNumber(get(upddata, "Order Qty")))
+                        ? 0
+                        : toNumber(get(upddata, "Order Qty"));
+                    achievedEleventToTwenty += isNaN(
+                        toNumber(get(upddata, "Qty Already Delivered"))
+                    )
+                        ? 0
+                        : toNumber(get(upddata, "Qty Already Delivered"));
+                });
+            }
+            if (isEqual(trim(name), "21-30")) {
+                map(ddata, (upddata) => {
+                    twentyOneToThirty += isNaN(
+                        toNumber(get(upddata, "Order Qty"))
+                    )
+                        ? 0
+                        : toNumber(get(upddata, "Order Qty"));
+                    achievedTwentyOneToThirty += isNaN(
+                        toNumber(get(upddata, "Qty Already Delivered"))
+                    )
+                        ? 0
+                        : toNumber(get(upddata, "Qty Already Delivered"));
+                });
+            }
+        });
+        updatedTableData.push(
+            {
+                oneToTen: oneToTen,
+                elevenToTwenty: elevenToTwenty,
+                twentyOneToThirty: twentyOneToThirty,
+            },
+            {
+                achievedOneToTen: achievedOneToTen,
+                achievedEleventToTwenty: achievedEleventToTwenty,
+                achievedTwentyOneToThirty: achievedTwentyOneToThirty,
+            }
+        );
+
         setdataSource(updatedTableData);
     }, [sheetData]);
 
@@ -120,6 +208,7 @@ function index() {
                     <Button
                         style={{ backgroundColor: "yellow" }}
                         onClick={() => {
+                            //console.log("===>>>", dataSource);
                             dispatch(sendEmail(dataSource));
                         }}
                     >

@@ -35,7 +35,7 @@ class ReadExcelController extends Controller
     {
 
         try {
-            $data = Mail::to('sonkrsh@gmail.com')->send(new updatedExcel($request->all()));
+            $data = Mail::to('sonkrsh@gmail.com')->cc('shubhamkumar@gomechanic.in')->send(new updatedExcel($request->all()));
             return response()->json(['message' => 'Mail Send Successfully'], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Message Not Send'], 400);

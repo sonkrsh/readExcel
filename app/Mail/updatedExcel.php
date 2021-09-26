@@ -28,6 +28,6 @@ class updatedExcel extends Mailable
      */
     public function build()
     {
-        return $this->view('backend.updatedexcel');
+        return $this->subject(' Accessories | Procurement Performance Report | October Month')->view('backend.updatedexcel');
     }
 }
