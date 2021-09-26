@@ -14,7 +14,7 @@
         </body>
 
 
-        <script src="{{ mix('js/app.js')}}"></script>
+        <script src="{{ asset('js/app.js')}}"></script>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
