@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchExcelData, fetchSheetName, sendEmail } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Input, Table, Row, Col } from "antd";
+import { Button, Input, Table, Row, Col, Select } from "antd";
 import get from "lodash/get";
 import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
@@ -13,6 +13,7 @@ import columnName from "./columnName";
 
 function index() {
     const dispatch = useDispatch();
+    const { Option } = Select;
     const [sheetName, setsheetName] = useState(null);
     const [sheetData, setsheetData] = useState(null);
     const [sheetUpdateData, setsheetUpdateData] = useState([]);
@@ -22,7 +23,7 @@ function index() {
     var updatedArray = [];
 
     useEffect(() => {
-        dispatch(fetchSheetName());
+        dispatch(fetchExcelData());
     }, []);
 
     useEffect(() => {
@@ -31,13 +32,6 @@ function index() {
             setonLoadCall(true);
         }
     }, [reducerProps]);
-
-    useEffect(() => {
-        if (onLoadCall) {
-            const sheetNameVariable = { sheetName: sheetName, ongetCall: true };
-            dispatch(fetchExcelData(sheetNameVariable, true));
-        }
-    }, [onLoadCall]);
 
     useEffect(() => {
         setsheetData(reducerProps.sheetData);
@@ -97,19 +91,29 @@ function index() {
         <div>
             <Row>
                 <Col md={18} lg={18}>
-                    <Input
-                        value={sheetName}
-                        onChange={(e) => setsheetName(e.target.value)}
-                        placeholder="Basic usage"
-                    />
-                    <Button
-                        onClick={() => {
-                            const sheetNameVariable = { sheetName: sheetName };
+                    <Select
+                        showSearch
+                        style={{ width: 200 }}
+                        placeholder="Please Select Sheet NAme"
+                        optionFilterProp="children"
+                        onSelect={(e) => {
+                            const sheetNameVariable = {
+                                sheetName: e,
+                            };
                             dispatch(fetchExcelData(sheetNameVariable));
                         }}
+                        filterOption={(input, option) =>
+                            option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
                     >
-                        Search
-                    </Button>
+                        {map(reducerProps.sheetNames, (data) => (
+                            <Option value={data.properties.title}>
+                                {data.properties.title}
+                            </Option>
+                        ))}
+                    </Select>
                 </Col>
 
                 <Col offset={2} md={4} lg={4}>

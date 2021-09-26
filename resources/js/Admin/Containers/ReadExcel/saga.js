@@ -1,11 +1,20 @@
 import { FETCH_EXCEL_DATA, FETCH_SHEET_NAME, SEND_EMAIL } from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
-import { fetchSheetNameSuccess, fetchExcelDataSuccess } from "./actions";
+import {
+    fetchSheetNameSuccess,
+    fetchExcelDataSuccess,
+    getSheetName,
+} from "./actions";
+import get from "lodash/get";
 import { message } from "antd";
 
 function* fetchExcelData({ payload }) {
     try {
+        if (get(payload, "sheetName")) {
+            message.info("Please Wait While We Fetching The Data", 2);
+        }
+
         const options = {
             url: "/readExcel",
             method: "post",
@@ -13,8 +22,12 @@ function* fetchExcelData({ payload }) {
         };
 
         const response = yield call(request, options);
+
         const { data } = response;
-        if (data) {
+
+        if (data.sheets) {
+            yield put(getSheetName(data.sheets));
+        } else {
             yield put(fetchExcelDataSuccess(data));
         }
     } catch (error) {

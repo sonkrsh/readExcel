@@ -1,8 +1,13 @@
-import { FETCH_SHEET_NAME_SUCCESS ,FETCH_EXCEL_DATA_SUCCESS} from "./constants";
+import {
+    FETCH_SHEET_NAME_SUCCESS,
+    FETCH_EXCEL_DATA_SUCCESS,
+    GET_SHEET_NAME,
+} from "./constants";
 
 const initialState = {
     sheetName: null,
-    sheetData:null
+    sheetData: null,
+    sheetNames: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +20,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 sheetData: action.payload,
+            };
+        case GET_SHEET_NAME:
+            return {
+                ...state,
+                sheetNames: action.payload,
             };
 
         default:
