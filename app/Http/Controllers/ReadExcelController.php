@@ -35,12 +35,8 @@ class ReadExcelController extends Controller
     {
 
         try {
-            $users = ['sonkrsh@gmail.com', 'mailsenda2z2@gmail.com'];
 
-            foreach ($users as $uniqueuser) {
-                Mail::to($uniqueuser)->cc('shubhamkumar@gomechanic.in')->send(new updatedExcel($request->all()));
-            }
-
+            Mail::to('hiteshluthra@gomechanic.in')->cc('joydeepsingh@gomechanic.in')->send(new updatedExcel($request->all()));
             return response()->json(['message' => 'Mail Send Successfully'], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Message Not Send'], 400);
