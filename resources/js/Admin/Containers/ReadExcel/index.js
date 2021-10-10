@@ -56,22 +56,19 @@ function index() {
             let orderPlaced = 0;
             let inventory = 0;
             let dilivered = 0;
-
             map(items, (data) => {
                 inventory += isNaN(toNumber(get(data, "Inventory")))
                     ? 0
                     : toNumber(get(data, "Inventory"));
-                requirement += isNaN(
-                    toNumber(get(data, "Total Qty. to be Procured"))
-                )
+                requirement += isNaN(toNumber(get(data, "October Requirement")))
                     ? 0
-                    : toNumber(get(data, "Total Qty. to be Procured"));
-                orderPlaced += isNaN(toNumber(get(data, "Order Qty")))
+                    : toNumber(get(data, "October Requirement"));
+                orderPlaced += isNaN(toNumber(get(data, "Order Placed")))
                     ? 0
-                    : toNumber(get(data, "Order Qty"));
-                dilivered += isNaN(toNumber(get(data, "Qty Already Delivered")))
+                    : toNumber(get(data, "Order Placed"));
+                dilivered += isNaN(toNumber(get(data, "Delivered Quantity")))
                     ? 0
-                    : toNumber(get(data, "Qty Already Delivered"));
+                    : toNumber(get(data, "Delivered Quantity"));
             });
             return {
                 Product_Category: name,
