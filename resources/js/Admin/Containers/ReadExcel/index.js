@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { fetchExcelData, fetchSheetName, sendEmail } from "./actions";
+import {
+    fetchExcelData,
+    fetchSheetName,
+    sendEmail,
+    getEmailName,
+} from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Input, Table, Tabs, Row, Col, Select } from "antd";
 import get from "lodash/get";
@@ -29,6 +34,7 @@ function index() {
 
     useEffect(() => {
         dispatch(fetchExcelData());
+        dispatch(getEmailName());
     }, []);
 
     useEffect(() => {

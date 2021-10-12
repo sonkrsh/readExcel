@@ -3,6 +3,7 @@ import {
     FETCH_SHEET_NAME,
     SEND_EMAIL,
     ADD_EMAIL_NAME,
+    GET_EMAIL_NAME,
 } from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
@@ -91,10 +92,24 @@ function* addEmailName({ payload }) {
         /*  yield put(fetchingFormValueError()); */
     }
 }
+function* getEmailName({ payload }) {
+    try {
+        const options = {
+            url: "/getEmail",
+            method: "get",
+        };
+        const response = yield call(request, options);
+        console.log("===>>", response);
+    } catch (error) {
+        message.error(error, 2);
+        /*  yield put(fetchingFormValueError()); */
+    }
+}
 
 export default function* readExcelDefaultSaga() {
     yield takeLatest(FETCH_EXCEL_DATA, fetchExcelData);
     yield takeLatest(FETCH_SHEET_NAME, fetchSheetName);
     yield takeLatest(SEND_EMAIL, sendEmail);
     yield takeLatest(ADD_EMAIL_NAME, addEmailName);
+    yield takeLatest(GET_EMAIL_NAME, getEmailName);
 }

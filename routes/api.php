@@ -25,6 +25,7 @@ Route::group([
     //Route::post('readExcel', [FuelCarController::class, 'googlesheet']);
     Route::post('readExcel', [ReadExcelController::class, 'store']);
     Route::post('addEmail', [EmailUsersController::class, 'store']);
+    Route::get('getEmail', [EmailUsersController::class, 'index']);
     Route::get('fetchSheetName', [ReadExcelController::class, 'index']);
     Route::post('sendMail', [ReadExcelController::class, 'sendMail']);
     Route::get('checkToken', [AuthController::class, 'checkToken']);

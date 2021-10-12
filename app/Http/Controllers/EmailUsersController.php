@@ -14,7 +14,8 @@ class EmailUsersController extends Controller
      */
     public function index()
     {
-        //
+        $emailData = EmailUsers::orderBy('id', 'DESC')->get();
+        return $emailData;
     }
 
     /**

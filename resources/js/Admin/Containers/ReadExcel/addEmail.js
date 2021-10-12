@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, Select } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { addEmailName } from "./actions";
