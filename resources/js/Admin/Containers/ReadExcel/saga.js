@@ -101,7 +101,6 @@ function* getEmailName({ payload }) {
         };
         const response = yield call(request, options);
         yield put(getEmailNameSuccess(response.data));
-        console.log("===>>", response);
     } catch (error) {
         message.error(error, 2);
         /*  yield put(fetchingFormValueError()); */

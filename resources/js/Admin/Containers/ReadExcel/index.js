@@ -181,7 +181,11 @@ function index() {
     }, [sheetData]);
 
     const onFinish = (value) => {
-        console.log("==>>", value);
+        const combineData = {
+            dataSource: dataSource,
+            ...value,
+        };
+        dispatch(sendEmail(combineData));
     };
     return (
         <div>
@@ -192,6 +196,7 @@ function index() {
                 <TabPane tab="Dashboard" key="2">
                     <Row>
                         <Col md={18} lg={18}>
+                            <h4>Select Google Sheet</h4>
                             <Select
                                 showSearch
                                 style={{ width: 200 }}
@@ -230,104 +235,124 @@ function index() {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Form name="control-hooks" onFinish={onFinish}>
-                            <Form.Item
-                                name="to"
-                                label="Select User Mail(to)"
-                                /* rules={[{ required: true }]} */
-                            >
-                                <Select
-                                    showSearch
-                                    placeholder="Please Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
+                    <Form
+                        name="control-hooks"
+                        style={{ width: "100%", marginTop: "2rem" }}
+                        onFinish={onFinish}
+                        layout="vertical"
+                    >
+                        <Row gutter={[16, 16]}>
+                            <Col md={8} lg={8}>
+                                <Form.Item
+                                    name="to"
+                                    label="Select User Mail(to)"
+                                    /* rules={[{ required: true }]} */
                                 >
-                                    {map(
-                                        get(reducerProps, "emailNames"),
-                                        (data) => {
-                                            if (!isEmpty(trim(data))) {
-                                                return (
-                                                    <Option value={data.to}>
-                                                        {data.to}
-                                                    </Option>
-                                                );
-                                            }
+                                    <Select
+                                        showSearch
+                                        mode="multiple"
+                                        placeholder="Please Select"
+                                        optionFilterProp="children"
+                                        filterOption={(input, option) =>
+                                            option.children
+                                                .toLowerCase()
+                                                .indexOf(input.toLowerCase()) >=
+                                            0
                                         }
-                                    )}
-                                </Select>
-                            </Form.Item>
-                            <Form.Item
-                                name="cc"
-                                label="Select User Mail(cc)"
-                                /* rules={[{ required: true }]} */
-                            >
-                                <Select
-                                    showSearch
-                                    placeholder="Please Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
+                                    >
+                                        {map(
+                                            get(reducerProps, "emailNames"),
+                                            (data) => {
+                                                if (!isEmpty(trim(data))) {
+                                                    return (
+                                                        <Option value={data.to}>
+                                                            {data.to}
+                                                        </Option>
+                                                    );
+                                                }
+                                            }
+                                        )}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
+                            <Col md={8} lg={8}>
+                                <Form.Item
+                                    name="cc"
+                                    label="Select User Mail(cc)"
+                                    /* rules={[{ required: true }]} */
                                 >
-                                    {map(
-                                        get(reducerProps, "emailNames"),
-                                        (data) => {
-                                            if (!isEmpty(trim(data))) {
-                                                return (
-                                                    <Option value={data.cc}>
-                                                        {data.cc}
-                                                    </Option>
-                                                );
-                                            }
+                                    <Select
+                                        mode="multiple"
+                                        showSearch
+                                        placeholder="Please Select"
+                                        optionFilterProp="children"
+                                        filterOption={(input, option) =>
+                                            option.children
+                                                .toLowerCase()
+                                                .indexOf(input.toLowerCase()) >=
+                                            0
                                         }
-                                    )}
-                                </Select>
-                            </Form.Item>
-                            <Form.Item
-                                name="bcc"
-                                label="Select User Mail(bcc)"
-                                /* rules={[{ required: true }]} */
-                            >
-                                <Select
-                                    showSearch
-                                    placeholder="Please Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
+                                    >
+                                        {map(
+                                            get(reducerProps, "emailNames"),
+                                            (data) => {
+                                                if (!isEmpty(trim(data))) {
+                                                    return (
+                                                        <Option value={data.cc}>
+                                                            {data.cc}
+                                                        </Option>
+                                                    );
+                                                }
+                                            }
+                                        )}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
+                            <Col md={8} lg={8}>
+                                <Form.Item
+                                    name="bcc"
+                                    label="Select User Mail(bcc)"
+                                    /* rules={[{ required: true }]} */
                                 >
-                                    {map(
-                                        get(reducerProps, "emailNames"),
-                                        (data) => {
-                                            if (!isEmpty(trim(data))) {
-                                                return (
-                                                    <Option value={data.bcc}>
-                                                        {data.bcc}
-                                                    </Option>
-                                                );
-                                            }
+                                    <Select
+                                        mode="multiple"
+                                        showSearch
+                                        placeholder="Please Select"
+                                        optionFilterProp="children"
+                                        filterOption={(input, option) =>
+                                            option.children
+                                                .toLowerCase()
+                                                .indexOf(input.toLowerCase()) >=
+                                            0
                                         }
-                                    )}
-                                </Select>
-                            </Form.Item>
-
+                                    >
+                                        {map(
+                                            get(reducerProps, "emailNames"),
+                                            (data) => {
+                                                if (!isEmpty(trim(data))) {
+                                                    return (
+                                                        <Option
+                                                            value={data.bcc}
+                                                        >
+                                                            {data.bcc}
+                                                        </Option>
+                                                    );
+                                                }
+                                            }
+                                        )}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit">
                                     Send Mail
                                 </Button>
                             </Form.Item>
-                        </Form>
-                    </Row>
+                        </Row>
+                    </Form>
+
                     <Table
+                        style={{ marginTop: "2rem" }}
                         scroll={{ x: 1000 }}
                         //loading={loading}
                         columns={columnName()}
