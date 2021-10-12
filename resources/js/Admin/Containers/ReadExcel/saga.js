@@ -1,4 +1,9 @@
-import { FETCH_EXCEL_DATA, FETCH_SHEET_NAME, SEND_EMAIL } from "./constants";
+import {
+    FETCH_EXCEL_DATA,
+    FETCH_SHEET_NAME,
+    SEND_EMAIL,
+    ADD_EMAIL_NAME,
+} from "./constants";
 import { call, put, takeLatest } from "redux-saga/effects";
 import request from "../../utils/request";
 import {
@@ -71,8 +76,25 @@ function* sendEmail({ payload }) {
     }
 }
 
+function* addEmailName({ payload }) {
+    try {
+        const options = {
+            url: "/addEmail",
+            method: "post",
+            data: payload,
+        };
+        const response = yield call(request, options);
+        const { data } = response;
+        message.success(data.message, 2);
+    } catch (error) {
+        message.error(error, 2);
+        /*  yield put(fetchingFormValueError()); */
+    }
+}
+
 export default function* readExcelDefaultSaga() {
     yield takeLatest(FETCH_EXCEL_DATA, fetchExcelData);
     yield takeLatest(FETCH_SHEET_NAME, fetchSheetName);
     yield takeLatest(SEND_EMAIL, sendEmail);
+    yield takeLatest(ADD_EMAIL_NAME, addEmailName);
 }

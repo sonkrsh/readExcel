@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchExcelData, fetchSheetName, sendEmail } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Input, Table, Row, Col, Select } from "antd";
+import { Button, Input, Table, Tabs, Row, Col, Select } from "antd";
 import get from "lodash/get";
 import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
@@ -14,6 +14,7 @@ import remove from "lodash/remove";
 import toNumber from "lodash/toNumber";
 import columnName from "./columnName";
 import isEqual from "lodash/isEqual";
+import AddEmail from "./addEmail";
 
 function index() {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function index() {
     const reducerProps = useSelector((state) => state.ReadExcel);
     const [dataSource, setdataSource] = useState([]);
     var updatedArray = [];
+    const { TabPane } = Tabs;
 
     useEffect(() => {
         dispatch(fetchExcelData());
@@ -174,53 +176,60 @@ function index() {
 
     return (
         <div>
-            <Row>
-                <Col md={18} lg={18}>
-                    <Select
-                        showSearch
-                        style={{ width: 200 }}
-                        placeholder="Please Select Sheet NAme"
-                        optionFilterProp="children"
-                        onSelect={(e) => {
-                            const sheetNameVariable = {
-                                sheetName: e,
-                            };
-                            dispatch(fetchExcelData(sheetNameVariable));
-                        }}
-                        filterOption={(input, option) =>
-                            option.children
-                                .toLowerCase()
-                                .indexOf(input.toLowerCase()) >= 0
-                        }
-                    >
-                        {map(reducerProps.sheetNames, (data) => (
-                            <Option value={data.properties.title}>
-                                {data.properties.title}
-                            </Option>
-                        ))}
-                    </Select>
-                </Col>
+            <Tabs defaultActiveKey="2">
+                <TabPane tab="Add Email Users" key="1">
+                    <AddEmail />
+                </TabPane>
+                <TabPane tab="Dashboard" key="2">
+                    <Row>
+                        <Col md={18} lg={18}>
+                            <Select
+                                showSearch
+                                style={{ width: 200 }}
+                                placeholder="Please Select Sheet NAme"
+                                optionFilterProp="children"
+                                onSelect={(e) => {
+                                    const sheetNameVariable = {
+                                        sheetName: e,
+                                    };
+                                    dispatch(fetchExcelData(sheetNameVariable));
+                                }}
+                                filterOption={(input, option) =>
+                                    option.children
+                                        .toLowerCase()
+                                        .indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {map(reducerProps.sheetNames, (data) => (
+                                    <Option value={data.properties.title}>
+                                        {data.properties.title}
+                                    </Option>
+                                ))}
+                            </Select>
+                        </Col>
 
-                <Col offset={2} md={4} lg={4}>
-                    <Button
-                        style={{ backgroundColor: "yellow" }}
-                        onClick={() => {
-                            //console.log("===>>>", dataSource);
-                            dispatch(sendEmail(dataSource));
-                        }}
-                    >
-                        Send Email
-                    </Button>
-                </Col>
-            </Row>
+                        <Col offset={2} md={4} lg={4}>
+                            <Button
+                                style={{ backgroundColor: "yellow" }}
+                                onClick={() => {
+                                    //console.log("===>>>", dataSource);
+                                    dispatch(sendEmail(dataSource));
+                                }}
+                            >
+                                Send Email
+                            </Button>
+                        </Col>
+                    </Row>
 
-            <Table
-                scroll={{ x: 1000 }}
-                //loading={loading}
-                columns={columnName()}
-                dataSource={dataSource}
-                bordered
-            />
+                    <Table
+                        scroll={{ x: 1000 }}
+                        //loading={loading}
+                        columns={columnName()}
+                        dataSource={dataSource}
+                        bordered
+                    />
+                </TabPane>
+            </Tabs>
         </div>
     );
 }

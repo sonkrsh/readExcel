@@ -5,6 +5,7 @@ import {
     FETCH_EXCEL_DATA_SUCCESS,
     SEND_EMAIL,
     GET_SHEET_NAME,
+    ADD_EMAIL_NAME,
 } from "./constants";
 
 export function fetchExcelData(payload) {
@@ -41,6 +42,12 @@ export function sendEmail(payload) {
 export function getSheetName(payload) {
     return {
         type: GET_SHEET_NAME,
+        payload,
+    };
+}
+export function addEmailName(payload) {
+    return {
+        type: ADD_EMAIL_NAME,
         payload,
     };
 }

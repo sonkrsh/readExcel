@@ -12,9 +12,11 @@ use App\Http\Controllers\BatteryModelController;
 use App\Http\Controllers\VerifiedUserController;
 use App\Http\Controllers\BatteryCompanyController;
 use App\Http\Controllers\BatteryProductController;
+use App\Http\Controllers\EmailUsersController;
 use App\Http\Controllers\GlassCategoryController;
 use App\Http\Controllers\GlassPriceController;
 use App\Http\Controllers\ReadExcelController;
+
 
 Route::group([
     'middleware' => 'jwt.auth',
@@ -22,6 +24,7 @@ Route::group([
 ], function ($router) {
     //Route::post('readExcel', [FuelCarController::class, 'googlesheet']);
     Route::post('readExcel', [ReadExcelController::class, 'store']);
+    Route::post('addEmail', [EmailUsersController::class, 'store']);
     Route::get('fetchSheetName', [ReadExcelController::class, 'index']);
     Route::post('sendMail', [ReadExcelController::class, 'sendMail']);
     Route::get('checkToken', [AuthController::class, 'checkToken']);
