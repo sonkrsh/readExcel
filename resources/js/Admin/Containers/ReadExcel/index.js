@@ -6,7 +6,7 @@ import {
     getEmailName,
 } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Input, Table, Tabs, Row, Col, Select } from "antd";
+import { Button, Input, Table, Tabs, Row, Col, Select, Form } from "antd";
 import get from "lodash/get";
 import trim from "lodash/trim";
 import groupBy from "lodash/groupBy";
@@ -180,6 +180,9 @@ function index() {
         setdataSource(updatedTableData);
     }, [sheetData]);
 
+    const onFinish = (value) => {
+        console.log("==>>", value);
+    };
     return (
         <div>
             <Tabs defaultActiveKey="2">
@@ -227,6 +230,103 @@ function index() {
                         </Col>
                     </Row>
 
+                    <Row>
+                        <Form name="control-hooks" onFinish={onFinish}>
+                            <Form.Item
+                                name="to"
+                                label="Select User Mail(to)"
+                                /* rules={[{ required: true }]} */
+                            >
+                                <Select
+                                    showSearch
+                                    placeholder="Please Select"
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {map(
+                                        get(reducerProps, "emailNames"),
+                                        (data) => {
+                                            if (!isEmpty(trim(data))) {
+                                                return (
+                                                    <Option value={data.to}>
+                                                        {data.to}
+                                                    </Option>
+                                                );
+                                            }
+                                        }
+                                    )}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item
+                                name="cc"
+                                label="Select User Mail(cc)"
+                                /* rules={[{ required: true }]} */
+                            >
+                                <Select
+                                    showSearch
+                                    placeholder="Please Select"
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {map(
+                                        get(reducerProps, "emailNames"),
+                                        (data) => {
+                                            if (!isEmpty(trim(data))) {
+                                                return (
+                                                    <Option value={data.cc}>
+                                                        {data.cc}
+                                                    </Option>
+                                                );
+                                            }
+                                        }
+                                    )}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item
+                                name="bcc"
+                                label="Select User Mail(bcc)"
+                                /* rules={[{ required: true }]} */
+                            >
+                                <Select
+                                    showSearch
+                                    placeholder="Please Select"
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {map(
+                                        get(reducerProps, "emailNames"),
+                                        (data) => {
+                                            if (!isEmpty(trim(data))) {
+                                                return (
+                                                    <Option value={data.bcc}>
+                                                        {data.bcc}
+                                                    </Option>
+                                                );
+                                            }
+                                        }
+                                    )}
+                                </Select>
+                            </Form.Item>
+
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    Send Mail
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </Row>
                     <Table
                         scroll={{ x: 1000 }}
                         //loading={loading}

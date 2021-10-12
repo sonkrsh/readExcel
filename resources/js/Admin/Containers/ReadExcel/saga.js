@@ -11,6 +11,7 @@ import {
     fetchSheetNameSuccess,
     fetchExcelDataSuccess,
     getSheetName,
+    getEmailNameSuccess,
 } from "./actions";
 import get from "lodash/get";
 import { message } from "antd";
@@ -99,6 +100,7 @@ function* getEmailName({ payload }) {
             method: "get",
         };
         const response = yield call(request, options);
+        yield put(getEmailNameSuccess(response.data));
         console.log("===>>", response);
     } catch (error) {
         message.error(error, 2);

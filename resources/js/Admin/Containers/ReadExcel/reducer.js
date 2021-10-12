@@ -2,12 +2,14 @@ import {
     FETCH_SHEET_NAME_SUCCESS,
     FETCH_EXCEL_DATA_SUCCESS,
     GET_SHEET_NAME,
+    GET_EMAIL_NAME_SUCCESS,
 } from "./constants";
 
 const initialState = {
     sheetName: null,
     sheetData: null,
     sheetNames: null,
+    emailNames: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +27,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 sheetNames: action.payload,
+            };
+        case GET_EMAIL_NAME_SUCCESS:
+            return {
+                ...state,
+                emailNames: action.payload,
             };
 
         default:
